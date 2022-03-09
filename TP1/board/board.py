@@ -1,7 +1,7 @@
 import imp
 from mapException import MapException
 from node import Node
-import player_moves
+from player_moves import *
 
 LEFT = 'l'
 RIGHT = 'r'

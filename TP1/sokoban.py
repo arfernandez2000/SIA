@@ -2,7 +2,6 @@ from node import Node
 from board.board import Board
 from mapException import MapException
 
-
 try:
     board = Board('soko_1.txt')
     print("hola")
