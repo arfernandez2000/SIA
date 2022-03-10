@@ -1,29 +1,8 @@
-from solution import *
-
-def sort_BPA(nodes):
-    return nodes.depth
+import search
+import get_depth
+from solution import INITIAL_STATE
 
 def bpa(root_node):
-    A = [root_node]
-    F = [root_node]
-    Ex = []
+    search(root_node, get_depth, True)
 
-    while len(F) > 0:
-        node = F[0]
-        Ex.append[node]
-
-        if node == FINAL_MATRIX:
-            return "encontrado"
-        
-        moves = possible_moves(node.matrix, node.blankSpace)
-
-        for move in moves:
-            if move not in Ex:
-                F.append(move)
-                A.append(move)
-        
-        F.sort(key= sort_BPA)
-    
-    return "no encontrado"
-
-
+bpa(INITIAL_STATE)

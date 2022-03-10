@@ -3,6 +3,8 @@ import copy
 import random
 
 FINAL_MATRIX = [[1,2,3], [4,5,6], [7,8,0]]
+GOAL_STATE = Node(FINAL_MATRIX, None, None, None, None)
+
 matrix = []
 
 def read_matrix (filename):
@@ -15,8 +17,10 @@ def read_matrix (filename):
             row.append(int(map[index]))
             index = index + 1
         matrix.append(row)
-    return matrix
+    return Node(matrix, None, None, None, None)
     f.close()
+
+INITIAL_STATE = read_matrix('maps/map_solution.txt')
 
 def fill_matrix ():
     options = []
@@ -86,4 +90,4 @@ def is_solvable(matrix) :
     
     inv_count = get_inv_count([j for sub in matrix for j in sub])
 
-    return (inv_count % 2 == 0)                                                                    
+    return (inv_count % 2 == 0)        
