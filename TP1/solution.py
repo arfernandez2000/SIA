@@ -5,6 +5,21 @@ import random
 FINAL_MATRIX = [[1,2,3], [4,5,6], [7,8,0]]
 matrix = []
 
+def read_matrix ():
+    f = open("./maps/map_solution.txt", "r")
+    map = f.readline()
+    index = 0
+    for i in range(len(FINAL_MATRIX[0])):
+        row = []
+        for j in range(len(FINAL_MATRIX)):
+            row.append(int(map[index]))
+            index = index + 1
+        matrix.append(row)
+    print(matrix)
+    return matrix
+    f.close()
+
+read_matrix()
 def fill_matrix ():
     options = []
     matrix = []
