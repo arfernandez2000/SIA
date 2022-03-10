@@ -1,4 +1,4 @@
-import search
+from search import search
 import get_depth
 from solution import INITIAL_STATE
 
