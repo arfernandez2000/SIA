@@ -1,5 +1,4 @@
 from node import Node
-import solution
 from mapException import MapException
 
 try:
