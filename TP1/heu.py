@@ -1,27 +1,30 @@
 import math
 
-def heu_wrong_row_col(matrix):
+def heu_wrong_row_col(node):
     heu = 0
+    matrix = node.matrix
+    side_size = math.sqrt(len(matrix))
     for i in range(len(matrix)):
-        if (i % 3 != matrix[i-1] % 3):
+        if (i % side_size != matrix[i-1] % side_size):
             heu = heu + 1
         if matrix[i] == 0:
-            if i < 6:
+            if i < (len(matrix) - side_size):
                 heu = heu + 1
         else:
-            div_i = math.floor(i/3)
-            div_pos = math.floor((matrix[i]-1)/3)
+            div_i = math.floor(i/side_size)
+            div_pos = math.floor((matrix[i]-1)/side_size)
             if(div_i != div_pos):
                 heu = heu + 1
     return heu
-    
+
 def heu_wrong_tile(node):
     heu = 0
-    for i in range(len(node.matrix) - 1):
-        if node.matrix[i] != i + 1:
+    matrix = node.matrix
+    for i in range(len(matrix) - 1):
+        if matrix[i] != i + 1:
             heu += 1
 
-    if node.matrix[len(node.matrix) - 1] != 0:
+    if matrix[len(matrix) - 1] != 0:
         heu += 1
     return heu
 
