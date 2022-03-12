@@ -1,3 +1,5 @@
+
+
 class Node:
     def __init__ (self, matrix, previous, blankspace, depth, heuristic = None):
         self.matrix = matrix
@@ -8,10 +10,9 @@ class Node:
  
     def __eq__(self, other):
         if isinstance(other, self.__class__):
-            for i in range(len(self.matrix[0])):
-                for j in range(len(self.matrix)):
-                    if self.matrix[i][j] != other.matrix[i][j]:
-                        return False
+            for i in range(len(self.matrix)):
+                if self.matrix[i] != other.matrix[i]:
+                    return False
             return True
         return False
 
@@ -24,6 +25,5 @@ class Node:
         return hash((self.matrix))
 
     def __str__(self):
-        for i in range(len(self.matrix[0])):
-                for j in range(len(self.matrix)):
-                    print(self.matrix[i][j])
+        for i in range(len(self.matrix)):
+            print(self.matrix[i])
