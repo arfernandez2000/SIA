@@ -67,15 +67,17 @@ def check_move (new_position, matrix):
 
 def next(mat, empty_tile_pos, new_empty_tile_pos, previous):
    
-    x1 = mat[empty_tile_pos]
-    x2 = mat[new_empty_tile_pos]
+    new_mat = copy.deepcopy(mat)
+
+    x1 = new_mat[empty_tile_pos]
+    x2 = new_mat[new_empty_tile_pos]
     
-    mat[empty_tile_pos] = x2
-    mat[new_empty_tile_pos] = x1
+    new_mat[empty_tile_pos] = x2
+    new_mat[new_empty_tile_pos] = x1
         
     depth = previous.depth + 1
     
-    return Node(mat, previous, new_empty_tile_pos, depth)
+    return Node(new_mat, previous, new_empty_tile_pos, depth)
 
 def possible_moves(mat, empty_tile_pos):
     moves = []

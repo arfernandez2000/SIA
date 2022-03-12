@@ -15,14 +15,14 @@ class Node:
                     return False
             return True
         return False
-
+    
     def _eq_BPPV_(self, other):
         if self.depth > other.depth:
             return False
         return self.__eq__(self, other)
 
     def __hash__(self):
-        return hash((self.matrix))
+        return hash((tuple(self.matrix)))
 
     def __str__(self):
         for i in range(len(self.matrix)):

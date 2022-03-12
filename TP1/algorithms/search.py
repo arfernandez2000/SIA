@@ -7,28 +7,35 @@ from solution import next
 def get_depth(nodes):
     return nodes.depth
 
-def search(root_node, sort_key = get_depth, reverse = True):
-    A = [root_node]
-    F = [root_node]
-    Ex = []
+def search(root_node, stack = True):
+    A = []
+    F = []
+    Ex = set()
+
+    F.append(root_node)
+    A.append(root_node)
 
     while len(F) > 0:
-        node = F.pop(0)
+        
+        if stack:
+            node = F.pop(0)
+        else:
+            node = F.pop()
         print ("NODE ", node.matrix)
-        Ex.append(node)
+        Ex.add(node)
 
         if node.__eq__(GOAL_STATE):
             print ("encontrado")
             return
         
         moves = possible_moves(node.matrix, node.blankspace)
-
+        
         for move in moves:
             nextNode = next(node.matrix, node.blankspace, move, node)
             if nextNode not in Ex:
                 F.append(nextNode)
                 A.append(nextNode)
-        F.sort(key= sort_key, reverse = reverse)
+
 
     print("no encontrado")
     return
