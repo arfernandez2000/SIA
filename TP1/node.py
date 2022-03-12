@@ -1,10 +1,10 @@
 class Node:
-    def __init__ (self, matrix, previous, blankSpace, depth, heuristic):
+    def __init__ (self, matrix, previous, blankspace, depth, heuristic = None):
         self.matrix = matrix
         self.depth = depth
         self.heu = heuristic
         self.prev = previous
-        self.blankSpace = blankSpace
+        self.blankspace = blankspace
  
     def __eq__(self, other):
         if isinstance(other, self.__class__):

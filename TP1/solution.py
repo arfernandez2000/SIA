@@ -3,9 +3,15 @@ import copy
 import random
 
 FINAL_MATRIX = [[1,2,3], [4,5,6], [7,8,0]]
-GOAL_STATE = Node(FINAL_MATRIX, None, None, None, None)
+GOAL_STATE = Node(FINAL_MATRIX, None, None, None)
 
 matrix = []
+
+def get_blanckspace(matrix):
+    for i in range(len(FINAL_MATRIX)):
+        for j in range(len(FINAL_MATRIX[0])):
+            if matrix[i][j] == 0:
+                return [i, j]
 
 def read_matrix (filename):
     f = open(filename, "r")
@@ -16,27 +22,48 @@ def read_matrix (filename):
         for j in range(len(FINAL_MATRIX)):
             row.append(int(map[index]))
             index = index + 1
+        print ("row", row)
         matrix.append(row)
-    return Node(matrix, None, None, None, None)
     f.close()
+    print ("matrix", matrix)
+    blanskspace = get_blanckspace(matrix)
+    return Node(matrix, None,blanskspace, 0)
 
-INITIAL_STATE = read_matrix('maps/map_solution.txt')
+def get_inv_count(arr):
+    inv_count = 0
+    empty_value = -1
+    for i in range(0, len(arr)):
+        for j in range(i+1, len(arr)):
+            if arr[j] != empty_value and arr[i] != empty_value and arr[i] > arr[j]:
+                inv_count += 1
+    return inv_count
+
+def is_solvable(matrix) :
+    inv_count = get_inv_count([j for sub in matrix for j in sub])
+
+    return (inv_count % 2 == 0)   
 
 def fill_matrix ():
     options = []
     matrix = []
     max = len(FINAL_MATRIX) * len(FINAL_MATRIX)
-    for i in range(max):
-        options.append(i)
-    for i in range(len(FINAL_MATRIX[0])):
-        row = []
-        for j in range(len(FINAL_MATRIX)):
-            index = random.randint(0, len(options)-1)
-            print(len(options), index, options[index])
-            row.append(options[index])
-            options.pop(index)
-        matrix.append(row)
-    return matrix
+    solvable = False
+    while not solvable:
+        for i in range(max):
+            options.append(i)
+        for i in range(len(FINAL_MATRIX[0])):
+            row = []
+            for j in range(len(FINAL_MATRIX)):
+                index = random.randint(0, len(options)-1)
+                row.append(options[index])
+                options.pop(index)
+            matrix.append(row)
+        solvable = is_solvable(matrix)
+        if not solvable:
+            matrix = []
+            options = []
+    blankspace = get_blanckspace(matrix)
+    return Node(matrix, None, blankspace, 0)
 
 def check_move (row, column, matrix):
     len_row = len(matrix)
@@ -76,18 +103,3 @@ def possible_moves(mat, empty_tile_pos):
         moves.append([empty_tile_pos[0], empty_tile_pos[1] - 1])
         
     return moves
-
-def get_inv_count(arr):
-    inv_count = 0
-    empty_value = -1
-    for i in range(len(arr[0])):
-        for j in range(len(arr)):
-            if arr[j] != empty_value and arr[i] != empty_value and arr[i] > arr[j]:
-                inv_count += 1
-    return inv_count
- 
-def is_solvable(matrix) :
-    
-    inv_count = get_inv_count([j for sub in matrix for j in sub])
-
-    return (inv_count % 2 == 0)        
