@@ -1,6 +1,7 @@
 from metrics import Metrics
 from logging import root
 from metrics import Metrics
+from time import perf_counter
 from solution import GOAL_STATE
 from solution import possible_moves
 from solution import next
@@ -12,6 +13,7 @@ class BPP(Search):
         self.metrics = metrics = Metrics('BPP')
 
     def search(self, root_node):
+        t1_start = perf_counter()
         A = []
         F = []
         Ex = set()
@@ -28,7 +30,11 @@ class BPP(Search):
             if node.__eq__(GOAL_STATE):
                 print ("encontrado")
                 metrics.success = True
-                metrics.frontier = len(A)
+                metrics.frontier = len(F)
+                print(node.get_trace())
+                t1_stop = perf_counter() 
+                metrics.time = (t1_stop-t1_start)
+                metrics.depth = node.depth
                 return metrics
             
             moves = possible_moves(node.matrix, node.blankspace)
@@ -41,5 +47,8 @@ class BPP(Search):
 
 
         print("no encontrado")
-
+        t1_stop = perf_counter() 
+        metrics.time = (t1_stop-t1_start)
+        metrics.depth = node.depth
+        metrics.success = False
         return metrics
