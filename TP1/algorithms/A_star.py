@@ -12,7 +12,7 @@ class AStar(Search):
     def __init__(self):
         super().__init__()
         self.heumethod = None
-        self.metrics = Metrics('GLOBAL_H')
+        self.metrics = Metrics('A_STAR')
     
     def setHeuristic(self, heu):
         self.heumethod = heu

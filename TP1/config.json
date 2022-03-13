@@ -1,6 +1,6 @@
 {
-    "method": "BPA",
-    "heuristic": "rowcol",
+    "method": "A_STAR",
+    "heuristic": "tile",
     "map": "maps/map1.txt",
-    "informed": 0
+    "informed": 1
 }
