@@ -6,6 +6,7 @@ from solution import GOAL_STATE
 from solution import possible_moves
 from solution import next
 from algorithms.search import Search
+from time import perf_counter
 
 class GlobalHeuristic(Search):
     def __init__(self):
@@ -17,6 +18,7 @@ class GlobalHeuristic(Search):
         self.heumethod = heu
 
     def search(self, root_node):
+        t1_start = perf_counter()
         A = []
         F = []
         Ex = set()
@@ -26,7 +28,6 @@ class GlobalHeuristic(Search):
 
         while len(F) > 0:
             node = F.pop(0)
-            print ("NODE ", node.matrix)
             Ex.add(node)
             metrics.nodes_expanded +=1
 
@@ -34,6 +35,10 @@ class GlobalHeuristic(Search):
                 print ("encontrado")
                 metrics.success = True
                 metrics.frontier = len(A)
+                print(node.get_trace())
+                t1_stop = perf_counter() 
+                metrics.time = (t1_stop-t1_start)
+                metrics.depth = node.depth
                 return metrics
             
             moves = possible_moves(node.matrix, node.blankspace)
@@ -47,5 +52,8 @@ class GlobalHeuristic(Search):
             F.sort(key=self.heumethod)
 
         print("no encontrado")
-
+        t1_stop = perf_counter() 
+        metrics.time = (t1_stop-t1_start)
+        metrics.depth = node.depth
+        metrics.success = False
         return metrics
