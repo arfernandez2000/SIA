@@ -1,6 +1,6 @@
 {
     "method": "A_STAR",
     "heuristic": "rowcol",
-    "map": "maps/map_solution.txt",
+    "map": "maps/map1.txt",
     "informed": 1
 }
