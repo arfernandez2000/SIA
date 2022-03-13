@@ -1,0 +1,6 @@
+{
+    "heuristic": "tile",
+    "method": "LOCAL_H",
+    "map": "maps/map_solution.txt",
+    "informed": 1
+}

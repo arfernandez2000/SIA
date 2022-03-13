@@ -1,17 +1,83 @@
 from node import Node
-from algorithms.BPA import bpa
-from algorithms.BPP import bpp
-from algorithms.BPPV import search_BPPV
-from algorithms.search import search
+from algorithms.BPA import BPA
+from algorithms.BPP import BPP
+from algorithms.BPPV import BPPV
+from algorithms.heu_local import LocalHeuristic
+from algorithms.heu_global import GlobalHeuristic
+from algorithms.A_star import AStar
+from algorithms.search import Search
 from solution import fill_matrix
 from solution import read_matrix
+from heu import heu_wrong_tile, heu_wrong_row_col, heu_linear_distance
 from mapException import MapException
+import json
+
+def choose_heuristic(argument):
+  switcher = {
+       "tile": heu_wrong_tile,
+       "rowcol": heu_wrong_row_col,
+       "linear": heu_linear_distance, 
+  }
+
+  return switcher.get(argument, "Wrong heuristic!")
+
+def choose_search_method(argument):
+    switcher = {
+        "BPA": BPA(),
+        "BPP": BPP(),
+        "BPPV": BPPV(),
+        "LOCAL_H": LocalHeuristic(),
+        "GLOBAL_H": GlobalHeuristic(),
+        "A_STAR": AStar()
+    }
+    
+    return switcher.get(argument, "Wrong search method!")
+
+def getMethod(data):
+    methodName = ""
+
+    for i in data["method"]:
+        methodName = methodName + i
+    
+    return choose_search_method(methodName)
+
+def getMap(data):
+    mapName = ""
+    for i in data["map"]:
+        mapName = mapName + i
+    return mapName
+
+def getHeu(data):
+    heuristicName = ""
+    for i in data["heuristic"]:
+        heuristicName = heuristicName + i
+    heu = choose_heuristic(heuristicName)
+    return heu
+
+def getData():
+    f = open('config.json')
+    data = json.load(f)
+
+    search_method = getMethod(data)
+    mapName = getMap(data)
+
+    informed = data["informed"]
+    if informed:
+        heu = getHeu(data)
+        search_method.setHeuristic(heu)
+
+    f.close()
+
+    return mapName, search_method
 
 try:
-    print ("ARRANCO")
-    root_node = read_matrix("maps/map_solution.txt")
-    print("matriz inicial: ", root_node.matrix)
-    search_BPPV(root_node)
-    print("hola mundo")
+    mapName, search_method = getData()
+    print(mapName, search_method)
+    root_node = read_matrix(mapName)
+
+    if (isinstance(search_method, str)):
+        raise Exception(search_method)
+    search_method.search(root_node)
+
 except MapException as e:
     print(str(e))

@@ -28,3 +28,13 @@ def heu_wrong_tile(node):
         heu += 1
     return heu
 
+def heu_linear_distance(node):
+    matrix = node.matrix
+    heu = 0
+    for i in range(len(matrix)):
+        num = matrix[i]
+        if(num == 0):
+            heu = heu + (len(matrix) - 1) - i
+        else:
+            heu = heu + abs(num-(i+1))
+    return heu

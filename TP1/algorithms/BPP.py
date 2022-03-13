@@ -1,7 +1,45 @@
-from algorithms.search import search
-from algorithms.search import get_depth
 from metrics import Metrics
+from logging import root
+from metrics import Metrics
+from solution import GOAL_STATE
+from solution import possible_moves
+from solution import next
+from algorithms.search import Search
 
-def bpp(root_node):
-    metrics = Metrics('BPP', False, 0,0,0,0)
-    return search(root_node, metrics)
+class BPP(Search):
+    def __init__(self):
+        super().__init__()
+        self.metrics = metrics = Metrics('BPP')
+
+    def search(self, root_node):
+        A = []
+        F = []
+        Ex = set()
+        metrics = self.metrics
+        F.append(root_node)
+        A.append(root_node)
+
+        while len(F) > 0:
+            node = F.pop(0)
+            print ("NODE ", node.matrix)
+            Ex.add(node)
+            metrics.nodes_expanded +=1
+
+            if node.__eq__(GOAL_STATE):
+                print ("encontrado")
+                metrics.success = True
+                metrics.frontier = len(A)
+                return metrics
+            
+            moves = possible_moves(node.matrix, node.blankspace)
+            
+            for move in moves:
+                nextNode = next(node.matrix, node.blankspace, move, node)
+                if nextNode not in Ex:
+                    F.append(nextNode)
+                    A.append(nextNode)
+
+
+        print("no encontrado")
+
+        return metrics

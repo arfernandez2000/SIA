@@ -27,3 +27,14 @@ class Node:
     def __str__(self):
         for i in range(len(self.matrix)):
             print(self.matrix[i])
+
+    def get_trace(self):
+        node = self
+        trace = []
+        i = node.depth
+        while(node):
+            step = " \n Paso " + str(i) + ": " + str(node.matrix)
+            trace.insert(0, step)
+            node = node.prev
+            i = i-1
+        return trace

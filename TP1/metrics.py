@@ -1,8 +1,8 @@
 class Metrics:
-    def __init__(self, param, success, depth, nodes_expanded, frontier, time):
+    def __init__(self, param):
         self.param = param
-        self.success = success
-        self.depth = depth
-        self.nodes_expanded = nodes_expanded
-        self.frontier = frontier
-        self.time = time
+        self.success = False
+        self.depth = 0
+        self.nodes_expanded = 0
+        self.frontier = 0
+        self.time = 0
