@@ -1,9 +1,9 @@
 # Rompecabezas de 8 numeros
 
 ## Integrantes:
-* Ariadna Fernandez Truglia
-* Florencia Chao
-* Faustino Maggioni Duffy
+* [Ariadna Fernandez Truglia](https://github.com/arfernandez2000)
+* [Florencia Chao](https://github.com/florchao)
+* [Faustino Maggioni Duffy](https://github.com/maggioniduffy)
 
 ## Descripcion del proplema:
 * El Rompecabezas de 8 numeros presenta una grilla con con 9 celdas, 8 ocupadas con los numeros del 1 al 8 y la otra vacia. El objetivo, o por lo menos el de nuestro programa es dejar los 8 numeros ordenados de menor a mayor con la ultima celda libre.
