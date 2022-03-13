@@ -1,11 +1,9 @@
 # Rompecabezas de 8 numeros
 
-<span style="color:blue">
 ## Integrantes:
-* Ariadna Fernandez Truglia
+* <span color='pink'> Ariadna Fernandez Truglia </span>
 * Florencia Chao
 * Faustino Maggioni Duffy
-</span>.
 
 ### Descripcion del proplema:
 * El Rompecabezas de 8 numeros presenta una grilla con con 9 celdas, 8 ocupadas con los numeros del 1 al 8 y la otra vacia. El objetivo, o por lo menos el de nuestro programa es dejar los 8 numeros ordenados de menor a mayor con la ultima celda libre.
