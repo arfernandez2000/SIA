@@ -1,6 +1,5 @@
 {
-    "heuristic": "tile",
-    "method": "LOCAL_H",
+    "method": "BPA",
     "map": "maps/map_solution.txt",
-    "informed": 1
+    "informed": 0
 }

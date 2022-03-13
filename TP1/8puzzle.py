@@ -77,7 +77,13 @@ try:
 
     if (isinstance(search_method, str)):
         raise Exception(search_method)
-    search_method.search(root_node)
+    answer = search_method.search(root_node)
+    print(answer.time)
+    print(answer.param)
+    print(answer.depth)
+    print(answer.nodes_expanded)
+    print(answer.frontier)
+
 
 except MapException as e:
     print(str(e))

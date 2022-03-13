@@ -2,10 +2,12 @@ from metrics import Metrics
 #from algorithms.search import get_depth
 from logging import root
 from metrics import Metrics
+import time
 from solution import GOAL_STATE
 from solution import possible_moves
 from solution import next
 from algorithms.search import Search
+from time import perf_counter 
 
 class BPA(Search):
     def __init__(self):
@@ -13,6 +15,7 @@ class BPA(Search):
         self.metrics = metrics = Metrics('BPA')
 
     def search(self, root_node):
+        t1_start = perf_counter()
         A = []
         F = []
         Ex = set()
@@ -30,6 +33,9 @@ class BPA(Search):
                 metrics.success = True
                 metrics.frontier = len(A)
                 print(node.get_trace())
+                t1_stop = perf_counter() 
+                metrics.time = (t1_stop-t1_start)
+                metrics.depth = node.depth
                 return metrics
             
             moves = possible_moves(node.matrix, node.blankspace)
@@ -42,5 +48,7 @@ class BPA(Search):
 
 
         print("no encontrado")
-
+        t1_stop = perf_counter() 
+        metrics.time = (t1_stop-t1_start)
+        metrics.depth = node.depth
         return metrics
