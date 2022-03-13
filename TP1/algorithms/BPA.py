@@ -24,7 +24,7 @@ class BPA(Search):
         A.append(root_node)
 
         while len(F) > 0:
-            node = F.pop()
+            node = F.pop(0)
             Ex.add(node)
             metrics.nodes_expanded +=1
 

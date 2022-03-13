@@ -22,7 +22,7 @@ class BPP(Search):
         A.append(root_node)
 
         while len(F) > 0:
-            node = F.pop(0)
+            node = F.pop()
             print ("NODE ", node.matrix)
             Ex.add(node)
             metrics.nodes_expanded +=1

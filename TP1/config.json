@@ -1,6 +1,13 @@
 {
+<<<<<<< HEAD
     "method": "A_STAR",
     "heuristic": "tile",
     "map": "maps/map_solution.txt",
     "informed": 1
+=======
+    "method": "BPA",
+    "heuristic": "rowcol",
+    "map": "maps/map1.txt",
+    "informed": 0
+>>>>>>> 0d0224d691958abe47210da9d9c3feac9d0b4a0c
 }
