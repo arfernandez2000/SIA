@@ -5,33 +5,43 @@ from solution import GOAL_STATE
 from solution import possible_moves
 from solution import next
 from algorithms.search import Search
+from time import perf_counter
 
 class BPPV(Search):
+    F = []
+    depth = 0
     def __init__(self):
         super().__init__()
-        self.metrics = metrics = Metrics('BPA')
+        self.metrics = metrics = Metrics('BPPV')
         self.LIMIT_INCREASE = 25
 
     def search(self, root_node):
-            
-        final_node = self.iddfs(root_node) 
+
+        t1_start = perf_counter()
+        metrics = self.metrics
+        final_node = self.bppv(root_node) 
             
         if(final_node is True):
-            print("enoctradoo")
-            return
-            # self.metrics.success = True 
-            # self.metrics.frontier = len(self.queue) + len(self.last_level_nodes)
-            # return SearchResults(self.metrics, final_node)
+            print("encontradoo")
+            metrics.success = True 
+            metrics.frontier = len(self.F)
+            t1_stop = perf_counter() 
+            metrics.time = (t1_stop-t1_start)
+            metrics.depth = self.depth
+            return metrics
                 
-        #self.metrics.success = False
-        print("no enoctradoo")
-        return 
+        print("no encontradoo")
+        t1_stop = perf_counter() 
+        metrics.time = (t1_stop-t1_start)
+        metrics.depth = self.depth
+        metrics.success = False
+        return metrics
     
         
-    def iddfs(self, root_node):
+    def bppv(self, root_node):
 
         A = []
-        F = []
+        F = self.F
         Ex = set()
 
         F.append(root_node)
@@ -41,48 +51,44 @@ class BPPV(Search):
         last_level_nodes = []
 
         while F:
-            print("primer while")
             while F:
-                print("segundo while")
-                result = self.iddfs_rec(F, A, Ex, start, limit, last_level_nodes)
+                result = self.bppv_rec(F, A, Ex, start, limit, last_level_nodes)
                 if(result is True):
                     print("encontrado")
                     return result
             start = limit
             limit += self.LIMIT_INCREASE
-            print("nuevo limite", limit)
             F = last_level_nodes.copy()
             last_level_nodes = []
             i += 1
         # NO SOLUTION
-        #self.metrics.success = False
+        self.metrics.success = False
         return False
         
-    def iddfs_rec(self, F, A, Ex, start, limit, last_level_nodes):
+    def bppv_rec(self, F, A, Ex, start, limit, last_level_nodes):
         node = F.pop()
-        #print("NODE", node.matrix)  
         if node.__eq__(GOAL_STATE):
             print ("encontrado")
-            print(node.matrix)
+            self.depth = node.depth
+            print(node.get_trace())
             return True
 
         if(start == limit): #reached max_depth and sn not found
-            print("Llegue al limite", node.depth)
             last_level_nodes.insert(0,node)
             return False
 
         Ex.add(node)
-        #self.metrics.nodes_expanded += 1
+        self.metrics.nodes_expanded += 1
         
         moves = possible_moves(node.matrix, node.blankspace)
 
         for move in moves:
             nextNode = next(node.matrix, node.blankspace, move, node)
             if(nextNode not in Ex):
-                print(nextNode.matrix)
                 F.append(nextNode)
-                result = self.iddfs_rec(F, A, Ex, start + 1, limit, last_level_nodes)
+                result = self.bppv_rec(F, A, Ex, start + 1, limit, last_level_nodes)
                 if(result is not False):
-                    return result
-        print("F despues d la recu", len(F))     
+                    self.F = F
+                    return result   
+        self.F = F
         return False
