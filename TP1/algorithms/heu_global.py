@@ -34,7 +34,7 @@ class GlobalHeuristic(Search):
             if node.__eq__(GOAL_STATE):
                 print ("encontrado")
                 metrics.success = True
-                metrics.frontier = len(A)
+                metrics.frontier = len(F)
                 print(node.get_trace())
                 t1_stop = perf_counter() 
                 metrics.time = (t1_stop-t1_start)
