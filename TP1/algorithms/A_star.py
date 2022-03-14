@@ -42,6 +42,7 @@ class AStar(Search):
                 t1_stop = perf_counter() 
                 metrics.time = (t1_stop-t1_start)
                 metrics.depth = node.depth
+                metrics.goal = node
                 return metrics
             
             moves = possible_moves(node.matrix, node.blankspace)

@@ -70,7 +70,7 @@ class BPPV(Search):
         if node.__eq__(GOAL_STATE):
             print ("encontrado")
             self.depth = node.depth
-            print(node.get_trace())
+            self.metrics.goal = node
             return True
 
         if(start == limit): #reached max_depth and sn not found

@@ -1,0 +1,113 @@
+ <style> 
+    body {
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        margin: auto;
+        text-align: center;
+    }
+    .game-board {
+        background: whitesmoke;
+        display: grid;
+        grid-template-rows: 100px 100px 100px;
+        grid-template-columns: 100px 100px 100px;
+        margin: 1rem;
+        border-radius: 5px;
+    }
+    .box {
+        background: transparent;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: black;
+        font-size: 35px;
+    }
+    .zero {
+        background: yellow;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: black;
+        border-radius: 0px 0px 5px 0px;
+        font-size: 35px;
+    }
+    </style>
+    <h1> 8 Number Puzzle </h1>
+    <h4> Florencia Chao, Ariadna Fernandez Truglia, Faustino Maggioni Duffy </h4>
+    <ul> 
+    <p> Paso: 0
+    <li class='game-board'><div class='box'>8</div> <div class='box'>3</div> <div class='box'>5</div> <div class='box'>6</div> <div class='box'>2</div> <div class='box'>7</div> <div class='box'>1</div> <div class='box'>4</div> <div class='zero'>0</div> 
+    </li> 
+    <p> Paso: 1
+    <li class='game-board'><div class='box'>8</div> <div class='box'>3</div> <div class='box'>5</div> <div class='box'>6</div> <div class='box'>2</div> <div class='zero'>0</div> <div class='box'>1</div> <div class='box'>4</div> <div class='box'>7</div> 
+    </li> 
+    <p> Paso: 2
+    <li class='game-board'><div class='box'>8</div> <div class='box'>3</div> <div class='zero'>0</div> <div class='box'>6</div> <div class='box'>2</div> <div class='box'>5</div> <div class='box'>1</div> <div class='box'>4</div> <div class='box'>7</div> 
+    </li> 
+    <p> Paso: 3
+    <li class='game-board'><div class='box'>8</div> <div class='zero'>0</div> <div class='box'>3</div> <div class='box'>6</div> <div class='box'>2</div> <div class='box'>5</div> <div class='box'>1</div> <div class='box'>4</div> <div class='box'>7</div> 
+    </li> 
+    <p> Paso: 4
+    <li class='game-board'><div class='box'>8</div> <div class='box'>2</div> <div class='box'>3</div> <div class='box'>6</div> <div class='zero'>0</div> <div class='box'>5</div> <div class='box'>1</div> <div class='box'>4</div> <div class='box'>7</div> 
+    </li> 
+    <p> Paso: 5
+    <li class='game-board'><div class='box'>8</div> <div class='box'>2</div> <div class='box'>3</div> <div class='zero'>0</div> <div class='box'>6</div> <div class='box'>5</div> <div class='box'>1</div> <div class='box'>4</div> <div class='box'>7</div> 
+    </li> 
+    <p> Paso: 6
+    <li class='game-board'><div class='box'>8</div> <div class='box'>2</div> <div class='box'>3</div> <div class='box'>1</div> <div class='box'>6</div> <div class='box'>5</div> <div class='zero'>0</div> <div class='box'>4</div> <div class='box'>7</div> 
+    </li> 
+    <p> Paso: 7
+    <li class='game-board'><div class='box'>8</div> <div class='box'>2</div> <div class='box'>3</div> <div class='box'>1</div> <div class='box'>6</div> <div class='box'>5</div> <div class='box'>4</div> <div class='zero'>0</div> <div class='box'>7</div> 
+    </li> 
+    <p> Paso: 8
+    <li class='game-board'><div class='box'>8</div> <div class='box'>2</div> <div class='box'>3</div> <div class='box'>1</div> <div class='box'>6</div> <div class='box'>5</div> <div class='box'>4</div> <div class='box'>7</div> <div class='zero'>0</div> 
+    </li> 
+    <p> Paso: 9
+    <li class='game-board'><div class='box'>8</div> <div class='box'>2</div> <div class='box'>3</div> <div class='box'>1</div> <div class='box'>6</div> <div class='zero'>0</div> <div class='box'>4</div> <div class='box'>7</div> <div class='box'>5</div> 
+    </li> 
+    <p> Paso: 10
+    <li class='game-board'><div class='box'>8</div> <div class='box'>2</div> <div class='zero'>0</div> <div class='box'>1</div> <div class='box'>6</div> <div class='box'>3</div> <div class='box'>4</div> <div class='box'>7</div> <div class='box'>5</div> 
+    </li> 
+    <p> Paso: 11
+    <li class='game-board'><div class='box'>8</div> <div class='zero'>0</div> <div class='box'>2</div> <div class='box'>1</div> <div class='box'>6</div> <div class='box'>3</div> <div class='box'>4</div> <div class='box'>7</div> <div class='box'>5</div> 
+    </li> 
+    <p> Paso: 12
+    <li class='game-board'><div class='zero'>0</div> <div class='box'>8</div> <div class='box'>2</div> <div class='box'>1</div> <div class='box'>6</div> <div class='box'>3</div> <div class='box'>4</div> <div class='box'>7</div> <div class='box'>5</div> 
+    </li> 
+    <p> Paso: 13
+    <li class='game-board'><div class='box'>1</div> <div class='box'>8</div> <div class='box'>2</div> <div class='zero'>0</div> <div class='box'>6</div> <div class='box'>3</div> <div class='box'>4</div> <div class='box'>7</div> <div class='box'>5</div> 
+    </li> 
+    <p> Paso: 14
+    <li class='game-board'><div class='box'>1</div> <div class='box'>8</div> <div class='box'>2</div> <div class='box'>4</div> <div class='box'>6</div> <div class='box'>3</div> <div class='zero'>0</div> <div class='box'>7</div> <div class='box'>5</div> 
+    </li> 
+    <p> Paso: 15
+    <li class='game-board'><div class='box'>1</div> <div class='box'>8</div> <div class='box'>2</div> <div class='box'>4</div> <div class='box'>6</div> <div class='box'>3</div> <div class='box'>7</div> <div class='zero'>0</div> <div class='box'>5</div> 
+    </li> 
+    <p> Paso: 16
+    <li class='game-board'><div class='box'>1</div> <div class='box'>8</div> <div class='box'>2</div> <div class='box'>4</div> <div class='zero'>0</div> <div class='box'>3</div> <div class='box'>7</div> <div class='box'>6</div> <div class='box'>5</div> 
+    </li> 
+    <p> Paso: 17
+    <li class='game-board'><div class='box'>1</div> <div class='zero'>0</div> <div class='box'>2</div> <div class='box'>4</div> <div class='box'>8</div> <div class='box'>3</div> <div class='box'>7</div> <div class='box'>6</div> <div class='box'>5</div> 
+    </li> 
+    <p> Paso: 18
+    <li class='game-board'><div class='box'>1</div> <div class='box'>2</div> <div class='zero'>0</div> <div class='box'>4</div> <div class='box'>8</div> <div class='box'>3</div> <div class='box'>7</div> <div class='box'>6</div> <div class='box'>5</div> 
+    </li> 
+    <p> Paso: 19
+    <li class='game-board'><div class='box'>1</div> <div class='box'>2</div> <div class='box'>3</div> <div class='box'>4</div> <div class='box'>8</div> <div class='zero'>0</div> <div class='box'>7</div> <div class='box'>6</div> <div class='box'>5</div> 
+    </li> 
+    <p> Paso: 20
+    <li class='game-board'><div class='box'>1</div> <div class='box'>2</div> <div class='box'>3</div> <div class='box'>4</div> <div class='box'>8</div> <div class='box'>5</div> <div class='box'>7</div> <div class='box'>6</div> <div class='zero'>0</div> 
+    </li> 
+    <p> Paso: 21
+    <li class='game-board'><div class='box'>1</div> <div class='box'>2</div> <div class='box'>3</div> <div class='box'>4</div> <div class='box'>8</div> <div class='box'>5</div> <div class='box'>7</div> <div class='zero'>0</div> <div class='box'>6</div> 
+    </li> 
+    <p> Paso: 22
+    <li class='game-board'><div class='box'>1</div> <div class='box'>2</div> <div class='box'>3</div> <div class='box'>4</div> <div class='zero'>0</div> <div class='box'>5</div> <div class='box'>7</div> <div class='box'>8</div> <div class='box'>6</div> 
+    </li> 
+    <p> Paso: 23
+    <li class='game-board'><div class='box'>1</div> <div class='box'>2</div> <div class='box'>3</div> <div class='box'>4</div> <div class='box'>5</div> <div class='zero'>0</div> <div class='box'>7</div> <div class='box'>8</div> <div class='box'>6</div> 
+    </li> 
+    <p> Paso: 24
+    <li class='game-board'><div class='box'>1</div> <div class='box'>2</div> <div class='box'>3</div> <div class='box'>4</div> <div class='box'>5</div> <div class='box'>6</div> <div class='box'>7</div> <div class='box'>8</div> <div class='zero'>0</div> 
+    </li> </ul>

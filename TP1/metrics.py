@@ -6,3 +6,4 @@ class Metrics:
         self.nodes_expanded = 0
         self.frontier = 0
         self.time = 0
+        self.goal = None

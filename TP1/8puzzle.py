@@ -10,6 +10,7 @@ from solution import fill_matrix
 from solution import read_matrix
 from heu import heu_wrong_tile, heu_wrong_row_col, heu_linear_distance
 from mapException import MapException
+from web import render
 import json
 
 def choose_heuristic(argument):
@@ -84,6 +85,6 @@ try:
     print(answer.nodes_expanded)
     print(answer.frontier)
 
-
+    render(answer.goal)
 except MapException as e:
     print(str(e))
