@@ -28,7 +28,7 @@ class LocalHeuristic(Search):
         metrics = self.metrics
         Ex = set()
         while nodes:
-            node = nodes.pop(0)
+            node = nodes.pop()
             Ex.add(node)
             metrics.nodes_expanded +=1
 
@@ -50,7 +50,8 @@ class LocalHeuristic(Search):
                 if nextNode not in Ex:
                     nextNodes.append(nextNode)
             
-            nextNodes.sort(key = self.heumethod)
-            self.local_heuristic_search(nextNodes)
+            nextNodes.sort(key = self.heumethod, reverse=True)
+            for n in nextNodes:
+                nodes.append(n)
 
         return metrics
