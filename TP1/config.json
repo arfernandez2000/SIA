@@ -1,6 +1,6 @@
 {
-    "method": "A_STAR",
-    "heuristic": "tile",
+    "method": "GLOBAL_H",
+    "heuristic": "rowcol",
     "map": "maps/map1.txt",
     "informed": 1
 }
