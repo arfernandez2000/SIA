@@ -4,6 +4,11 @@
 # Ignore all .pyc files
 *.pyc
 
+<<<<<<< HEAD
 *.json
 
 *.jpeg
+=======
+# Ignore all .json files
+*.json
+>>>>>>> c8ec46797354879caf5365adc5b7b0c95289d7eb
