@@ -26,6 +26,7 @@ def render(node):
         align-items: center;
         display: flex;
         flex-direction: column;
+        font-family: monospace;
         justify-content: center;
         margin: auto;
         text-align: center;
