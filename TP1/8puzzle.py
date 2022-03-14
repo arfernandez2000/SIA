@@ -6,7 +6,7 @@ from algorithms.heu_local import LocalHeuristic
 from algorithms.heu_global import GlobalHeuristic
 from algorithms.A_star import AStar
 from algorithms.search import Search
-from solution import fill_matrix
+from solution import is_solvable
 from solution import read_matrix
 from heu import heu_wrong_tile, heu_wrong_row_col, heu_linear_distance
 from mapException import MapException
@@ -75,7 +75,8 @@ try:
     mapName, search_method = getData()
     print(mapName, search_method)
     root_node = read_matrix(mapName)
-
+    if(not is_solvable(root_node.matrix)):
+        raise Exception('Matrix not solvable')
     if (isinstance(search_method, str)):
         raise Exception(search_method)
     answer = search_method.search(root_node)
