@@ -19,32 +19,36 @@ class LocalHeuristic(Search):
 
     def search(self, root_node):
         L = [root_node]
+        print("LOCAL ACA EN EL SEARCH")
         return self.local_heuristic_search(L)
 
     def local_heuristic_search(self, nodes):
+        A = nodes
         t1_start = perf_counter()
         metrics = self.metrics
         Ex = set()
-        while nodes:
-            node = nodes.pop(0)
-            Ex.add(node)
-            metrics.nodes_expanded +=1
+        while A:
+            while nodes:
+                node = nodes.pop(0)
+                Ex.add(node)
+                metrics.nodes_expanded +=1
 
-            if node.__eq__(GOAL_STATE):
-                print ("encontrado")
-                metrics.success = True
-                metrics.frontier = len(nodes)
-                print(node.get_trace())
-                t1_stop = perf_counter() 
-                metrics.time = (t1_stop-t1_start)
-                metrics.depth = node.depth
-                metrics.goal = node
-                return metrics
-            
-            moves = possible_moves(node.matrix, node.blankspace)
-            for move in moves:
-                nextNode = next(node.matrix, node.blankspace, move, node)
-                if nextNode not in Ex:
-                    nodes.append(nextNode)
-            
-            nodes.sort(key = self.heumethod)
+                if node.__eq__(GOAL_STATE):
+                    print ("encontrado")
+                    metrics.success = True
+                    metrics.frontier = len(nodes)
+                    print(node.get_trace())
+                    t1_stop = perf_counter() 
+                    metrics.time = (t1_stop-t1_start)
+                    metrics.depth = node.depth
+                    metrics.goal = node
+                    return metrics
+                
+                moves = possible_moves(node.matrix, node.blankspace)
+                for move in moves:
+                    nextNode = next(node.matrix, node.blankspace, move, node)
+                    if nextNode not in Ex:
+                        nodes.append(nextNode)
+                
+                nodes.sort(key = self.heumethod)
+            A.remove(node)
