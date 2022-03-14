@@ -87,6 +87,6 @@ try:
     print(answer.nodes_expanded)
     print(answer.frontier)
 
-    render(answer.goal)
+    render(answer)
 except MapException as e:
     print(str(e))

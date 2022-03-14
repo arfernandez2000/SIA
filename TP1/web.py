@@ -18,9 +18,9 @@ def get_grid(matrix, i):
     </li> """
     return html
 
-def render(node):
+def render(metrics):
     f = open('trace.html','w')
-    nodes = node.get_trace()
+    nodes = metrics.goal.get_trace()
     page = """ <style> 
     body {
         align-items: center;
@@ -30,6 +30,10 @@ def render(node):
         justify-content: center;
         margin: auto;
         text-align: center;
+    }
+    h3 {
+        align-items: center;
+        text-align: left;
     }
     .game-board {
         background: whitesmoke;
@@ -59,6 +63,12 @@ def render(node):
     </style>
     <h1> 8 Number Puzzle </h1>
     <h4> Florencia Chao, Ariadna Fernandez Truglia, Faustino Maggioni Duffy </h4>
+    <h3> Method: """+metrics.param+"""</h3>
+    <h3> Time: """+str(metrics.time)+"""</h3>
+    <h3> Depth and Cost: """+str(metrics.depth)+"""</h3>
+    <h3> Nodes Expanded: """+str(metrics.nodes_expanded)+"""</h3>
+    <h3> Frontier: """+str(metrics.frontier)+"""</h3>
+    <h3> Success: """+str(metrics.success)+"""</h3>
     <ul> """
     i = 0
     for matrix in nodes:
