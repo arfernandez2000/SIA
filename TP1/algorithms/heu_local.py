@@ -53,3 +53,4 @@ class LocalHeuristic(Search):
             nextNodes.sort(key = self.heumethod)
             self.local_heuristic_search(nextNodes)
 
+        return metrics

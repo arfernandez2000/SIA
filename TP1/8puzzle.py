@@ -65,6 +65,7 @@ def getData():
     informed = data["informed"]
     if informed:
         heu = getHeu(data)
+        print(search_method)
         search_method.setHeuristic(heu)
 
     f.close()
