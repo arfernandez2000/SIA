@@ -1,20 +1,15 @@
 from metrics import Metrics
-#from algorithms.search import get_depth
-from logging import root
-from metrics import Metrics
 from solution import GOAL_STATE
 from solution import possible_moves
 from solution import next
 from algorithms.search import Search
 from time import perf_counter
-import sys
 
 class LocalHeuristic(Search):
     def __init__(self):
         super().__init__()
         self.heumethod = None
         self.metrics = Metrics('LOCAL_H')
-        sys.setrecursionlimit(10 ** 6)
 
     def setHeuristic(self, heu):
         self.heumethod = heu

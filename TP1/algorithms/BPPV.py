@@ -1,5 +1,3 @@
-#from algorithms.search import get_depth
-from logging import root
 from metrics import Metrics
 from solution import GOAL_STATE
 from solution import possible_moves

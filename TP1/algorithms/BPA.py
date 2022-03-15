@@ -1,8 +1,4 @@
 from metrics import Metrics
-#from algorithms.search import get_depth
-from logging import root
-from metrics import Metrics
-import time
 from solution import GOAL_STATE
 from solution import possible_moves
 from solution import next

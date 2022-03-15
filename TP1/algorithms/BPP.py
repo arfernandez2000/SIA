@@ -1,6 +1,4 @@
 from metrics import Metrics
-from logging import root
-from metrics import Metrics
 from time import perf_counter
 from solution import GOAL_STATE
 from solution import possible_moves

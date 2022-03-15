@@ -1,11 +1,9 @@
-from node import Node
 from algorithms.BPA import BPA
 from algorithms.BPP import BPP
 from algorithms.BPPV import BPPV
 from algorithms.heu_local import LocalHeuristic
 from algorithms.heu_global import GlobalHeuristic
 from algorithms.A_star import AStar
-from algorithms.search import Search
 from solution import is_solvable
 from solution import read_matrix
 from heu import heu_wrong_tile, heu_wrong_row_col, heu_linear_distance
