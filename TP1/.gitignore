@@ -1,5 +1,3 @@
-# Ignore all text files
-*.txt
 
 # Ignore all .pyc files
 *.pyc
@@ -7,5 +5,5 @@
 # Ignore all .json files
 *.json
 
-# Ignore all .html files
-*.html
+# Ignore all trace.html files
+trace.html
