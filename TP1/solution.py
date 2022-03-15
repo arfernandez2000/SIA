@@ -20,7 +20,6 @@ def read_matrix (filename):
         matrix.append(int (map[index]))
         index = index + 1
     f.close()
-    print ("matrix", matrix)
     blanskspace = get_blanckspace(matrix)
     return Node(matrix, None,blanskspace, 0)
 

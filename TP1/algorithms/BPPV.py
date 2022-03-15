@@ -22,15 +22,13 @@ class BPPV(Search):
         final_node = self.bppv(root_node) 
             
         if(final_node is True):
-            print("encontradoo")
             metrics.success = True 
             metrics.frontier = len(self.F)
             t1_stop = perf_counter() 
             metrics.time = (t1_stop-t1_start)
             metrics.depth = self.depth
             return metrics
-                
-        print("no encontradoo")
+        
         t1_stop = perf_counter() 
         metrics.time = (t1_stop-t1_start)
         metrics.depth = self.depth
@@ -54,7 +52,6 @@ class BPPV(Search):
             while F:
                 result = self.bppv_rec(F, A, Ex, start, limit, last_level_nodes)
                 if(result is True):
-                    print("encontrado")
                     return result
             start = limit
             limit += self.LIMIT_INCREASE
@@ -68,7 +65,6 @@ class BPPV(Search):
     def bppv_rec(self, F, A, Ex, start, limit, last_level_nodes):
         node = F.pop()
         if node.__eq__(GOAL_STATE):
-            print ("encontrado")
             self.depth = node.depth
             self.metrics.goal = node
             return True

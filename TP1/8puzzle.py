@@ -65,7 +65,6 @@ def getData():
     informed = data["informed"]
     if informed:
         heu = getHeu(data)
-        print(search_method)
         search_method.setHeuristic(heu)
 
     f.close()
@@ -74,18 +73,12 @@ def getData():
 
 try:
     mapName, search_method = getData()
-    print(mapName, search_method)
     root_node = read_matrix(mapName)
     if(not is_solvable(root_node.matrix)):
         raise Exception('Matrix not solvable')
     if (isinstance(search_method, str)):
         raise Exception(search_method)
     answer = search_method.search(root_node)
-    print(answer.time)
-    print(answer.param)
-    print(answer.depth)
-    print(answer.nodes_expanded)
-    print(answer.frontier)
 
     render(answer)
 except MapException as e:

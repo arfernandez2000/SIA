@@ -33,10 +33,8 @@ class LocalHeuristic(Search):
             metrics.nodes_expanded +=1
 
             if node.__eq__(GOAL_STATE):
-                print ("encontrado")
                 metrics.success = True
                 metrics.frontier = len(nodes)
-                print(node.get_trace())
                 t1_stop = perf_counter() 
                 metrics.time = (t1_stop-t1_start)
                 metrics.depth = node.depth
