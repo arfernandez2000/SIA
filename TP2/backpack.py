@@ -1,14 +1,11 @@
 from typing import Tuple
 
-
 class Elem:
     def __init__(self, benefit, weight):
         self.benefit = benefit
         self.weight = weight
 
-
 Chromosome = Tuple[bool, ...]
-
 
 class Backpack:
     def __init__(self, max_capacity, max_weight, elems = []):
@@ -16,6 +13,9 @@ class Backpack:
         self.max_weight = max_weight
         self.elems = elems
     
+    def getCapacity(self):
+        return self.max_capacity
+
     def getWeight(self, chrom: Chromosome):
         totWeight = 0
         for c,e in zip(chrom, self.elems):

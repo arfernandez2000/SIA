@@ -1,17 +1,16 @@
-
-from TP2.backpack import Backpack, Elem
-
+from backpack import Backpack, Elem
+from typing import List
 
 maxWeight: int
 maxItems : int
-elems: list[Elem] = []
+elems: List[Elem] = []
 
 with open("./source/Mochila100Elementos.txt", 'r') as f:
     line = f.readline()
     count: int = 0
 
     while line:
-        aux: list[str] = line.split()
+        aux: List[str] = line.split()
 
         if count ==0:
             maxItems = aux[0]
