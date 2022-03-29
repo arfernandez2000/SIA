@@ -9,7 +9,7 @@ with open("./source/Mochila100Elementos.txt", 'r') as f:
     line = f.readline()
     count: int = 0
 
-    while line:
+    while line != '\n':
         aux: List[str] = line.split()
 
         if count ==0:
@@ -19,7 +19,9 @@ with open("./source/Mochila100Elementos.txt", 'r') as f:
             elem = Elem(aux[0], aux[1])
             elems.append(elem)
         count+=1
+        line = f.readline()
         
     f.close()
     
 backpack = Backpack(maxItems, maxWeight,elems)
+print (backpack)
