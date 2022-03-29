@@ -2,7 +2,6 @@ from typing import List, Tuple
 from random import random
 
 from main import backpack
-from backpack import Chromosome
 
 def get_random_population(P, prob):
     population = set()
