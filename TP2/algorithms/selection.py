@@ -14,30 +14,35 @@ def elite(l, backpack):
     #NO FUNCIONAAA LPM, 
 
 def ruleta(list, backpack):
-    res = []
-    sumFit = 0
+    res = set()
     sums = []
-    fitness = []
+    sumFit = 0
     
-    for i in range(0, len(list)):
-        sums[i] = Backpack.getFitness(list[i])
+    for i in range (len(list)):
+        sums.append(backpack.getFitness(list[i]))
         sumFit += sums[i]
+        
+    len_sums = len(sums)
     P = len(list) / 2
-    i = 0
-    q_j = sums[0] / sumFit
-    q_jplusone = q_j + sums[1] / sumFit
-    while (len(res) != P):
-        if (i == len(list) - 2):
-            i = 0
-        p_i = sums[i] / sumFit
-        p_iplusone = sums[i+1]/sumFit
+    i = 1
+    q_i = 0
+    q_iplusone = sums[0] / sumFit
+
+    while (len(res) < P):
+        if (i == len_sums):
+            i = 1
+            q_i = 0
+            q_iplusone = sums[0] / sumFit
+
+        q_i += sums[i-1] / sumFit
+        q_iplusone += sums[i] / sumFit
         r = random.uniform(0,1)
-        if r > q_j and r <= q_jplusone:
-            res.add(list[i])
+
+        if (q_i < r and q_iplusone >= r):
+            res.add(list[i-1])
         i += 1
-        q_j = q_jplusone
-        q_jplusone =  q_j + sum[i+1] / sumFit
-    return res
+
+    return [*res, ]
 
 def rank(l, backpack):
     aux = list(l)
