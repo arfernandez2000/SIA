@@ -11,9 +11,8 @@ def elite(l, backpack):
     aux = list(l)
     aux.sort(key = backpack.getFitness, reverse = True)
     return set(aux[0:LENGTH_FINAL])
-    #NO FUNCIONAAA LPM, 
 
-def selection(list, p_i_list, divisor, P):
+def q_selection(list, p_i_list, divisor, P):
     len_p_i_list = len(p_i_list)
     i = 1
     q_i = 0
@@ -43,7 +42,7 @@ def ruleta(list, backpack):
         sums.append(backpack.getFitness(list[i]))
         sumFit += sums[i]
     P = len(list) / 2
-    res = selection(list, sums, sumFit, P)
+    res = q_selection(list, sums, sumFit, P)
     return res
 
 def rank(l, backpack):
@@ -58,7 +57,7 @@ def rank(l, backpack):
         p_rank.append(fit_inv)
         sumfit +=fit_inv
     
-    res = selection(l, p_rank, sumfit, P)
+    res = q_selection(l, p_rank, sumfit, P)
     return res
 
 def tournament(List, backpack):
