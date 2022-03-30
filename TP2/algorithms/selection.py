@@ -60,8 +60,26 @@ def rank(l, backpack):
     res = q_selection(l, p_rank, sumfit, P)
     return res
 
-def tournament(List, backpack):
-    i = 0
+def tournament(list, backpack):
+    u = random.uniform(0.5,1)
+    competitors = random.sample(list, 4)
+    pair_one = competitors[:2]
+    pair_two = competitors[2:]
+    r = random.uniform(0,1)
+    winners = []
+    pairs = [pair_one, pair_two, winners]
+    for p in pairs:
+        first_fit = backpack.getFitnes(p[0])
+        second_fit = backpack.getFitness(p[1])
+        best_fit = p[1] if second_fit > first_fit else p[0]
+        worst_fit = p[1] if second_fit <= first_fit else p[0]
+
+        if r < u:
+            winners.append(best_fit)
+        else:
+            winners.append(worst_fit)
+
+    return winners[-1]
 
 def boltzman(List, backpack):
     i = 0
