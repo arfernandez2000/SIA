@@ -1,21 +1,19 @@
+from turtle import back
 from backpack import Backpack
 import random
+from typing import Tuple
 
 LENGTH_FINAL = 100
 def selection(List, int):
     print("hola")
 
-def elite(list):
-    fitness = []
-    
-    for i in range (len(list)):
-        fitness.append(Backpack.getFitness(list[i]))
-    fitness.sort(reverse=True)
-    return sorted(list, key=fitness,reverse=True)[0:LENGTH_FINAL]
-
+def elite(l, backpack):
+    aux = list(l)
+    aux.sort(key = backpack.getFitness, reverse = True)
+    return set(aux[0:LENGTH_FINAL])
     #NO FUNCIONAAA LPM, 
 
-def ruleta(list):
+def ruleta(list, backpack):
     res = []
     sumFit = 0
     sums = []
@@ -41,31 +39,34 @@ def ruleta(list):
         q_jplusone =  q_j + sum[i+1] / sumFit
     return res
 
-def rank(list):
-    fitness = []
-    for i in range (len(list)):
-        fitness.append(Backpack.getFitness(list[i]), list[i])
-    fitness.sort(reverse=True)
-    P = len(list) /2
+def rank(l, backpack):
+    aux = list(l)
+    sumfit = 0
+    aux.sort(key = backpack.getFitness, reverse = True)
+    print(aux)
+    P = len(l) /2
     p_rank = []
-    for i in range(len(list)):
-        p_rank.append((P - fitness[i]) / P)
+    for i in range(len(aux)):
+        fit_inv = (P - i)/P
+        p_rank.append(fit_inv)
+        sumfit +=fit_inv
     
-    return random.choices(population = fitness, weights=p_rank, k=100)
+    
+    return random.choices(population = aux, weights=p_rank, k=100)
 
-    #TO DO : AGREGAR LO DE RANKING
+    #TO DO : AGREGAR LO DE RULETA
 
 
-def tournament(List):
+def tournament(List, backpack):
     i = 0
 
-def boltzman(List):
+def boltzman(List, backpack):
     i = 0
 
-def truncated(list, k):
+def truncated(list, k, backpack):
     fitness = []
     for i in range (len(list)):
-        fitness.append(Backpack.getFitness(list[i]), list[i])
+        fitness.append(backpack.getFitness(list[i]), list[i])
     fitness.sort()
     list_truncated = fitness[k: len(list)]
 
