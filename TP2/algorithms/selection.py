@@ -13,17 +13,6 @@ def elite(l, backpack):
     return set(aux[0:LENGTH_FINAL])
     #NO FUNCIONAAA LPM, 
 
-def ruleta(list, backpack):
-    sums = []
-    sumFit = 0
-    
-    for i in range (len(list)):
-        sums.append(backpack.getFitness(list[i]))
-        sumFit += sums[i]
-    P = len(list) / 2
-    res = selection(list, sums, sumFit, P)
-    return res
-
 def selection(list, p_i_list, divisor, P):
     len_p_i_list = len(p_i_list)
     i = 1
@@ -46,6 +35,17 @@ def selection(list, p_i_list, divisor, P):
 
     return [*res, ]
 
+def ruleta(list, backpack):
+    sums = []
+    sumFit = 0
+    
+    for i in range (len(list)):
+        sums.append(backpack.getFitness(list[i]))
+        sumFit += sums[i]
+    P = len(list) / 2
+    res = selection(list, sums, sumFit, P)
+    return res
+
 def rank(l, backpack):
     aux = list(l)
     sumfit = 0
@@ -58,11 +58,8 @@ def rank(l, backpack):
         p_rank.append(fit_inv)
         sumfit +=fit_inv
     
-    
-    return random.choices(population = aux, weights=p_rank, k=100)
-
-    #TO DO : AGREGAR LO DE RULETA
-
+    res = selection(l, p_rank, sumfit, P)
+    return res
 
 def tournament(List, backpack):
     i = 0
