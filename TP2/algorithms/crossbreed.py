@@ -2,10 +2,14 @@ import random
 
 def crossbreed(one, two, n):
     if n==0:
+        onet = list(one)
+        twot = list(two)
         for i in range (0, len(one)):
             prob = random.random()
             if prob > 0.5:
-                one[i], two[i] = two[i], one[i]
+                onet[i], twot[i] = twot[i], onet[i]
+        
+        return tuple(onet), tuple(twot)
         
     else:
         points = set()

@@ -1,5 +1,7 @@
 from backpack import Backpack, Elem
 from typing import List
+from algorithms.genetic_algorithm import *
+from algorithms.selection import *
 
 maxWeight: int
 maxItems : int
@@ -13,15 +15,22 @@ with open("./source/Mochila100Elementos.txt", 'r') as f:
         aux: List[str] = line.split()
 
         if count ==0:
-            maxItems = aux[0]
-            maxWeight = aux[1]
+            maxItems = int(aux[0])
+            maxWeight = int(aux[1])
         else:
-            elem = Elem(aux[0], aux[1])
+            elem = Elem(int(aux[0]), int(aux[1]))
             elems.append(elem)
         count+=1
         line = f.readline()
         
     f.close()
-    
+print(maxWeight)
 backpack = Backpack(maxItems, maxWeight,elems)
-print (backpack)
+last_population = genetic_algorithm(backpack, 100, 0.5, 0.3, elite)
+
+optimo = last_population.pop()
+for popu in last_population:
+    if backpack.getFitness(optimo) < backpack.getFitness(popu):
+        optimo = popu
+print("Optimo: ", optimo)
+print("Weight: ", backpack.getWeight(optimo))
