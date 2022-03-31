@@ -44,7 +44,7 @@ def ruleta(individuals, backpack):
     sumFit = 0
     length = len(individuals)
     for i in range (length):
-        f_list.append(backpack.getFitness(individuals[i]))
+        f_list.add(backpack.getFitness(individuals[i]))
         sumFit += f_list[i]
     res = selection_method(individuals, f_list, sumFit, length / 2, isRulet=True)
     return res
@@ -56,11 +56,11 @@ def rank(individuals, backpack):
     length = len(individuals)
     f_i_list = []
     for i in range(0,len(aux)):
-        fit_inv = (length - (aux.index(individuals[i]) + 1)) / length 
+        fit_inv = (length - i) / length 
         f_i_list.append(fit_inv)
         sumfit += fit_inv
     
-    res = selection_method(individuals, f_i_list, sumfit, length / 2)
+    res = selection_method(aux, f_i_list, sumfit, length / 2)
     return res
 
 def tournament(list, backpack):
@@ -76,19 +76,14 @@ def tournament(list, backpack):
         pairs = [pair_one, pair_two, final]
         for p in pairs:
             first_fit = backpack.getFitness(p[0])
-            print("FIRST", first_fit)
             second_fit = backpack.getFitness(p[1])
-            print("SECOND", second_fit)
             best_fit = p[1] if second_fit > first_fit else p[0]
             worst_fit = p[1] if second_fit <= first_fit else p[0]
-            print("BEST",backpack.getFitness(best_fit))
             if r < u:
                 final.append(best_fit)
             else:
                 final.append(worst_fit)
         winners.append(final[-1])
-    print("WINNERS", winners)
-    print("LEN WINNERS", len(winners))
     return winners
 
 Tc = 5
