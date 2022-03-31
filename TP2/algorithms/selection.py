@@ -49,7 +49,6 @@ def rank(l, backpack):
     aux = list(l)
     sumfit = 0
     aux.sort(key = backpack.getFitness, reverse = True)
-    print(aux)
     P = len(l) /2
     p_rank = []
     for i in range(len(aux)):
@@ -61,25 +60,32 @@ def rank(l, backpack):
     return res
 
 def tournament(list, backpack):
-    u = random.uniform(0.5,1)
-    competitors = random.sample(list, 4)
-    pair_one = competitors[:2]
-    pair_two = competitors[2:]
-    r = random.uniform(0,1)
+    P = len(list)/2
     winners = []
-    pairs = [pair_one, pair_two, winners]
-    for p in pairs:
-        first_fit = backpack.getFitnes(p[0])
-        second_fit = backpack.getFitness(p[1])
-        best_fit = p[1] if second_fit > first_fit else p[0]
-        worst_fit = p[1] if second_fit <= first_fit else p[0]
-
-        if r < u:
-            winners.append(best_fit)
-        else:
-            winners.append(worst_fit)
-
-    return winners[-1]
+    while len(winners) < P:
+        u = random.uniform(0.5,1)
+        competitors = random.sample(list, 4)
+        pair_one = competitors[:2]
+        pair_two = competitors[2:]
+        r = random.uniform(0,1)
+        final = []
+        pairs = [pair_one, pair_two, final]
+        for p in pairs:
+            first_fit = backpack.getFitness(p[0])
+            print("FIRST", first_fit)
+            second_fit = backpack.getFitness(p[1])
+            print("SECOND", second_fit)
+            best_fit = p[1] if second_fit > first_fit else p[0]
+            worst_fit = p[1] if second_fit <= first_fit else p[0]
+            print("BEST",backpack.getFitness(best_fit))
+            if r < u:
+                final.append(best_fit)
+            else:
+                final.append(worst_fit)
+        winners.append(final[-1])
+    print("WINNERS", winners)
+    print("LEN WINNERS", len(winners))
+    return winners
 
 def boltzman(l, backpack):
     pass
