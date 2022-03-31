@@ -33,13 +33,21 @@ class Backpack:
         return totBenefit
 
     def getFitness(self, chrom):
-        
-        print("Weight", self.getWeight(chrom))  
         d = self.getBenefit(chrom) - self.getWeight(chrom) 
+        if( d > 700):
+            d = 700
         if( d < 0):
             ans = -1/d
         else:
             prev = math.pow(math.e, d)
+
             ans = math.pow(prev, 0.5)
-        print(ans)
         return ans
+
+    def getPopuFitness(self, popu):
+        maxFit =0
+        for i in popu:
+            actualFit = self.getFitness(i)
+            if(maxFit < actualFit):
+                maxFit = actualFit
+        return maxFit

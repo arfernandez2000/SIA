@@ -6,8 +6,6 @@ from algorithms.crossbreed import *
 def get_random_population(P, prob, backpack):
     population = set()
     capacity = backpack.getCapacity()
-    print(capacity)
-    print(type(capacity))
     while len(population) < P:
         chromosome = [False] * capacity
         for i in range(capacity):
@@ -23,21 +21,25 @@ def select_two_by_fitness(population):
     # A TERMINAR
     return population.pop(), population.pop()
 
-def stop(population, generation):
-    print("ENTRA")
-    generation += 1
-    return generation > 100
+def stop(lastFitness, lastUpdate, actualFitness):
+    if(lastFitness - actualFitness < 0.00001):
+        lastUpdate += 1
+    else:
+        lastUpdate =0
+    return lastUpdate == 50
 
 def genetic_algorithm(backpack, P, prob, pmutation, selection, n=0):
-    gen =0
+    gen = 0
     population = get_random_population(P,prob, backpack)
+    lastFitness =0
+    lastUpdate =0
+    actualFitness = backpack.getPopuFitness(population)
 
-    while gen < 1000:
+    while not stop(lastFitness, lastUpdate, actualFitness) and gen< 20000:
         print("GEN", gen)
         gen += 1
         new_population = set()
         aux_population = list(population)
-        print("type aux ", type(aux_population[0]))
         aux_population.sort(key = backpack.getFitness)
         while len(new_population) < P:
             if(len(aux_population) < 2):
@@ -49,8 +51,6 @@ def genetic_algorithm(backpack, P, prob, pmutation, selection, n=0):
             new_population.add(child_one)
             new_population.add(child_two)
         total_population = population.union(new_population)
-        print("POP type before ", type(population))
-        population = set(selection(list(total_population), backpack, gen))
-        print("POP type after", type(population))
+        population = set(selection(total_population, backpack))
 
     return population

@@ -7,6 +7,8 @@ def mutation(individual, p):
     indt = list(individual)
     for i in range(len(individual)):
         r = random()
+        if (not indt[i]):
+            p /= 1.15
         if (r < p):
             aux = indt[i]
             indt[i] = not aux
