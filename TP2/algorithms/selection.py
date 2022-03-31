@@ -1,3 +1,5 @@
+import math
+from operator import le
 from turtle import back
 from backpack import Backpack
 import random
@@ -89,8 +91,25 @@ def tournament(list, backpack):
     print("LEN WINNERS", len(winners))
     return winners
 
-def boltzman(l, backpack):
-    pass
+Tc = 5
+T_0 = 100
+generation = 0
+def t_function(k,gen):
+    return Tc + (T_0 - Tc) * math.pow(math.e, -k*gen)
+
+def boltzman(individuals, backpack, gen):
+    sumFit = 0
+    length = len(individuals)
+    ve_list = []
+    fitnessList = [backpack.getFitness(x) for x in individuals]
+    temp = t_function(1,gen)
+    for i in range(0, length):
+        ve_i = math.pow(math.e,fitnessList[i]) / temp
+        ve_list.append(ve_i)
+        sumFit += ve_i
+    
+    return selection_method(individuals, ve_list, sumFit, length / 2)
+
 
 def truncated(list, k, backpack):
     fitness = []
