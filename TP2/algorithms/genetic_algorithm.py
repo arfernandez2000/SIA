@@ -50,7 +50,7 @@ def genetic_algorithm(backpack, P, prob, pmutation, selection, n=0):
             new_population.add(child_two)
         total_population = population.union(new_population)
         print("POP type before ", type(population))
-        population = set(selection(total_population, backpack))
+        population = set(selection(list(total_population), backpack, gen))
         print("POP type after", type(population))
 
     return population

@@ -1,9 +1,5 @@
 import math
-from operator import le
-from turtle import back
-from backpack import Backpack
 import random
-from typing import Tuple
 
 LENGTH_FINAL = 100
 def selection(List, int):
@@ -27,14 +23,14 @@ def selection_method(individuals, p_i_list, divisor, length, isRulet = False):
     q_list = get_q(p_i_list, divisor)
     len_p_i_list = len(p_i_list)
     i = 1
-    res = []
+    res = set()
     while (len(res) < length):
         if (i == len_p_i_list):
             i = 1
         r = random.uniform(0,1)
         if (q_list[i-1] < r and r <= q_list[i]):
             index = i - 1 if isRulet else i
-            res.append(individuals[index])
+            res.add(individuals[index])
         i += 1
 
     return res
