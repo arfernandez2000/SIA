@@ -12,52 +12,53 @@ def elite(l, backpack):
     aux.sort(key = backpack.getFitness, reverse = True)
     return set(aux[0:LENGTH_FINAL])
 
-def q_selection(list, p_i_list, divisor, P):
+def get_q(p_i_list, divisor):
+    q = []
+    aux = 0
+    for i in range(0, len(p_i_list)):
+        aux = aux + (p_i_list[i] / divisor)
+        q.append(aux)
+    return q
+        
+def selection_method(individuals, p_i_list, divisor, length, isRulet = False):
+    p_i_list = [0] + p_i_list if isRulet else p_i_list
+    q_list = get_q(p_i_list, divisor)
     len_p_i_list = len(p_i_list)
     i = 1
-    q_i_minus_one = 0
-    q_i = p_i_list[0] / divisor
-    res = set()
-    while (len(res) < P):
+    res = []
+    while (len(res) < length):
         if (i == len_p_i_list):
             i = 1
-            q_i_minus_one = 0
-            q_i = p_i_list[0] / divisor
-
-        q_i_minus_one += p_i_list[i-1] / divisor
-        q_i += p_i_list[i] / divisor
         r = random.uniform(0,1)
-
-        if (q_i_minus_one < r and r <= q_i):
-            res.add(list[i])
+        if (q_list[i-1] < r and r <= q_list[i]):
+            index = i - 1 if isRulet else i
+            res.append(individuals[index])
         i += 1
 
-    return [*res, ]
-
-def ruleta(list, backpack):
-    sums = []
-    sumFit = 0
-    
-    for i in range (len(list)):
-        sums.append(backpack.getFitness(list[i]))
-        sumFit += sums[i]
-    P = len(list) / 2
-    res = q_selection(list, sums, sumFit, P)
     return res
 
-def rank(l, backpack):
-    aux = list(l)
+def ruleta(individuals, backpack):
+    f_list = []
+    sumFit = 0
+    length = len(individuals)
+    for i in range (length):
+        f_list.append(backpack.getFitness(individuals[i]))
+        sumFit += f_list[i]
+    res = selection_method(individuals, f_list, sumFit, length / 2, isRulet=True)
+    return res
+
+def rank(individuals):
+    aux = list(individuals)
     sumfit = 0
-    aux.sort(key = backpack.getFitness, reverse = True)
-    print(aux)
-    P = len(l) /2
-    p_rank = []
-    for i in range(len(aux)):
-        fit_inv = (P - i)/P
-        p_rank.append(fit_inv)
+    aux.sort(reverse = True)
+    length = len(individuals)
+    f_i_list = []
+    for i in range(0,len(aux)):
+        fit_inv = (length - (aux.index(individuals[i]) + 1)) / length 
+        f_i_list.append(fit_inv)
         sumfit += fit_inv
     
-    res = q_selection(l, p_rank, sumfit, P)
+    res = selection_method(individuals, f_i_list, sumfit, length / 2)
     return res
 
 def tournament(list, backpack):
