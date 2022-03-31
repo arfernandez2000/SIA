@@ -1,4 +1,5 @@
 from typing import Tuple
+import math
 
 class Elem:
     def __init__(self, benefit, weight):
@@ -32,6 +33,13 @@ class Backpack:
         return totBenefit
 
     def getFitness(self, chrom):
-        if self.getWeight(chrom) > self.max_weight:
-            return 0
-        return self.getBenefit(chrom)
+        
+        print("Weight", self.getWeight(chrom))  
+        d = self.getBenefit(chrom) - self.getWeight(chrom) 
+        if( d < 0):
+            ans = -1/d
+        else:
+            prev = math.pow(math.e, d)
+            ans = math.pow(prev, 0.5)
+        print(ans)
+        return ans
