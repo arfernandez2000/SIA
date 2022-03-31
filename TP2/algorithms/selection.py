@@ -15,21 +15,21 @@ def elite(l, backpack):
 def q_selection(list, p_i_list, divisor, P):
     len_p_i_list = len(p_i_list)
     i = 1
-    q_i = 0
-    q_iplusone = p_i_list[0] / divisor
+    q_i_minus_one = 0
+    q_i = p_i_list[0] / divisor
     res = set()
     while (len(res) < P):
         if (i == len_p_i_list):
             i = 1
-            q_i = 0
-            q_iplusone = p_i_list[0] / divisor
+            q_i_minus_one = 0
+            q_i = p_i_list[0] / divisor
 
-        q_i += p_i_list[i-1] / divisor
-        q_iplusone += p_i_list[i] / divisor
+        q_i_minus_one += p_i_list[i-1] / divisor
+        q_i += p_i_list[i] / divisor
         r = random.uniform(0,1)
 
-        if (q_i < r and q_iplusone >= r):
-            res.add(list[i-1])
+        if (q_i_minus_one < r and r <= q_i):
+            res.add(list[i])
         i += 1
 
     return [*res, ]
@@ -55,7 +55,7 @@ def rank(l, backpack):
     for i in range(len(aux)):
         fit_inv = (P - i)/P
         p_rank.append(fit_inv)
-        sumfit +=fit_inv
+        sumfit += fit_inv
     
     res = q_selection(l, p_rank, sumfit, P)
     return res
@@ -81,8 +81,8 @@ def tournament(list, backpack):
 
     return winners[-1]
 
-def boltzman(List, backpack):
-    i = 0
+def boltzman(l, backpack):
+    pass
 
 def truncated(list, k, backpack):
     fitness = []
