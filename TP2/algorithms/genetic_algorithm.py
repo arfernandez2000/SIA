@@ -3,7 +3,7 @@ from algorithms.mutation import *
 from algorithms.crossbreed import *
 
 def get_random_population(P, prob, backpack):
-    population = set()
+    population = []
     capacity = backpack.getCapacity()
     while len(population) < P:
         weight = backpack.getMaxWeight()
@@ -20,9 +20,7 @@ def get_random_population(P, prob, backpack):
                 weight -= elemWeight
             indexes.pop(index)
         individual = tuple(chromosome)
-        print("INDI WEIGHT", backpack.getWeight(individual))
-        print("INDI BENEFIT", backpack.getBenefit(individual))
-        population.add(individual)
+        population.append(individual)
     return population
 
 def select_two_by_fitness(population):
@@ -44,16 +42,21 @@ def genetic_algorithm(backpack, P, prob, pmutation, selection, n=0):
     actualFitness = backpack.getPopuFitness(population)
     print(population)
 
-    while gen < 500:
+    while not stop(lastFitness, lastUpdate, actualFitness):
         print("GEN: ", gen)
         print("ACTUAL FITNESS: ", actualFitness)
         gen += 1
-        new_population = set()
+        new_population = []
         aux_population = list(population)
         aux_population.sort(key = backpack.getFitness)
         while len(new_population) < P:
+            print("LENGTH AUX BEFORE", len(aux_population))
+            print("LENGTH POPU", len(population))
             if(len(aux_population) < 2):
                 aux_population += list(population)
+                print("ENTRA")
+                print("LENGTH POPULATION ADENTRO", len(aux_population))
+            print("LENGTH POPULATION", len(population))
             one, two = select_two_by_fitness(aux_population)
             print("BEFORE")
             print(one)
@@ -64,10 +67,12 @@ def genetic_algorithm(backpack, P, prob, pmutation, selection, n=0):
             print(child_two)
             child_one = mutation(child_one, pmutation)
             child_two = mutation(child_two, pmutation)
-            new_population.add(child_one)
-            new_population.add(child_two)
-        total_population = population.union(new_population)
-        population = set(selection(total_population, backpack))
+            new_population.append(child_one)
+            new_population.append(child_two)
+        population += new_population 
+        print("CHHILD", len(new_population))
+        population = selection(population, backpack, gen)
+        print("LENGTH POP DESPUES SELECTION", len(population))
         lastFitness = actualFitness
         actualFitness = backpack.getPopuFitness(population)
         print(population)
