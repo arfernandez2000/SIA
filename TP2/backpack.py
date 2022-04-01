@@ -34,13 +34,12 @@ class Backpack:
 
     def getFitness(self, chrom):
         d = self.getBenefit(chrom) - self.getWeight(chrom) 
-        if( d > 700):
+        if (d > 700):
             d = 700
-        if( d < 0):
+        elif (d < 0):
             ans = -1/d
         else:
             prev = math.pow(math.e, d)
-
             ans = math.pow(prev, 0.5)
         return ans
 

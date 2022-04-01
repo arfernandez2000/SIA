@@ -18,8 +18,8 @@ def get_q(p_i_list, divisor):
         q.append(aux)
     return q
         
-def selection_method(individuals, p_i_list, divisor, length, isRulet = False):
-    p_i_list = [0] + p_i_list if isRulet else p_i_list
+def selection_method(individuals, p_i_list, divisor, length, addZero = False):
+    p_i_list = [0] + p_i_list if addZero else p_i_list
     q_list = get_q(p_i_list, divisor)
     len_p_i_list = len(p_i_list)
     i = 1
@@ -29,7 +29,7 @@ def selection_method(individuals, p_i_list, divisor, length, isRulet = False):
             i = 1
         r = random.uniform(0,1)
         if (q_list[i-1] < r and r <= q_list[i]):
-            index = i - 1 if isRulet else i
+            index = i - 1 if addZero else i
             res.add(individuals[index])
         i += 1
 
@@ -40,9 +40,9 @@ def ruleta(individuals, backpack):
     sumFit = 0
     length = len(individuals)
     for i in range (length):
-        f_list.add(backpack.getFitness(individuals[i]))
+        f_list.append(backpack.getFitness(individuals[i]))
         sumFit += f_list[i]
-    res = selection_method(individuals, f_list, sumFit, length / 2, isRulet=True)
+    res = selection_method(individuals, f_list, sumFit, length / 2, addZero=True)
     return res
 
 def rank(individuals, backpack):
@@ -95,11 +95,12 @@ def boltzman(individuals, backpack, gen):
     fitnessList = [backpack.getFitness(x) for x in individuals]
     temp = t_function(1,gen)
     for i in range(0, length):
+        print(fitnessList[i])
         ve_i = math.pow(math.e,fitnessList[i]) / temp
         ve_list.append(ve_i)
         sumFit += ve_i
     
-    return selection_method(individuals, ve_list, sumFit, length / 2)
+    return selection_method(individuals, ve_list, sumFit, length / 2, addZero = True)
 
 
 def truncated(list, k, backpack):

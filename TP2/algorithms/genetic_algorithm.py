@@ -51,6 +51,9 @@ def genetic_algorithm(backpack, P, prob, pmutation, selection, n=0):
             new_population.add(child_one)
             new_population.add(child_two)
         total_population = population.union(new_population)
-        population = set(selection(total_population, backpack))
+        if selection.__name__ == 'boltzman':
+            population = set(selection(list(total_population), backpack, gen))
+        else:
+            population = set(selection(list(total_population), backpack))
 
     return population
