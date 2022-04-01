@@ -102,6 +102,3 @@ def truncated(list, k, backpack, gen, P):
     fitness.sort()
     list_truncated = fitness[k: len(list)]
     tournament(list_truncated, backpack, gen)
-
-    #TO DO: HAY QUE LLAMAR A ALGUNO DE LOS OTROS METODOS. DESPUES DEFINIMOS CUAL
-

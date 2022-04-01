@@ -2,12 +2,24 @@ from backpack import Backpack, Elem
 from typing import List
 from algorithms.genetic_algorithm import *
 from algorithms.selection import *
+import json
 
 maxWeight: int
 maxItems : int
 elems: List[Elem] = []
 
-with open("./source/Mochila100Elementos.txt", 'r') as f:
+f = open('./config.json')
+data = json.load(f)
+P = data['P']
+file = data['file']
+mutation_prob = data['mutation_prob']
+selection_name = data['selection']['method']
+crossover_name = data['crossover']['method']
+crossover_points = data['crossover']['points']
+unchanged_gens = data['stop']['unchanged_generations']
+max_gens = data['stop']['max_generations']
+
+with open(file, 'r') as f:
     line = f.readline()
     count: int = 0
 
@@ -24,8 +36,10 @@ with open("./source/Mochila100Elementos.txt", 'r') as f:
         line = f.readline()
         
     f.close()
+
+
 backpack = Backpack(maxItems, maxWeight,elems)
-last_population = genetic_algorithm(backpack, 100, 0.2, 0.3, elite, 3)
+last_population = genetic_algorithm(backpack, P, 0.2, mutation_prob, elite, crossover_points)
 
 optimo = last_population.pop()
 for popu in last_population:

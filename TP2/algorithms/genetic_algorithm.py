@@ -31,7 +31,7 @@ def stop(lastFitness, lastUpdate, actualFitness):
     if(lastFitness - actualFitness < 0.00001):
         lastUpdate += 1
     else:
-        lastUpdate =0
+        lastUpdate = 0
     return lastUpdate == 50
 
 def genetic_algorithm(backpack, P, prob, pmutation, selection, n=0):
