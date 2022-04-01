@@ -1,5 +1,3 @@
-from turtle import back
-from typing import List, Tuple
 from random import random
 from algorithms.mutation import *
 from algorithms.crossbreed import *
