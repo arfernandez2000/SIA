@@ -1,14 +1,13 @@
 import random
 
-def crossbreed(one, two, n):
+def crossbreed(one, two, n, backpack):
     if n==0:
         onet = list(one)
         twot = list(two)
         for i in range (0, len(one)):
-            prob = random.random()
+            prob = random.uniform(0, 1)
             if prob > 0.5:
                 onet[i], twot[i] = twot[i], onet[i]
-        
         return tuple(onet), tuple(twot)
         
     else:
@@ -25,10 +24,9 @@ def crossbreed(one, two, n):
         final_one = []
         final_two = []
 
-        for i in range(0, len(points) -1):
-            
-            p1 = points[i]
-            p2 = points [i+1]
+        for i in range(1, len(points)):
+            p1 = points[i - 1]
+            p2 = points [i]
 
             n1 = one if i%2 == 0 else two
             n2 = two if i%2 == 0 else one
@@ -36,8 +34,7 @@ def crossbreed(one, two, n):
             if i==0:
                 final_one += n1[0:p1]
                 final_two += n2[0:p1]
-    
-            final_one += n1[p1:p2]
-            final_two += n2[p1:p2]
-            
+            else:
+                final_one += n1[p1:p2]
+                final_two += n2[p1:p2]
         return final_one, final_two

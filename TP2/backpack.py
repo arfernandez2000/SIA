@@ -25,23 +25,32 @@ class Backpack:
                 totWeight += e.weight
         return totWeight
     
+    def getElemWeight(self, index):
+        return self.elems[index].weight
+    
     def getBenefit(self, chrom):
         totBenefit = 0 
         for c, e in zip(chrom, self.elems):
             if c:
-                totBenefit = e.benefit
+                totBenefit += e.benefit
         return totBenefit
 
     def getFitness(self, chrom):
-        d = self.getBenefit(chrom) - self.getWeight(chrom) 
-        if (d > 700):
-            d = 700
-        elif (d < 0):
-            ans = -1/d
-        else:
-            prev = math.pow(math.e, d)
-            ans = math.pow(prev, 0.5)
-        return ans
+        benefit = self.getBenefit(chrom)
+        weight = self.getWeight(chrom)
+        if weight > self.getMaxWeight():
+           weight *= (weight - self.getMaxWeight())
+           return benefit/weight
+        return benefit
+        # d = self.getBenefit(chrom) - self.getWeight(chrom) 
+        # if( d > 700):
+        #     d = 700
+        # if( d < 0):
+        #     ans = -1/d
+        # else:
+        #     prev = math.pow(math.e, d)
+        #     ans = math.pow(prev, 0.5)
+        # return ans
 
     def getPopuFitness(self, popu):
         maxFit =0
