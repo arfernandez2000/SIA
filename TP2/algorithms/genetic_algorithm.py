@@ -45,7 +45,7 @@ def genetic_algorithm(backpack, P, prob, pmutation, selection, n=0):
     actualFitness = backpack.getPopuFitness(population)
     print(population)
 
-    while gen < 500:
+    while not stop(lastFitness, lastUpdate, actualFitness):
         print("GEN: ", gen)
         print("ACTUAL FITNESS: ", actualFitness)
         gen += 1
