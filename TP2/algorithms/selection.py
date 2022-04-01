@@ -9,7 +9,7 @@ LENGTH_FINAL = 100
 
 def elite(l, backpack, gen):
     l.sort(key = backpack.getFitness, reverse = True)
-    return set(l[0:LENGTH_FINAL])
+    return l[0:LENGTH_FINAL]
 
 def get_q(p_i_list, divisor):
     q = []

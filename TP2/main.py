@@ -25,7 +25,7 @@ with open("./source/Mochila100Elementos.txt", 'r') as f:
         
     f.close()
 backpack = Backpack(maxItems, maxWeight,elems)
-last_population = genetic_algorithm(backpack, 100, 0.2, 0.3, truncated, 3)
+last_population = genetic_algorithm(backpack, 100, 0.2, 0.3, elite, 3)
 
 optimo = last_population.pop()
 for popu in last_population:
