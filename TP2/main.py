@@ -2,7 +2,7 @@ from backpack import Backpack, Elem
 from typing import List
 from algorithms.genetic_algorithm import *
 from algorithms.selection import *
-from config_loader import file, P, mutation_prob, selection_name
+from config_loader import file, P, mutation_prob, selection_name, max_gens, unchanged_gens
 
 maxWeight: int
 maxItems : int
@@ -37,7 +37,11 @@ selection_method_dic = {
 
 selection = selection_method_dic.get(selection_name)
 backpack = Backpack(maxItems, maxWeight,elems)
-last_population = genetic_algorithm(backpack, P, 0.2, mutation_prob, selection)
+
+def stop(lastUpdate, gen):
+    return lastUpdate == unchanged_gens or gen == max_gens
+
+last_population = genetic_algorithm(backpack, P, 0.2, mutation_prob, selection, stop)
 
 optimo = last_population.pop()
 for popu in last_population:
