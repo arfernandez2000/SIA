@@ -3,6 +3,7 @@ from typing import List
 from algorithms.genetic_algorithm import *
 from algorithms.selection import *
 from config_loader import file, P, mutation_prob, selection_name
+from graphic import draw
 
 maxWeight: int
 maxItems : int
@@ -39,10 +40,18 @@ selection = selection_method_dic.get(selection_name)
 backpack = Backpack(maxItems, maxWeight,elems)
 last_population = genetic_algorithm(backpack, P, 0.2, mutation_prob, selection)
 
+fitness_values = []
+gen = 0
+gens = []
+
 optimo = last_population.pop()
 for popu in last_population:
+    gens.append(gen)
+    fitness_values.append(backpack.getFitness(popu))
     if backpack.getFitness(optimo) < backpack.getFitness(popu):
         optimo = popu
+    gen += 1
 print("Optimo: ", optimo)
 print("Weight: ", backpack.getWeight(optimo))
 print("Beneficio: ", backpack.getBenefit(optimo))
+draw(gens, fitness_values)
