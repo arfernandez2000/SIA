@@ -1,4 +1,5 @@
 from random import random
+import math
 from algorithms.mutation import *
 from algorithms.crossbreed import *
 
@@ -29,16 +30,13 @@ def select_two_by_fitness(population):
 
 def update(lastFitness, lastUpdate, actualFitness):
     print(lastUpdate)
-    if(lastFitness - actualFitness < 0.00001):
+    if(math.fabs(lastFitness - actualFitness) < 0.00001):
         lastUpdate += 1
     else:
         lastUpdate = 0
     return lastUpdate
 
-def stop(lastUpdate):
-    return lastUpdate == 50
-
-def genetic_algorithm(backpack, P, prob, pmutation, selection):
+def genetic_algorithm(backpack, P, prob, pmutation, selection, stop):
     gen = 0
     population = get_random_population(P,prob, backpack)
     lastFitness = 0
@@ -46,7 +44,7 @@ def genetic_algorithm(backpack, P, prob, pmutation, selection):
     actualFitness = backpack.getPopuFitness(population)
     print(population)
 
-    while not stop(lastUpdate):
+    while not stop(lastUpdate, gen):
         gen += 1
         new_population = []
         aux_population = list(population)
@@ -60,9 +58,8 @@ def genetic_algorithm(backpack, P, prob, pmutation, selection):
             child_two = mutation(child_two, pmutation)
             new_population.append(child_one)
             new_population.append(child_two)
-        print(type(population), type(new_population))
         population += new_population
-        print('algo')
+        print('POPLATION', len(population))
         if selection.__name__ == 'boltzman':
             population = selection(population, backpack, gen, len(population))
         elif selection.__name__ == 'elite':

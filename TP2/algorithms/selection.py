@@ -14,7 +14,6 @@ def get_q(p_i_list, divisor):
     for i in range(0, len(p_i_list)):
         aux = aux + (p_i_list[i] / divisor)
         q.append(aux)
-    print(q)
     return q
         
 def selection_method(individuals, p_i_list, divisor, length, addZero = False):
@@ -31,13 +30,12 @@ def selection_method(individuals, p_i_list, divisor, length, addZero = False):
             index = i - 1 if addZero else i
             res.add(individuals[index])
         i += 1
-    return [res]
+    return list(res)
 
 def ruleta(individuals, backpack, P):
     f_list = []
     sumFit = 0
     for i in range (P):
-        print(i)
         f_list.append(backpack.getFitness(individuals[i]))
         sumFit += f_list[i]
     res = selection_method(individuals, f_list, sumFit, P / 2, addZero=True)
@@ -52,8 +50,8 @@ def rank(individuals, backpack, P):
         fit_inv = (length - i) / length 
         f_i_list.append(fit_inv)
         sumfit += fit_inv
-    
     res = selection_method(individuals, f_i_list, sumfit, length / 2)
+    print("RES LENGTH", len(res))
     return res
 
 def tournament(list, backpack, P):

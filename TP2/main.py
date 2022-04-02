@@ -38,7 +38,11 @@ selection_method_dic = {
 
 selection = selection_method_dic.get(selection_name)
 backpack = Backpack(maxItems, maxWeight,elems)
-last_population = genetic_algorithm(backpack, P, 0.2, mutation_prob, selection)
+
+def stop(lastUpdate, gen):
+    return lastUpdate == unchanged_gens or gen == max_gens
+
+last_population = genetic_algorithm(backpack, P, 0.2, mutation_prob, selection, stop)
 
 fitness_values = []
 gen = 0
