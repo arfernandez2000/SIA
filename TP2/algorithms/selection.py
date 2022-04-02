@@ -1,9 +1,10 @@
 import math
 import random
+from config_loader import tournament_k
 
 LENGTH_FINAL = 100
 
-def elite(l, backpack, gen):
+def elite(l, backpack):
     l.sort(key = backpack.getFitness, reverse = True)
     return l[0:LENGTH_FINAL]
 
@@ -13,6 +14,7 @@ def get_q(p_i_list, divisor):
     for i in range(0, len(p_i_list)):
         aux = aux + (p_i_list[i] / divisor)
         q.append(aux)
+    print(q)
     return q
         
 def selection_method(individuals, p_i_list, divisor, length, addZero = False):
@@ -29,18 +31,19 @@ def selection_method(individuals, p_i_list, divisor, length, addZero = False):
             index = i - 1 if addZero else i
             res.add(individuals[index])
         i += 1
-    return res
+    return [res]
 
-def ruleta(individuals, backpack, gen, P):
+def ruleta(individuals, backpack, P):
     f_list = []
     sumFit = 0
     for i in range (P):
+        print(i)
         f_list.append(backpack.getFitness(individuals[i]))
         sumFit += f_list[i]
-    res = selection_method(individuals, f_list, sumFit, P / 2, isRulet=True)
+    res = selection_method(individuals, f_list, sumFit, P / 2, addZero=True)
     return res
 
-def rank(individuals, backpack, gen, P):
+def rank(individuals, backpack, P):
     sumfit = 0
     individuals.sort(key = backpack.getFitness, reverse = True)
     length = P
@@ -53,7 +56,7 @@ def rank(individuals, backpack, gen, P):
     res = selection_method(individuals, f_i_list, sumfit, length / 2)
     return res
 
-def tournament(list, backpack, gen, P):
+def tournament(list, backpack, P):
     stopper = P/2
     winners = []
     while len(winners) < stopper:
@@ -82,6 +85,7 @@ def t_function(k,gen):
     return Tc + (T_0 - Tc) * math.pow(math.e, -k*gen)
 
 def boltzman(individuals, backpack, gen, P):
+    print('boltzman')
     sumFit = 0
     length = P
     ve_list = []
@@ -92,13 +96,13 @@ def boltzman(individuals, backpack, gen, P):
         ve_list.append(ve_i)
         sumFit += ve_i
     
-    return selection_method(individuals, ve_list, sumFit, length / 2, isRulet=True)
+    return selection_method(individuals, ve_list, sumFit, length / 2, addZero = True)
 
-
-def truncated(list, k, backpack, gen, P):
+def truncated(list, backpack, P):
+    k = tournament_k
     fitness = []
     for i in range (P):
         fitness.append(backpack.getFitness(list[i]), list[i])
     fitness.sort()
     list_truncated = fitness[k: len(list)]
-    tournament(list_truncated, backpack, gen)
+    tournament(list_truncated, backpack)

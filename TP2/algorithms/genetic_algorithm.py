@@ -27,54 +27,54 @@ def select_two_by_fitness(population):
     # A TERMINAR
     return population.pop(), population.pop()
 
-def stop(lastFitness, lastUpdate, actualFitness):
+def update(lastFitness, lastUpdate, actualFitness):
+    print(lastUpdate)
     if(lastFitness - actualFitness < 0.00001):
         lastUpdate += 1
     else:
         lastUpdate = 0
+    return lastUpdate
+
+def stop(lastUpdate):
     return lastUpdate == 50
 
-def genetic_algorithm(backpack, P, prob, pmutation, selection, n=0):
+def genetic_algorithm(backpack, P, prob, pmutation, selection):
     gen = 0
     population = get_random_population(P,prob, backpack)
-    lastFitness =0
-    lastUpdate =0
+    lastFitness = 0
+    lastUpdate = 0
     actualFitness = backpack.getPopuFitness(population)
     print(population)
 
-    while not stop(lastFitness, lastUpdate, actualFitness):
-        print("GEN: ", gen)
-        print("ACTUAL FITNESS: ", actualFitness)
+    while not stop(lastUpdate):
         gen += 1
         new_population = []
         aux_population = list(population)
         aux_population.sort(key = backpack.getFitness)
         while len(new_population) < P:
-            print("LENGTH AUX BEFORE", len(aux_population))
-            print("LENGTH POPU", len(population))
             if(len(aux_population) < 2):
                 aux_population += list(population)
-                print("ENTRA")
-                print("LENGTH POPULATION ADENTRO", len(aux_population))
-            print("LENGTH POPULATION", len(population))
             one, two = select_two_by_fitness(aux_population)
-            print("BEFORE")
-            print(one)
-            print(two)
-            child_one, child_two = crossbreed(one,two, n, backpack)
-            print("AFTER")
-            print(child_one)
-            print(child_two)
+            child_one, child_two = crossbreed(one,two,backpack)
             child_one = mutation(child_one, pmutation)
             child_two = mutation(child_two, pmutation)
             new_population.append(child_one)
             new_population.append(child_two)
-        population += new_population 
-        print("CHHILD", len(new_population))
-        population = selection(population, backpack, gen)
+        print(type(population), type(new_population))
+        population += new_population
+        print('algo')
+        if selection.__name__ == 'boltzman':
+            population = selection(population, backpack, gen, len(population))
+        elif selection.__name__ == 'elite':
+            population = selection(population, backpack)
+        else:
+            print(selection.__name__)
+            population = selection(population, backpack, len(population))
+            print('popu')
+
         print("LENGTH POP DESPUES SELECTION", len(population))
         lastFitness = actualFitness
         actualFitness = backpack.getPopuFitness(population)
-        print(population)
+        lastUpdate = update(lastFitness, lastUpdate, actualFitness)
 
     return population

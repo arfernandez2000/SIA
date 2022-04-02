@@ -1,7 +1,9 @@
 import random
+from config_loader import crossover_points
 
-def crossbreed(one, two, n, backpack):
-    if n==0:
+def crossbreed(one, two, backpack):
+    n = crossover_points
+    if n == 0:
         onet = list(one)
         twot = list(two)
         for i in range (0, len(one)):
@@ -14,13 +16,13 @@ def crossbreed(one, two, n, backpack):
         points = set()
         points.add(0)
         points.add(len(one))
-        while n>0:
+        while n > 0:
             l = len(points)
             points.add(random.randint(0, len(one)))
             if len(points) == l:
                 n-=1
         points = sorted(points)
-
+        print(type(points))
         final_one = []
         final_two = []
 

@@ -5,4 +5,4 @@
 *.json
 
 #Ignore dump file
-text.txt
+*.txt
