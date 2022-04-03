@@ -47,7 +47,7 @@ def rank(individuals, backpack, P):
     individuals.sort(key = backpack.getFitness, reverse = True)
     length = P
     f_i_list = []
-    for i in range(0, P):
+    for i in range(0, length):
         fit_inv = (length - i) / length 
         f_i_list.append(fit_inv)
         sumfit += fit_inv
@@ -84,19 +84,19 @@ def tournament(list, backpack, P):
 Tc = 5
 T_0 = 100
 def t_function(k,gen):
-    return Tc + (T_0 - Tc) * math.pow(math.e, -k*gen)
+    return Tc + (T_0 - Tc) * math.exp(-k*gen)
 
 def boltzman(individuals, backpack, gen, P):
     sumFit = 0
-    length = P
     ve_list = []
     temp = t_function(1,gen)
-    for i in range(0, length):
-        ve_i = math.pow(math.e,backpack.getFitness(individuals[i]/temp))
+    for i in range(0, P):
+        aux_fit = backpack.getFitness(individuals[i]) / 100
+        ve_i = math.exp(aux_fit/temp)
         ve_list.append(ve_i)
         sumFit += ve_i
     
-    return selection_method(individuals, ve_list, sumFit, length / 2, addZero = True)
+    return selection_method(individuals, ve_list, sumFit, P / 2, addZero = True)
 
 def truncated(list, backpack,P):
     k = tournament_k
