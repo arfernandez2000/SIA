@@ -102,6 +102,6 @@ def boltzman(individuals, backpack, gen, P):
 
 def truncated(list, backpack,P):
     k = tournament_k
-    list.sort(key = backpack.getFitness, reverse = True)
+    list.sort(key = backpack.getFitness)
     list_truncated = list[k: len(list)]
     return tournament(list_truncated, backpack, P)
