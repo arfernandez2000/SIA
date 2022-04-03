@@ -14,6 +14,7 @@ def get_q(p_i_list, divisor):
     for i in range(0, len(p_i_list)):
         aux = aux + (p_i_list[i] / divisor)
         q.append(aux)
+    print(q)
     return q
         
 def selection_method(individuals, p_i_list, divisor, length, addZero = False):
@@ -83,7 +84,6 @@ def t_function(k,gen):
     return Tc + (T_0 - Tc) * math.pow(math.e, -k*gen)
 
 def boltzman(individuals, backpack, gen, P):
-    print('boltzman')
     sumFit = 0
     length = P
     ve_list = []

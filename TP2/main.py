@@ -45,17 +45,18 @@ def stop(lastUpdate, gen):
 last_population = genetic_algorithm(backpack, P, 0.2, mutation_prob, selection, stop)
 
 fitness_values = []
-gen = 0
-gens = []
 
 optimo = last_population.pop()
 for popu in last_population:
-    gens.append(gen)
-    fitness_values.append(backpack.getFitness(popu))
-    if backpack.getFitness(optimo) < backpack.getFitness(popu):
+    fit = backpack.getFitness(popu)
+    fitness_values.append(fit)
+    if backpack.getFitness(optimo) < fit:
         optimo = popu
-    gen += 1
+
+weight = backpack.getWeight(optimo)
+benefit = backpack.getBenefit(optimo)
+
 print("Optimo: ", optimo)
-print("Weight: ", backpack.getWeight(optimo))
-print("Beneficio: ", backpack.getBenefit(optimo))
-draw(gens, fitness_values)
+print("Weight: ", weight)
+print("Beneficio: ", benefit)
+draw(fitness_values, weight, benefit)
