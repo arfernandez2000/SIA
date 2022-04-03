@@ -2,6 +2,7 @@ from random import random
 import math
 from algorithms.mutation import *
 from algorithms.crossbreed import *
+from config_loader import unchanged_gens, max_gens
 
 def get_random_population(P, prob, backpack):
     population = []
@@ -46,6 +47,7 @@ def genetic_algorithm(backpack, P, prob, pmutation, selection, stop):
 
     while not stop(lastUpdate, gen):
         gen += 1
+        print('GEN')
         new_population = []
         aux_population = list(population)
         aux_population.sort(key = backpack.getFitness)
