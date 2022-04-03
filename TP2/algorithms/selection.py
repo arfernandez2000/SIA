@@ -87,10 +87,9 @@ def boltzman(individuals, backpack, gen, P):
     sumFit = 0
     length = P
     ve_list = []
-    fitnessList = [backpack.getFitness(x) for x in individuals]
     temp = t_function(1,gen)
     for i in range(0, length):
-        ve_i = math.pow(math.e,fitnessList[i]/temp)
+        ve_i = math.pow(math.e,backpack.getFitness(individuals[i]/temp))
         ve_list.append(ve_i)
         sumFit += ve_i
     
