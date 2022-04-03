@@ -69,7 +69,6 @@ def genetic_algorithm(backpack, P, prob, pmutation, selection, stop):
             population = selection(population, backpack, len(population))
             print('popu')
 
-        print("LENGTH POP DESPUES SELECTION", len(population))
         lastFitness = actualFitness
         actualFitness = backpack.getPopuFitness(population)
         lastUpdate = update(lastFitness, lastUpdate, actualFitness)
