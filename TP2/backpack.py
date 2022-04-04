@@ -42,15 +42,6 @@ class Backpack:
            weight *= (weight - self.getMaxWeight())
            return benefit/weight
         return benefit
-        # d = self.getBenefit(chrom) - self.getWeight(chrom) 
-        # if( d > 700):
-        #     d = 700
-        # if( d < 0):
-        #     ans = -1/d
-        # else:
-        #     prev = math.pow(math.e, d)
-        #     ans = math.pow(prev, 0.5)
-        # return ans
 
     def getPopuFitness(self, popu):
         maxFit =0

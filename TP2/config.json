@@ -1,10 +1,10 @@
 {
     "P": 100,
     "file": "source/Mochila100Elementos.txt",
-    "mutation_prob": 0.001,
+    "mutation_prob": 0.005,
     "selection": {
-        "method": "boltzman",
-        "truncated_k": 0,
+        "method": "truncated",
+        "truncated_k": 15,
         "boltzman_k" : 1,
         "T0" : 100,
         "Tc" : 70
