@@ -83,13 +83,14 @@ def tournament(list, backpack, P):
 
 Tc = 5
 T_0 = 100
-def t_function(k,gen):
-    return Tc + (T_0 - Tc) * math.exp(-k*gen)
+
+def t_function(k,gen): 
+    return Tc+(T_0-Tc)*math.exp(-k*gen)
 
 def boltzman(individuals, backpack, gen, P):
     sumFit = 0
     ve_list = []
-    temp = t_function(1,gen)
+    temp = t_function(2,gen)
     for i in range(0, P):
         aux_fit = backpack.getFitness(individuals[i]) / 100
         ve_i = math.exp(aux_fit/temp)
