@@ -24,7 +24,7 @@ En "crossover" definir "points" que son los puntos que se utilizan para separar 
 
 Por ultimo en "stop" definimos las condiciones de corte. La primera, "unchanged_generations", indica despues de cuantas generaciones sin cambios cortar el algoritmo genetico. La segunda, "max_generations", indica cuantas generaciones en total pueden ser creadas por el algoritmo.
 
-* Ejecutar con '$ python3 main.py' o '$py main.py'
+* Ejecutar con `$ python3 main.py` o `$py main.py`
 #### Ejemplos de configuración:
   
   ```
