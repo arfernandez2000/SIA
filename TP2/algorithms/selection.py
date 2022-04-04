@@ -46,7 +46,7 @@ def rank(individuals, backpack, P):
     individuals.sort(key = backpack.getFitness, reverse = True)
     length = P
     f_i_list = []
-    for i in range(0, P):
+    for i in range(0, length):
         fit_inv = (length - i) / length 
         f_i_list.append(fit_inv)
         sumfit += fit_inv
@@ -80,7 +80,7 @@ def tournament(list, backpack, P):
 Tc = 5
 T_0 = 100
 def t_function(k,gen):
-    return Tc + (T_0 - Tc) * math.pow(math.e, -k*gen)
+    return Tc + (T_0 - Tc) * math.exp(-k*gen)
 
 def boltzman(individuals, backpack, gen, P):
     sumFit = 0
