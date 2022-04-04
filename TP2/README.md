@@ -12,8 +12,8 @@
 * Python 3
 * Matplotlib
     * Instalacion: 
-    1. `python -m pip install -U pip
-    2. python -m pip install -U matplotlib`
+    1. `python -m pip install -U pip`
+    2. `python -m pip install -U matplotlib`
 
 ## Configuracion y ejecucion:
 Crear archivo config.json en la carpeta donde se encuentra el archivo main.py, con los parametros deseados. Aclarar "P" (tamaño), "file" (un archivo txt con los datos de la mochila*), "mutatrion_prob" (probabilidad de que algun gen de un individuo cambie).
