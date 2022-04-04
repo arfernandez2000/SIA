@@ -16,9 +16,9 @@
     2. `python -m pip install -U matplotlib`
 
 ## Configuracion y ejecucion:
-Crear archivo config.json en la carpeta donde se encuentra el archivo main.py, con los parametros deseados. Aclarar "P" (tamaño), "file" (un archivo txt con los datos de la mochila*), "mutatrion_prob" (probabilidad de que algun gen de un individuo cambie).
+Crear archivo config.json en la carpeta donde se encuentra el archivo main.py, con los parametros deseados. Aclarar "P" (tamaño), "file" (un archivo txt con los datos de la mochila*), "mutation_prob" (probabilidad de que algun gen de un individuo cambie).
 
-En "selection" especificar "method" (metodo de seleccion para los P individuos de una nueva generacion), "truncated_k" (para elegir cuantos individuos con peor fitness descartar), "boltzman_k" (constante utilizada en el metodo de seleccionde boltzman) y "T0" y "Tc" que son las temperaturas iniciales y mininmas, respectivamente, que utiliza ,la funcion de temperatura en el metodo boltzman.
+En "selection" especificar "method" (metodo de seleccion para los P individuos de una nueva generacion), "truncated_k" (para elegir cuantos individuos con peor fitness descartar utilizada en el método de selección Truncada), "boltzman_k" (constante utilizada en el metodo de seleccionde boltzman) y "T0" y "Tc" que son las temperaturas iniciales y mininmas, respectivamente, que utiliza ,la funcion de temperatura en el metodo boltzman.
 
 En "crossover" definir "points" que son los puntos que se utilizan para separar los genes de los individuos y cruzarlos. Si es 0, sera una cruza uniforme. Si es 1, sera una simple. Y si es > 1, sera una cruza multiple.
 
