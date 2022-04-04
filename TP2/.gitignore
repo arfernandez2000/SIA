@@ -2,7 +2,6 @@
 *.pyc
 
 # Ignore all .json files
-*.json
 
 #Ignore dump file
 *.txt

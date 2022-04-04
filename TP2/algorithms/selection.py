@@ -1,6 +1,6 @@
 import math
 import random
-from config_loader import tournament_k
+from config_loader import truncated_k, boltzman_k, T0, Tc
 
 LENGTH_FINAL = 100
 
@@ -77,16 +77,18 @@ def tournament(list, backpack, P):
 
     return winners
 
-Tc = 5
-T_0 = 100
+def truncated(list, backpack,P):
+    list.sort(key = backpack.getFitness)
+    list_truncated = list[truncated_k: len(list)]
+    return tournament(list_truncated, backpack, P)
 
 def t_function(k,gen): 
-    return Tc+(T_0-Tc)*math.exp(-k*gen)
+    return Tc+(T0-Tc)*math.exp(-k*gen)
 
 def boltzman(individuals, backpack, gen, P):
     sumFit = 0
     ve_list = []
-    temp = t_function(2,gen)
+    temp = t_function(boltzman_k,gen)
     for i in range(0, P):
         aux_fit = backpack.getFitness(individuals[i]) / 100
         ve_i = math.exp(aux_fit/temp)
@@ -95,8 +97,12 @@ def boltzman(individuals, backpack, gen, P):
     
     return selection_method(individuals, ve_list, sumFit, P / 2, addZero = True)
 
-def truncated(list, backpack,P):
-    k = tournament_k
-    list.sort(key = backpack.getFitness)
-    list_truncated = list[k: len(list)]
-    return tournament(list_truncated, backpack, P)
+def boltzmann(individuals, backpack, gen, P):
+    val = t_function(boltzman_k,gen)
+    probabilities = []
+    population_sum = sum(list(map(lambda individual: math.exp(backpack.getFitness(individual)/val), individuals)))/len(individuals)
+    for individual in enumerate(individuals):
+        relative_fitness = math.exp(individual.fitness/val)/population_sum
+        probabilities.append(relative_fitness)
+
+    return selection_method(individuals,probabilities,population_sum,P/2,addZero=True)

@@ -1,0 +1,19 @@
+{
+    "P": 100,
+    "file": "source/Mochila100Elementos.txt",
+    "mutation_prob": 0.001,
+    "selection": {
+        "method": "boltzman",
+        "truncated_k": 0,
+        "boltzman_k" : 1,
+        "T0" : 100,
+        "Tc" : 70
+    },
+    "crossover": {
+        "points": 1
+    },
+    "stop": {
+        "unchanged_generations": 50,
+        "max_generations": 500
+    }
+  }
