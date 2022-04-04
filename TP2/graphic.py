@@ -15,10 +15,9 @@ def draw(y_data: list, weight, benefit):
     y[:len_y] = y_data
     ax.plot(x_data, y, linewidth=2.0)
 
-    max_y = np.amax(y_data)
-    step_y = round(max_y / 10)
-    step_x = round(len_y / 10)
-    ax.set(xlim=(0, len_y), xticks=np.arange(1, len_y, step_x),
-        ylim=(0, max_y+300), yticks=np.arange(1, max_y+10, step_y))
+    plt.xlim(0,len_y)
+    plt.ylim(0,10000)
+    ax.locator_params("y", nbins = 10)
+    ax.locator_params("x", nbins=10)
     
     plt.show()

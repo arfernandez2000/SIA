@@ -22,7 +22,6 @@ def crossbreed(one, two, backpack):
             if len(points) == l:
                 n-=1
         points = sorted(points)
-        print(type(points))
         final_one = []
         final_two = []
 

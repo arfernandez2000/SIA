@@ -30,7 +30,6 @@ def select_two_by_fitness(population):
     return population.pop(), population.pop()
 
 def update(lastFitness, lastUpdate, actualFitness):
-    print(lastUpdate)
     if(math.fabs(lastFitness - actualFitness) < 0.00001):
         lastUpdate += 1
     else:
@@ -42,12 +41,11 @@ def genetic_algorithm(backpack, P, prob, pmutation, selection, stop):
     population = get_random_population(P,prob, backpack)
     lastFitness = 0
     lastUpdate = 0
+    fitnessValues = []
     actualFitness = backpack.getPopuFitness(population)
-    print(population)
-
+    
     while not stop(lastUpdate, gen):
         gen += 1
-        print('GEN')
         new_population = []
         aux_population = list(population)
         aux_population.sort(key = backpack.getFitness)
@@ -61,18 +59,16 @@ def genetic_algorithm(backpack, P, prob, pmutation, selection, stop):
             new_population.append(child_one)
             new_population.append(child_two)
         population += new_population
-        print('POPLATION', len(population))
         if selection.__name__ == 'boltzman':
             population = selection(population, backpack, gen, len(population))
         elif selection.__name__ == 'elite':
             population = selection(population, backpack)
         else:
-            print(selection.__name__)
             population = selection(population, backpack, len(population))
-            print('popu')
 
         lastFitness = actualFitness
         actualFitness = backpack.getPopuFitness(population)
+        fitnessValues.append(actualFitness)
         lastUpdate = update(lastFitness, lastUpdate, actualFitness)
 
-    return population
+    return population, fitnessValues

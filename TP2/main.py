@@ -5,6 +5,7 @@ from algorithms.selection import *
 from config_loader import file, P, mutation_prob, selection_name
 from graphic import draw
 
+
 maxWeight: int
 maxItems : int
 elems: List[Elem] = []
@@ -42,14 +43,14 @@ backpack = Backpack(maxItems, maxWeight,elems)
 def stop(lastUpdate, gen):
     return lastUpdate == unchanged_gens or gen == max_gens
 
-last_population = genetic_algorithm(backpack, P, 0.2, mutation_prob, selection, stop)
+fitnessValues = []
 
-fitness_values = []
+last_population, fitnessValues = genetic_algorithm(backpack, P, 0.2, mutation_prob, selection, stop)
+
 
 optimo = last_population.pop()
 for popu in last_population:
     fit = backpack.getFitness(popu)
-    fitness_values.append(fit)
     if backpack.getFitness(optimo) < fit:
         optimo = popu
 
@@ -58,5 +59,5 @@ benefit = backpack.getBenefit(optimo)
 
 print("Optimo: ", optimo)
 print("Weight: ", weight)
-print("Beneficio: ", benefit)
-draw(fitness_values, weight, benefit)
+print("Benefit: ", benefit)
+draw(fitnessValues, weight, benefit)

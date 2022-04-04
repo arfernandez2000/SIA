@@ -14,7 +14,6 @@ def get_q(p_i_list, divisor):
     for i in range(0, len(p_i_list)):
         aux = aux + (p_i_list[i] / divisor)
         q.append(aux)
-    print(q)
     return q
         
 def selection_method(individuals, p_i_list, divisor, length, addZero = False):
@@ -52,7 +51,6 @@ def rank(individuals, backpack, P):
         f_i_list.append(fit_inv)
         sumfit += fit_inv
     res = selection_method(individuals, f_i_list, sumfit, length / 2)
-    print("RES LENGTH", len(res))
     return res
 
 def tournament(list, backpack, P):
@@ -76,9 +74,7 @@ def tournament(list, backpack, P):
             else:
                 final.append(worst_fit)
         winners.append(final[-1])
-        print(winners)
-        print(len(winners))
-        print(type(winners))
+
     return winners
 
 Tc = 5
