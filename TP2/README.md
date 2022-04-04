@@ -22,7 +22,7 @@ En "selection" especificar "method" (metodo de seleccion para los P individuos d
 
 En "crossover" definir "points" que son los puntos que se utilizan para separar los genes de los individuos y cruzarlos. Si es 0, sera una cruza uniforme. Si es 1, sera una simple. Y si es > 1, sera una cruza multiple.
 
-Por ultimo en "stop" definimos las condiciones de corte. La primera, "unchanged_generations", indica despues de cuantas generaciones sin cambios cortar el algoritmo genetico. La segunda, "max_generations", indica cuantas generaciones en total pueden ser creadas por el algoritmo.
+Por ultimo en "stop" definimos las condiciones de corte. La primera, "unchanged_generations", indica despues de cuantas generaciones sin cambios cortar el algoritmo genetico. La segunda, "max_generations", indica cuantas generaciones en total pueden ser creadas por el algoritmo. El valor de "unchanged_generations" debe ser menor que "max_generations"
 
 * Ejecutar con `$ python3 main.py` o `$py main.py`
 #### Ejemplos de configuración:
@@ -55,11 +55,11 @@ Por ultimo en "stop" definimos las condiciones de corte. La primera, "unchanged_
     "file": "source/Mochila100Elementos.txt",
     "mutation_prob": 0.005,
     "selection": {
-        "method": "boltzman", 
-        "truncated_k": 5,
-        "boltzman_k" : 5,
-        "T0" : 150,
-        "Tc" : 70
+        "method": "elite", 
+        "truncated_k": 0,
+        "boltzman_k" : 0,
+        "T0" : 0,
+        "Tc" : 0
     },
     "crossover": {
         "points": 5
