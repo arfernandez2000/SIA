@@ -10,7 +10,7 @@
         "Tc" : 70
     },
     "crossover": {
-        "points": 1
+        "points": 0
     },
     "stop": {
         "unchanged_generations": 50,
