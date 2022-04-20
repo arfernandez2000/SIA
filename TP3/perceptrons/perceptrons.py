@@ -1,4 +1,5 @@
 import numpy
+from plot import plot
 
 class perceptrons:
 
@@ -15,23 +16,24 @@ class perceptrons:
         i = 0 
         length = len(self.training)
         dim = len(self.training[0])
-        w = numpy.zeros(dim)
-        w[-1] = 0
-        print(w,self.training)
+        w = numpy.append(numpy.zeros(dim-1),1)
+        #print(w,self.training)
         self.errorMin = length * 2
         error = 1
         while error > 0 and i < cota:
             i_x = numpy.random.randint(0, length)
             excitedState = numpy.inner(self.training[i_x], w)
+            #print('i_x', self.training[i_x])
             activationState = self.activation(excitedState)
-            deltaW = self.learnRate * (self.expOut[i_x] - activationState) * self.training[i_x]
+            #print(activationState)
+            deltaW = self.learnRate * ((self.expOut[i_x] - activationState) * self.training[i_x])
             w += deltaW
+            print('w: ', w)
             error = self.error(self.training, self.expOut, w)
             if error < self.errorMin:
                 self.errorMin = error
+                print(error)
                 self.wMin = w
-                print('wmin_____: ', w)
-            print('wmin: ', self.wMin)
+                print('DELTA: ', deltaW)
+                plot(w)
             i += 1
-        print(self.errorMin)
-        #print('final min: ', self.wMin)

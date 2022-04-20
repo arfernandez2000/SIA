@@ -1,12 +1,10 @@
-import numpy
-
+#import numpy
 from perceptrons.perceptrons import *
 from perceptrons.stepSimplePerceptron import *
 from plot import plot
+from config_loader import *
 
-trainData = numpy.array([[-1,1,1], [1,-1,1], [-1,-1,1] , [1,1,1]])
-expectOut = numpy.array([-1,-1,-1,1])
-
-perceptron = perceptrons(trainData, expectOut, 0.3, activationStepSimple, errorStepSimple)
+#Con 0.1 se queda corto, no se porque, tendria q llegar igual pero el error da 0 antes
+perceptron = perceptrons(trainData, expectOut, 0.01, activationStepSimple, errorStepSimple)
 perceptron.train(1000)
-plot(perceptron.wMin,trainData,expectOut)
+plot(perceptron.wMin, wait=True)

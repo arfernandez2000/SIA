@@ -8,9 +8,8 @@ def errorStepSimple(training, expOut, w):
         error = 0
         for i in range(trainLen):
             excitedState = numpy.inner(training[i], w)
-            print(excitedState)
-            #error += ((expOut[i] - activationStepSimple(excitedState))**2)
-            error += abs(activationStepSimple(excitedState) - expOut[i])
-            print(error)
+            error += ((expOut[i] - activationStepSimple(excitedState))**2)
+            #error += abs(activationStepSimple(excitedState) - expOut[i])
+            #print(error)
         #return error/2
-        return error
+        return error/2.
