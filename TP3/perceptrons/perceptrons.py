@@ -1,5 +1,5 @@
 import numpy
-from plot import plot
+from plot import add_w
 
 class perceptrons:
 
@@ -28,12 +28,9 @@ class perceptrons:
             #print(activationState)
             deltaW = self.learnRate * ((self.expOut[i_x] - activationState) * self.training[i_x])
             w += deltaW
-            print('w: ', w)
-            error = self.error(self.training, self.expOut, w)
+            error = self.error(self.training, self.expOut, w, length)
             if error < self.errorMin:
                 self.errorMin = error
-                print(error)
                 self.wMin = w
-                print('DELTA: ', deltaW)
-                plot(w)
+                add_w(w)
             i += 1

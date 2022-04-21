@@ -3,7 +3,7 @@ import numpy
 def activationStepSimple(excitedState):
     return 1.0 if excitedState >= 0.0 else -1.0
 
-def errorStepSimple(training, expOut, w):
+def errorStepSimple(training, expOut, w, p):
         trainLen = len(training)
         error = 0
         for i in range(trainLen):
@@ -12,4 +12,4 @@ def errorStepSimple(training, expOut, w):
             #error += abs(activationStepSimple(excitedState) - expOut[i])
             #print(error)
         #return error/2
-        return error/2.
+        return error/p
