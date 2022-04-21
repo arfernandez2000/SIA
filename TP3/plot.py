@@ -11,7 +11,7 @@ for t in train:
         aux = []
         for i in t:
             if i == -1:
-                aux.append(0)
+                aux.append(0) #Usa -1 para los calculos pero para graficar entre 0 y 1 lo acomoda aca, NO ES NECESARIO
             else: 
                 aux.append(i)
         points.append(aux)
@@ -33,7 +33,7 @@ def add_w(w):
     w0, w = w[-1], w[:-1]
     w = -w*x_mult-w0
     #w = w*x_mult-w0
-    w = w+1
+    w = w+1 #SIN ESTO NO ANDA, lo agregue porque los calculos se realizan con 3 entradas pero graficamos solo 2
     ws.append(w)
     ax.plot(x_point,w)
     plt.show(block=False)
