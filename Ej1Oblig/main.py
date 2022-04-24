@@ -2,7 +2,8 @@ from datetime import datetime
 import math
 import numpy
 from scipy.optimize import minimize
-import sklearn
+from autograd.misc.optimizers import adam
+import numdifftools as nd
 
 values = [[(4.4793, -4.0765, -4.0765), 0], [(-4.1793, -4.9218, 1.7664), 1], [(-3.9429, -0.7689, 4.883), 1]]
 
@@ -35,11 +36,11 @@ def print_res(x, time ,method):
         print("Error = " + str(E(x)))
         print("Tiempo: " + str(time))
 
-def main():
+def __init__():
     print("COMIENZO")
 
     x1 = numpy.zeros(11)
-    time1 = datetime.nowd
+    time1 = datetime.now
     res1 = minimize(E, x1, args=(), method='L-BFGS-B', jac=None, bounds=None, tol=None, callback=None, options={'disp': None, 'maxcor': 10, 'ftol': 2.220446049250313e-09, 'gtol': 1e-05, 'eps': 1e-08, 'maxfun': 15000, 'maxiter': 15000, 'iprint': - 1, 'maxls': 20, 'finite_diff_rel_step': None})
     print_res(res1, datetime.now - time1, "Gradiente Descendiente")
 
@@ -50,5 +51,5 @@ def main():
 
     x3 = numpy.zeros(11)
     time3 = datetime.now
-    res3 = sklearn.neural_network.MLPClassifier(max_iter=15000)
+    res3 = adam(nd.Gradient(E), x3, step_size = 0.99)
     print_res(res3, datetime.now - time3, "Adam")
