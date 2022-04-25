@@ -1,8 +1,10 @@
+from audioop import add
 from datetime import datetime
 import math
 import numpy
 from scipy.optimize import minimize
-import tensorflow as tf
+#import tensorflow as tf
+from plot import *
 
 values = [[(4.4793, -4.0765, -4.0765), 0], [(-4.1793, -4.9218, 1.7664), 1], [(-3.9429, -0.7689, 4.883), 1]]
 
@@ -19,53 +21,76 @@ def F(W, w, w0, epsilon):
         sum += W[i + 1] * g(aux)
     return g(sum - W[0])
 
-
 def E(x):
     W = x[0:3]
     w = [x[3:6], x[6:9]]
     w_0 = x[9:11]
     return sum((OUT - F(W, w, w_0, IN)) ** 2 for (IN, OUT) in values)
 
-def print_res(x, time ,method):
+class Ej1:
+    layers = []
+
+    def print_res(self,x):
         print("Resultado")
-        print("Metodo: "+ method)
+        print(x)
         print("W = " + str(x[:3]))
         print("w = "+ str([x[3:6]]) + "\t" + str([x[6:9]]))
         print("w0 = " + str(x[9:11]))
-        print("Error = " + str(E(x)))
-        print("Tiempo: " + str(time))
 
-def main():
-    print("COMIENZO")
+    def add_layer(self, x):
+        self.layers.append(E(x))
 
-    x1 = numpy.zeros(11)
-    time1 = datetime.now()
-    print(time1)
-    res1 = minimize(E, x1, args=(), method='L-BFGS-B', jac=None, bounds=None, tol=None, callback=None, options={'disp': None, 'maxcor': 10, 'ftol': 2.220446049250313e-09, 'gtol': 1e-05, 'eps': 1e-08, 'maxfun': 15000, 'maxiter': 15000, 'iprint': - 1, 'maxls': 20, 'finite_diff_rel_step': None})
-    print_res(res1['x'], datetime.now() - time1, "Gradiente Descendiente")
+    def main(self):
+        x1 = numpy.zeros(11)
+        time1 = datetime.now()
 
-    x2 = numpy.zeros(11)
-    time2 = datetime.now()
-    res2 = minimize(E, x2, args=(), method='CG', jac=None, tol=None, callback=None, options={'gtol': 1e-05, 'norm': numpy.inf, 'eps': 1.4901161193847656e-08, 'maxiter': None, 'disp': False, 'return_all': False, 'finite_diff_rel_step': None})
-    print_res(res2['x'], datetime.now() - time2, "Gradiente Conjugado")
+        res1 = minimize(
+            E, 
+            x1, args=(), 
+            method='L-BFGS-B', 
+            jac=None, bounds=None, 
+            tol=None, 
+            callback=self.add_layer, 
+            options={'disp': None, 'maxcor': 10, 'ftol': 2.220446049250313e-09, 'gtol': 1e-05, 'eps': 1e-08, 'maxfun': 15000, 'maxiter': 15000, 'iprint': - 1, 'maxls': 20, 'finite_diff_rel_step': None})
+        
+        self.print_res(res1['x'])
+        plot(self.layers,datetime.now() - time1, "Gradiente Descendiente")
 
-    x3 = numpy.zeros(11)
-    x3 = tf.Variable(x3)
-    #print(x3.numpy())
-    time3 = datetime.now()
-    tf.keras.optimizers.Adam(
-        learning_rate=0.001,
-        beta_1=0.9,
-        beta_2=0.999,
-        epsilon=1e-07,
-        amsgrad=False,
-        name='Adam',
-    )
-    opt = tf.keras.optimizers.Adam()
-    loss = lambda: (x3 ** 2)/2.0       # d(loss)/d(var1) == var1
-    #print(opt.minimize(loss, x3))
-    w3 = opt.get_weights()
-    print(w3)
+        self.layers = []
+        x2 = numpy.zeros(11)
+        time2 = datetime.now()
+
+        res2 = minimize(
+            E, 
+            x2, 
+            args=(), 
+            method='CG', 
+            jac=None, 
+            tol=None, 
+            callback=self.add_layer, 
+            options={'gtol': 1e-05, 'norm': numpy.inf, 'eps': 1.4901161193847656e-08, 'maxiter': None, 'disp': False, 'return_all': False, 'finite_diff_rel_step': None})
+        
+        self.print_res(res2['x'])
+        plot(self.layers,datetime.now() - time2, "Gradiente Conjugado")
+
+        #x3 = numpy.zeros(11)
+        #x3 = tf.Variable(x3)
+        #print(x3.numpy())
+        #time3 = datetime.now()
+        #tf.keras.optimizers.Adam(
+         #   learning_rate=0.001,
+          #  beta_1=0.9,
+           # beta_2=0.999,
+            #epsilon=1e-07,
+            #amsgrad=False,
+            #name='Adam',
+        #)
+        #opt = tf.keras.optimizers.Adam()
+        #loss = lambda: (x3 ** 2)/2.0       # d(loss)/d(var1) == var1
+        #print(opt.minimize(loss, x3))
+        #w3 = opt.get_weights()
+        #print(w3)
     #print_res(w3, datetime.now() - time3, "Adam")
 
-main()
+ej1 = Ej1()
+ej1.main()
