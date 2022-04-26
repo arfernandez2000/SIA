@@ -1,8 +1,7 @@
-import math
 import numpy as np
 
 def activationStepSimple(excitedState):
-    return 1.0 if excitedState >= 0.0 else -1.0
+    return 1.0 if excitedState > 0.0 else -1.0
 
 def errorStepSimple(training, expOut, w, p):
         error = 0
@@ -11,4 +10,4 @@ def errorStepSimple(training, expOut, w, p):
             print(excitedState)
             e = ((expOut[u] - activationStepSimple(excitedState))**2)
             error += e
-        return error/p
+        return error/2

@@ -4,7 +4,7 @@ from config_loader import trainData as train, expectOut as goal
 
 plt.style.use('default')
 ws = []
-x = [-1,1]
+x = np.linspace(-2,2,100)
 points = list(map(lambda p: p[:-1], train))
 fig, ax = plt.subplots()
 
@@ -21,10 +21,7 @@ def set_ax():
 
 def add_w(w):
     set_ax()
-    w0, w = w[-1], w[:-1]
-    print(-w*x)
-    w = -w*x-w0
-    w = w
+    w = (w[1] * x + w[2]) / -w[0]
     ws.append(w)
     ax.plot(x,w)
     plt.show(block=False)

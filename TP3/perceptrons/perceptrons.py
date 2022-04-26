@@ -16,7 +16,7 @@ class perceptrons:
         i = 0 
         length = len(self.training)
         dim = len(self.training[0])
-        w = np.append(np.zeros(dim-1),1)
+        w = np.append(np.random.rand(dim-1),1)
         self.errorMin = length * 2
         error = 1
 

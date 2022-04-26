@@ -13,3 +13,5 @@ if operation == 'and':
     expectOut = numpy.array([-1,-1,-1,1])
 else:
     expectOut = numpy.array([1,1,-1,-1])
+
+perceptron = data['perceptron']
