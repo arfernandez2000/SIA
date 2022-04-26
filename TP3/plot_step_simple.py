@@ -17,6 +17,7 @@ for t in train:
         points.append(aux)
 
 fig, ax = plt.subplots()
+
 def set_ax():
     for i in range(len(points)):
         color = "black"

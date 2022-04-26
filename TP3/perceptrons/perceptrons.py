@@ -1,5 +1,5 @@
 import numpy
-from plot import add_w
+from plot_step_simple import add_w
 
 class perceptrons:
 
@@ -26,7 +26,11 @@ class perceptrons:
             #print('i_x', self.training[i_x])
             activationState = self.activation(excitedState)
             #print(activationState)
-            deltaW = self.learnRate * ((self.expOut[i_x] - activationState) * self.training[i_x])
+            print(self.learnRate)
+            print(self.expOut[i_x])
+            print(activationState)
+            print(self.training[i_x])
+            deltaW = self.learnRate * ((self.expOut[i_x] - activationState) * self.training[i_x]) #error aca, self.training[i_x] tiene dimension 3
             w += deltaW
             error = self.error(self.training, self.expOut, w, length)
             if error < self.errorMin:
