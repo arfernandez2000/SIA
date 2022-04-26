@@ -8,7 +8,8 @@ def errorLinearSimple(training, expOut, w, p):
         print(p)
         for i in range(p):
             excitedState = np.dot(training[i], w)
-            print(excitedState,' - ', expOut[i], ' = ', excitedState - expOut[i] )
-            error += ((expOut[i] - excitedState)**2)
+            e = ((expOut[i] - excitedState)**2)
+            #e = np.abs(expOut[i] - excitedState)
+            error += e
             #print(error)
-        return error/2
+        return error
