@@ -1,4 +1,4 @@
-import numpy
+import numpy as np
 from plot_step_simple import add_w
 
 class perceptrons:
@@ -16,25 +16,24 @@ class perceptrons:
         i = 0 
         length = len(self.training)
         dim = len(self.training[0])
-        w = numpy.append(numpy.zeros(dim-1),1)
-        #print(w,self.training)
+        w = np.append(np.zeros(dim-1),1)
         self.errorMin = length * 2
         error = 1
+
         while error > 0 and i < cota:
-            i_x = numpy.random.randint(0, length)
-            excitedState = numpy.inner(self.training[i_x], w)
-            #print('i_x', self.training[i_x])
+            i_x = np.random.randint(0, length)
+            excitedState = np.inner(self.training[i_x], w)
             activationState = self.activation(excitedState)
-            #print(activationState)
-            print(self.learnRate)
-            print(self.expOut[i_x])
-            print(activationState)
-            print(self.training[i_x])
-            deltaW = self.learnRate * ((self.expOut[i_x] - activationState) * self.training[i_x]) #error aca, self.training[i_x] tiene dimension 3
+            E_i = np.array(self.training[i_x])
+            deltaW = self.learnRate * (self.expOut[i_x] - activationState) * E_i 
             w += deltaW
             error = self.error(self.training, self.expOut, w, length)
+            print(error)
             if error < self.errorMin:
                 self.errorMin = error
                 self.wMin = w
                 add_w(w)
             i += 1
+        
+        print(self.wMin)
+        print(self.errorMin)
