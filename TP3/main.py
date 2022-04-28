@@ -8,7 +8,7 @@ from plot_step_simple import plot
 if perceptron == "linear":
     train = load_entries()
     goals = load_goals()
-    linear_perceptron = perceptrons(train, goals, 0.01, activatonLinearSimple, errorLinearSimple)
+    linear_perceptron = perceptrons(trainData, expectOut, 0.01, activatonLinearSimple, errorLinearSimple)
     linear_perceptron.train(1000)
     print(linear_perceptron.wMin, '\nError: ', linear_perceptron.errorMin)
 
