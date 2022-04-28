@@ -1,4 +1,4 @@
 {
-    "perceptron" : "linear",
+    "perceptron" : "non-linear",
     "operation" : "and"
 }

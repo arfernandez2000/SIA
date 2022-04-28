@@ -37,8 +37,8 @@ def load_goals(filename):
     f.close()
     return goals
 
-trainDataEx2_linear = load_entries('./entries_2.txt')
-expectOutEx2_linear = load_goals('./expected_output_2.txt')
+trainDataEx2 = load_entries('./entries_2.txt')
+expectOutEx2 = load_goals('./expected_output_2.txt')
 
-test_trainDataEx2_linear = load_entries('./test_entries_2.txt')
-test_expectOutEx2_linear = load_goals('./test_outputs_2.txt')
+test_trainDataEx2 = load_entries('./test_entries_2.txt')
+test_expectOutEx2 = load_goals('./test_outputs_2.txt')
