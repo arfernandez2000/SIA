@@ -1,5 +1,6 @@
 import numpy as np
 from plot_step_simple import add_w
+from plot_linear_errors import add_error
 
 class perceptrons:
 
@@ -33,5 +34,8 @@ class perceptrons:
                 self.errorMin = error
                 print(error)
                 self.wMin = w
-                if self.isSimple: add_w(w)
+                if self.isSimple: 
+                    add_w(w)
+                else:
+                    add_error(error)
             i += 1
