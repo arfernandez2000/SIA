@@ -26,11 +26,11 @@ class perceptrons:
             activationState = self.activation(excitedState)
             E_i = np.array(self.training[i_x])
             deltaW = self.learnRate * (self.expOut[i_x] - activationState) * E_i
-            print(deltaW)
             w += deltaW
             error = self.error(self.training, self.expOut, w, length)
             if error < self.errorMin:
                 self.errorMin = error
+                print(error)
                 self.wMin = w
                 add_w(w)
             i += 1

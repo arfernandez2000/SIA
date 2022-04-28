@@ -6,13 +6,13 @@ data = json.load(f)
 f.close()
 
 operation = data['operation']
-trainData = numpy.array([[-1,1,1], [1,-1,1], [-1,-1,1] , [1,1,1]])
-expectOut = []
+trainDataEx1 = numpy.array([[-1,1,1], [1,-1,1], [-1,-1,1] , [1,1,1]])
+expectOutEx1 = []
 
 if operation == 'and':
-    expectOut = numpy.array([-1,-1,-1,1])
+    expectOutEx1 = numpy.array([-1,-1,-1,1])
 else:
-    expectOut = numpy.array([1,1,-1,-1])
+    expectOutEx1 = numpy.array([1,1,-1,-1])
 
 perceptron = data['perceptron']
 def load_entries():
@@ -25,6 +25,7 @@ def load_entries():
         entries.append(entrie)
         line = f.readline()
     f.close()
+    print('ENTRIES: ', entries)
     return entries
 
 def load_goals():
@@ -37,5 +38,5 @@ def load_goals():
     f.close()
     return goals
 
-entries = load_entries()
-goals = load_goals()
+trainDataEx2_linear = load_entries()
+expectOutEx2_linear = load_goals()
