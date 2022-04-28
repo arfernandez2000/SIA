@@ -3,7 +3,7 @@ from plot_step_simple import add_w
 
 class perceptrons:
 
-    def __init__(self, training, expOut, learnRate, activation, error):
+    def __init__(self, training, expOut, learnRate, activation, error, isSimple = False):
         self.error = error
         self.activation = activation
         self.learnRate = learnRate
@@ -11,6 +11,7 @@ class perceptrons:
         self.training = training
         self.errorMin = None
         self.wMin = None
+        self.isSimple =isSimple
     
     def train(self, cota):
         i = 0 
@@ -32,5 +33,5 @@ class perceptrons:
                 self.errorMin = error
                 print(error)
                 self.wMin = w
-                add_w(w)
+                if self.isSimple: add_w(w)
             i += 1

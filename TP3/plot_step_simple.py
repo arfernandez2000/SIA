@@ -1,6 +1,6 @@
 import matplotlib.pyplot as plt
 import numpy as np
-from config_loader import trainData as train, expectOut as goal
+from config_loader import trainDataEx1 as train, expectOutEx1 as goal
 
 plt.style.use('default')
 ws = []

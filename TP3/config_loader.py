@@ -15,8 +15,8 @@ else:
     expectOutEx1 = numpy.array([1,1,-1,-1])
 
 perceptron = data['perceptron']
-def load_entries():
-    f = open('./entries_2.txt', 'r')
+def load_entries(filename):
+    f = open(filename, 'r')
     line = f.readline()
     entries = []
     while line:
@@ -25,11 +25,10 @@ def load_entries():
         entries.append(entrie)
         line = f.readline()
     f.close()
-    print('ENTRIES: ', entries)
     return entries
 
-def load_goals():
-    f = open('./expected_output_2.txt', 'r')
+def load_goals(filename):
+    f = open(filename, 'r')
     line = f.readline()
     goals = []
     while line:
@@ -38,5 +37,8 @@ def load_goals():
     f.close()
     return goals
 
-trainDataEx2_linear = load_entries()
-expectOutEx2_linear = load_goals()
+trainDataEx2_linear = load_entries('./entries_2.txt')
+expectOutEx2_linear = load_goals('./expected_output_2.txt')
+
+test_trainDataEx2_linear = load_entries('./test_entries_2.txt')
+test_expectOutEx2_linear = load_goals('./test_outputs_2.txt')
