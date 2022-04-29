@@ -10,7 +10,7 @@ from plot_linear_errors import plot as plot_linear
 print(perceptron)
 if perceptron == "non-linear":
     non_linear_perceptron = NonLinearSimplePerceptron(trainDataEx2, expectOutEx2, 0.01, 0.4)
-    non_linear_perceptron.train(1000)
+    non_linear_perceptron.train(5000)
 
 elif perceptron == "linear":
     linear_perceptron = LinearSimplePerceptron(test_trainDataEx2, test_expectOutEx2, 0.01)
