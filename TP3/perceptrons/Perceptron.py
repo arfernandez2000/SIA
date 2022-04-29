@@ -42,7 +42,7 @@ class Perceptron(ABC):
         self.errorMin = length * 2
         error = 1
 
-        while error > 0 and i < cota:
+        while error > 0.001 and i < cota:
             i_x = np.random.randint(0, length)
             excitedState = np.dot(self.training[i_x], w)
             E_i = np.array(self.training[i_x])

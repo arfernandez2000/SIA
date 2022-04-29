@@ -17,7 +17,7 @@ class NonLinearSimplePerceptron(Perceptron):
         return np.tanh(self.beta*x)
 
     def g_prime(self,x):
-        return 1 - np.tanh(excitation)**2
+        return 1 - np.tanh(x)**2
 
     def activation(self,excitedState):
         return self.g(excitedState)
