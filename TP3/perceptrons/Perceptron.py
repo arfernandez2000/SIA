@@ -5,14 +5,13 @@ from plot_linear_errors import add_error
 
 class Perceptron(ABC):
 
-    def __init__(self, training, expOut, learnRate, beta):
+    def __init__(self, training, expOut, learnRate):
         self.learnRate = learnRate
         self.expOut = expOut
         self.training = training
         self.errorMin = None
         self.wMin = None
-        self.beta = beta
-        print(self.beta)
+        self.length = len(training)
     
     @abstractmethod
     def activation(self):
@@ -49,7 +48,7 @@ class Perceptron(ABC):
             deltaW = self.delta(i_x,excitedState,E_i)
             w += deltaW
 
-            error = self.error(self.training, self.expOut, w, length)
+            error = self.error(w)
             self.update(error,w)
             i += 1
         print('Error minimo: ',self.errorMin)
