@@ -1,7 +1,7 @@
 import numpy as np
 
 from perceptrons.Perceptron import Perceptron
-from plot_linear_errors import add_error
+from plot_errors import add_error
 
 class NonLinearSimplePerceptron(Perceptron):
     def __init__(self, training_set, expected_output,learning_rate, beta):

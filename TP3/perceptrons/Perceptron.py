@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
 import numpy as np
 from plot_step_simple import add_w
-from plot_linear_errors import add_error
+from plot_errors import add_error
 
 class Perceptron(ABC):
 

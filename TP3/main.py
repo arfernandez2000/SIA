@@ -5,18 +5,17 @@ from perceptrons.StepSimplePerceptron import *
 from perceptrons.LinearSimplePerceptron import *
 from config_loader import *
 from plot_step_simple import plot as plot_step
-from plot_linear_errors import plot as plot_linear
+from plot_errors import plot as plot_errors
 
-print(perceptron)
 if perceptron == "non-linear":
-    non_linear_perceptron = NonLinearSimplePerceptron(trainDataEx2, expectOutEx2, 0.01, 0.8)
-    non_linear_perceptron.train(10000)
-    plot_linear()
+    non_linear_perceptron = NonLinearSimplePerceptron(trainDataEx2, expectOutEx2, 0.005, 0.5)
+    non_linear_perceptron.train(50000)
+    plot_errors()
 
 elif perceptron == "linear":
     linear_perceptron = LinearSimplePerceptron(test_trainDataEx2, test_expectOutEx2, 0.01)
     linear_perceptron.train(1000)
-    plot_linear()
+    plot_errors()
 
 else:
     perceptron = StepSimplePerceptron(trainDataEx1, expectOutEx1, 0.01)
