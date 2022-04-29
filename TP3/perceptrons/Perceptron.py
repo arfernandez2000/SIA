@@ -48,8 +48,13 @@ class Perceptron(ABC):
             deltaW = self.delta(i_x,excitedState,E_i)
             w += deltaW
 
-            error = self.error(w)
+            error = self.error(w, self.training, self.expOut)
             self.update(error,w)
             i += 1
         print('Error minimo: ',self.errorMin)
         print('W minimo: ', self.wMin)
+
+    def test(self, test_input, test_output):
+        error = self.error(self.wMin, test_input, test_output)
+        print(error)
+        return error

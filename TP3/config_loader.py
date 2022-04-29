@@ -40,5 +40,5 @@ def load_goals(filename):
 trainDataEx2 = load_entries('./entries_2.txt')
 expectOutEx2 = load_goals('./expected_output_2.txt')
 
-test_trainDataEx2 = load_entries('./test_entries_2.txt')
-test_expectOutEx2 = load_goals('./test_outputs_2.txt')
+# test_trainDataEx2 = load_entries('./test_entries_2.txt')
+# test_expectOutEx2 = load_goals('./test_outputs_2.txt')

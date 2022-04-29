@@ -34,12 +34,10 @@ class NonLinearSimplePerceptron(Perceptron):
         if change:
             add_error(err)
 
-    def error(self, w):
+    def error(self, w, input, output):
         error = 0
-        for i in range(self.length):
-            excitedState = np.dot(self.training[i], w)
+        for i in range(len(input)):
+            excitedState = np.dot(input[i], w)
             activation = self.activation(excitedState)
-            output = self.expOut[i]
-            e = ((output - activation)**2)
-            error += e
+            error += ((output[i] - activation)**2)
         return error/2
