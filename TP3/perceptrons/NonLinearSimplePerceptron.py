@@ -9,10 +9,14 @@ class NonLinearSimplePerceptron(Perceptron):
         print(self.beta)
         max_output = np.amax(expected_output)
         min_output = np.amin(expected_output)
+        max_input = np.amax(training_set)
+        min_input = np.amin(training_set)
         output = [None] * len(expected_output)
+        training = [None] * len(training_set)
         for i in range(len(expected_output)):
             output[i] = 2 * ((expected_output[i] - min_output) / (max_output - min_output)) - 1
-        super().__init__(training_set,output,learning_rate)
+            training[i] = 2 * ((training_set[i] - min_input) / (max_input - min_input)) - 1
+        super().__init__(training,output,learning_rate)
 
     def g(self,x):
         return np.tanh(self.beta*x)
@@ -24,9 +28,9 @@ class NonLinearSimplePerceptron(Perceptron):
         return self.g(excitedState)
 
     def delta(self, i_x, excitedState, E_i):
-        max_output = np.amax(self.training)
-        min_output = np.amin(self.training)
-        E_i = 2 * ((E_i - min_output) / (max_output - min_output)) - 1
+        #max_output = np.amax(self.training)
+        #min_output = np.amin(self.training)
+        #E_i = 2 * ((E_i - min_output) / (max_output - min_output)) - 1
         return super().delta(i_x,excitedState,E_i) * self.g_prime(excitedState)
 
     def update(self, err, w):
