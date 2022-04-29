@@ -1,32 +1,38 @@
+from abc import ABC, abstractmethod
 import numpy as np
-from perceptrons.nonLinearSimplePerceptron import g_prime
 from plot_step_simple import add_w
 from plot_linear_errors import add_error
 
-class perceptrons:
+class Perceptron(ABC):
 
-    def __init__(self, training, expOut, learnRate, activation, error, isSimple = False, g_prime = None):
-        self.error = error
-        self.activation = activation
+    def __init__(self, training, expOut, learnRate):
         self.learnRate = learnRate
-        self.expOut = expOut #ya me los pasan como arrays, hay que hacerlo en el ej1
+        self.expOut = expOut
         self.training = training
         self.errorMin = None
         self.wMin = None
-        self.isSimple = isSimple
-        self.g_prime = g_prime
+    
+    @abstractmethod
+    def activation(self):
+        pass
+
+    @abstractmethod
+    def error(self):
+        pass
 
     def delta(self, i_x, excitedState, E_i):
         activationState = self.activation(excitedState)
         delta = self.learnRate * (self.expOut[i_x] - activationState) * E_i
-
-        if self.g_prime:
-            delta = delta * self.g_prime(excitedState)
-
         return delta
+    
+    def update(self, err, w):
+        if err < self.errorMin:
+            self.errorMin = err
+            self.wMin = w
+            return True
+        return False
 
     def train(self, cota):
-        print(self.g_prime)
         i = 0 
         length = len(self.training)
         dim = len(self.training[0])
@@ -38,17 +44,11 @@ class perceptrons:
             i_x = np.random.randint(0, length)
             excitedState = np.dot(self.training[i_x], w)
             E_i = np.array(self.training[i_x])
-
             deltaW = self.delta(i_x,excitedState,E_i)
             w += deltaW
 
             error = self.error(self.training, self.expOut, w, length)
-            if error < self.errorMin:
-                self.errorMin = error
-                print(error)
-                self.wMin = w
-                if self.isSimple: 
-                    add_w(w)
-                else:
-                    add_error(error)
+            self.update(error,w)
             i += 1
+        print('Error minimo: ',self.errorMin)
+        print('W minimo: ', self.wMin)
