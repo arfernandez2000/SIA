@@ -7,7 +7,12 @@ from config_loader import *
 from plot_step_simple import plot as plot_step
 from plot_errors import plot as plot_errors
 
-if perceptron == "non-linear":
+if perceptron == 'multi-layer':
+    print('multi capa')
+    multilayer_perceptron = NonLinearSimplePerceptron(trainDataEx1, expectOutEx1, 0.1, 0.5)
+    multilayer_perceptron.train(50000)
+
+elif perceptron == "non-linear":
     #non_linear_perceptron = NonLinearSimplePerceptron(trainDataEx2[:150], expectOutEx2[:150], 0.005, 0.5)
     non_linear_perceptron = NonLinearSimplePerceptron(trainDataEx2, expectOutEx2, 0.1, 0.5)
     non_linear_perceptron.train(50000)
@@ -20,6 +25,6 @@ elif perceptron == "linear":
     plot_errors()
 
 else:
-    perceptron = StepSimplePerceptron(trainDataEx1, expectOutEx1, 0.01)
+    perceptron = StepSimplePerceptron(trainDataEx1, expectOutEx1, 0.2)
     perceptron.train(1000)
     plot_step()
