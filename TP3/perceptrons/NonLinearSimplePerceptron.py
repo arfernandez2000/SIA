@@ -37,7 +37,6 @@ class NonLinearSimplePerceptron(Perceptron):
         for i in range(self.length):
             excitedState = np.dot(self.training[i], w)
             activation = self.activation(excitedState)
-            print('activation: ', activation)
             output = self.expOut[i]
             e = ((output - activation)**2)
             error += e
