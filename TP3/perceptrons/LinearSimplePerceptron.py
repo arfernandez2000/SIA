@@ -1,6 +1,6 @@
 import numpy as np
-from sklearn.linear_model import Perceptron
 
+from perceptrons.Perceptron import Perceptron
 from plot_linear_errors import add_error
 
 class LinearSimplePerceptron(Perceptron):

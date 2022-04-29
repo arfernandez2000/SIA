@@ -5,12 +5,14 @@ from plot_linear_errors import add_error
 
 class Perceptron(ABC):
 
-    def __init__(self, training, expOut, learnRate):
+    def __init__(self, training, expOut, learnRate, beta):
         self.learnRate = learnRate
         self.expOut = expOut
         self.training = training
         self.errorMin = None
         self.wMin = None
+        self.beta = beta
+        print(self.beta)
     
     @abstractmethod
     def activation(self):
