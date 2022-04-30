@@ -1,6 +1,5 @@
 import numpy as np
 
-# COPIADO Y PEGADO DE EUGE, NO CAMBIE NADA, solo comente de lo de adaptative eta
 class Neuron:
     def __init__(self, weights, activation_f):
         self.weights = weights
