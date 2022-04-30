@@ -1,4 +1,4 @@
 {
-    "perceptron" : "step",
-    "operation" : "and"
+    "perceptron" : "multi-layer",
+    "operation" : "xor"      
 }
