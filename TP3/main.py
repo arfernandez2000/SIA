@@ -1,4 +1,5 @@
 #import numpy
+from multilayer_perceptron.MultilayerPerceptron import MultilayerPerceptron
 from perceptrons.NonLinearSimplePerceptron import *
 from perceptrons.Perceptron import *
 from perceptrons.StepSimplePerceptron import *
@@ -9,7 +10,7 @@ from plot_errors import plot as plot_errors
 
 if perceptron == 'multi-layer':
     print('multi capa')
-    multilayer_perceptron = NonLinearSimplePerceptron(trainDataEx1, expectOutEx1, 0.1, 0.5)
+    multilayer_perceptron = MultilayerPerceptron(trainDataEx1, expectOutEx1, 0.1, 0.5)
     multilayer_perceptron.train(50000)
 
 elif perceptron == "non-linear":
