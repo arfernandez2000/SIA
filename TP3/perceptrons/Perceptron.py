@@ -1,5 +1,6 @@
 from abc import ABC, abstractmethod
 import numpy as np
+import random
 from plot_step_simple import add_w
 from plot_errors import add_error
 
