@@ -3,6 +3,7 @@ from perceptrons.NonLinearSimplePerceptron import *
 from utils import *
 from config_loader import *
 from utils import *
+from config_utils import parse_data
 
 training_matrix = parse_data('./entries_2.txt')
 expected_matrix = parse_data('./expected_output_2.txt')
@@ -31,19 +32,19 @@ print("training error", min_err)
 print("testing error", min_err_test)
 print()
 
-def cross_validations(array, expected, K):
-    splitsA = truncate(array, K)
-    splitsE = truncate(expected, K)
-    testId = random.randint(0, K-1)
-    test = splitsA[testId]
-    testExp = splitsE[testId]
+# def cross_validations(array, expected, K):
+#     splitsA = truncate(array, K)
+#     splitsE = truncate(expected, K)
+#     testId = random.randint(0, K-1)
+#     test = splitsA[testId]
+#     testExp = splitsE[testId]
 
-    train = []
-    trainExp = []
-    for i in range(K):
-        if i != testId:
-            for num in splitsA[i]:
-                train.append(num)
-            for num in splitsE[i]:
-                trainExp.append(num)
-    return train, trainExp, test, testExp
+#     train = []
+#     trainExp = []
+#     for i in range(K):
+#         if i != testId:
+#             for num in splitsA[i]:
+#                 train.append(num)
+#             for num in splitsE[i]:
+#                 trainExp.append(num)
+#     return train, trainExp, test, testExp

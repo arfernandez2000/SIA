@@ -1,20 +1,20 @@
 import math
 import numpy as np
+from plot_errors import plot_list_erros
 from utils import *
-from config_loader import parseNumbers
+from config_loader import ex3point
+from config_utils import parseNumbers
 from perceptrons.MultilayerPerceptron import *
 import random
 
-def ex3(config):
+def ex3():
     np.random.seed(1)
-    subitem = config['subitem']
-    if subitem == 1:
+    if ex3point == 1:
         ex3_1()
-    elif subitem == 2:
+    elif ex3point == 2:
         ex3_2()
-    elif subitem == 3:
+    elif ex3point == 3:
         ex3_3()
-
 
 def ex3_1():
     train_data = np.array([
@@ -37,6 +37,8 @@ def ex3_1():
 
     print(min_error)
     print(min_error_test)
+    print(errors)
+    plot_list_erros(errors)
 
 def ex3_2():
     numbers = parseNumbers('./entries_3.txt')

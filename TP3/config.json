@@ -1,4 +1,7 @@
 {
     "perceptron" : "multi-layer",
-    "operation" : "xor"
+    "operation" : "xor",
+    "multi-layer": {
+        "excercise" : 1
+    }
 }

@@ -17,3 +17,14 @@ def plot():
     ax.plot(x,errors)
     print(errors)
     plt.show()
+
+def plot_list_erros(errs):
+    plt.style.use('default')
+    fig, ax = plt.subplots()
+    length = len(errs)
+    y_max = np.amax(errs)
+    x = np.arange(0, length)
+    ax.set(xlim=(0,length), xticks=np.arange(0,length, length/10),
+            ylim=(0,y_max + 1), yticks=np.arange(0,y_max + 1, y_max/10))
+    ax.plot(x,errs)
+    plt.show()
