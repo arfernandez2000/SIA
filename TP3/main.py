@@ -1,5 +1,6 @@
 #import numpy
 from ex3 import ex3
+from ex1 import ex1
 from perceptrons.NonLinearSimplePerceptron import *
 from perceptrons.Perceptron import *
 from perceptrons.StepSimplePerceptron import *
@@ -24,6 +25,4 @@ elif perceptron == "linear":
     plot_errors()
 
 else:
-    perceptron = StepSimplePerceptron(trainDataEx1, expectOutEx1, 0.2)
-    perceptron.train(1000)
-    plot_step()
+    ex1()
