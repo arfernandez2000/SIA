@@ -120,9 +120,6 @@ class MultiLayerPerceptron:
             training_correct_cases = 0
             test_correct_cases = 0
             while j < len(training_set):
-                print("LEN", len(expected_set))
-                print("SHUFFLED", shuffled_list)
-                print("J", j)
                 x = training_set[shuffled_list[j]]
                 y = expected_set[shuffled_list[j]]
 
