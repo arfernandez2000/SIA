@@ -56,19 +56,3 @@ def ex2_3():
 
     plot_list_error(error_list)
 
-    # def cross_validations(array, expected, K):
-    #     splitsA = truncate(array, K)
-    #     splitsE = truncate(expected, K)
-    #     testId = random.randint(0, K-1)
-    #     test = splitsA[testId]
-    #     testExp = splitsE[testId]
-
-    #     train = []
-    #     trainExp = []
-    #     for i in range(K):
-    #         if i != testId:
-    #             for num in splitsA[i]:
-    #                 train.append(num)
-    #             for num in splitsE[i]:
-    #                 trainExp.append(num)
-    #     return train, trainExp, test, testExp

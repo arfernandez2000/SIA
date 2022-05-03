@@ -38,7 +38,6 @@ def ex3_1():
 
     print(min_error)
     print(min_error_test)
-    print(errors)
     plot_list_error(errors)
 
 def ex3_2():
