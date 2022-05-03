@@ -13,6 +13,8 @@ class Perceptron(ABC):
         self.errorMin = None
         self.wMin = None
         self.length = len(training)
+        self.errors = []
+        self.wMins = []
     
     @abstractmethod
     def activation(self):
@@ -31,8 +33,8 @@ class Perceptron(ABC):
         if err < self.errorMin:
             self.errorMin = err
             self.wMin = w
-            return True
-        return False
+            self.wMins.append(w)
+        self.errors.append(err)
 
     def train(self, cota):
         i = 0 
@@ -54,6 +56,7 @@ class Perceptron(ABC):
             i += 1
         print('Error minimo: ',self.errorMin)
         print('W minimo: ', self.wMin)
+        return self.wMins, self.errors
 
     def test(self, test_input, test_output):
         error = self.error(self.wMin, test_input, test_output)

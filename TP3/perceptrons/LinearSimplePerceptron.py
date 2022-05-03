@@ -8,7 +8,7 @@ class LinearSimplePerceptron(Perceptron):
     def update(self, err, w):
         super().update(err,w)
         add_error(err)
-    
+
     def activation(self,excitedState):
         return excitedState
 

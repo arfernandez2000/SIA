@@ -1,6 +1,6 @@
 import math
 import numpy as np
-from plot_errors import plot_list_erros
+from plot_errors import plot_list_error
 from utils import *
 from config_loader import ex3point
 from config_utils import parseNumbers

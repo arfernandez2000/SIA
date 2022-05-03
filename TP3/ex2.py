@@ -8,7 +8,6 @@ from plot_errors import plot as plot_errors, plot_list_erros
 
 training_matrix = parse_data('./entries_2.txt')
 expected_matrix = parse_data('./expected_output_2.txt')
-print("PARSEO DATA")
 
 i = 0
 max_value = np.max(expected_matrix)

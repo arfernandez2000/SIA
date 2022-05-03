@@ -7,20 +7,19 @@ def add_error(e):
     errors.append(e)
 
 def plot():
-    print('e: ', errors)
     plt.style.use('default')
     fig, ax = plt.subplots()
     length = len(errors)
     y_max = np.amax(errors)
-    print(y_max, length)
+    plt.ylabel('Error')
+    plt.xlabel('Iteraciones')
     x = np.arange(0, length)
     ax.set(xlim=(0,length), xticks=np.arange(0,length, length/10),
             ylim=(0,y_max + 1), yticks=np.arange(0,y_max + 1, y_max/10))
     ax.plot(x,errors)
-    print(errors)
     plt.show()
 
-def plot_list_erros(errs):
+def plot_list_error(errs):
     plt.style.use('default')
     fig, ax = plt.subplots()
     length = len(errs)
