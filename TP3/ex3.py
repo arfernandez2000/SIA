@@ -2,18 +2,19 @@ import math
 import numpy as np
 from plot_errors import plot_list_error
 from utils import *
-from config_loader import ex3point
+from config_loader import expoint
 from config_utils import parseNumbers
 from perceptrons.MultilayerPerceptron import *
 import random
+from plot_errors import plot as plot_errors, plot_list_error
 
 def ex3():
     np.random.seed(1)
-    if ex3point == 1:
+    if expoint == 1:
         ex3_1()
-    elif ex3point == 2:
+    elif expoint == 2:
         ex3_2()
-    elif ex3point == 3:
+    elif expoint == 3:
         ex3_3()
 
 def ex3_1():
@@ -119,7 +120,7 @@ def ex3_2():
 
 
 def ex3_3():
-    numbers = parseNumbers('entries_3.txt')
+    numbers = parseNumbers('./entries_3.txt')
     q = 7
     to_train = []
     train_data = []
@@ -133,6 +134,9 @@ def ex3_3():
         train_data.append(numbers[to_train[i]])
         to_test.append(i)
         test_data.append(numbers[i])
+    
+    train_data.append(numbers[:5])
+    test_data.append(numbers[5:])
 
     for n in to_train:
         if n == 0:

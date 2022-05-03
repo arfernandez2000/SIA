@@ -1,6 +1,7 @@
 #import numpy
 from ex3 import ex3
 from ex1 import ex1
+from ex2 import ex2
 from perceptrons.NonLinearSimplePerceptron import *
 from perceptrons.Perceptron import *
 from perceptrons.StepSimplePerceptron import *
@@ -15,14 +16,13 @@ if perceptron == 'multi-layer':
     ex3()
 
 elif perceptron == "non-linear":
-    non_linear_perceptron = NonLinearSimplePerceptron(trainDataEx2, expectOutEx2, 0.1, 0.5)
-    w, errors = non_linear_perceptron.train(50000)
-    plot_list_error()
+    print('non-linear')
+    ex2()
 
 elif perceptron == "linear":
-    linear_perceptron = LinearSimplePerceptron(trainDataEx2, expectOutEx2, 0.01)
-    w, errors = linear_perceptron.train(10000)
-    plot_list_error(errors)
+    print('linear')
+    ex2()
 
 else:
+    print('step')
     ex1()

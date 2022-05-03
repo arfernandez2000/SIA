@@ -98,6 +98,7 @@ class MultiLayerPerceptron:
     def train(self, training_set, expected_set,test_set, expected_test_set, subitem, error_epsilon=0, iterations_qty=10000, print_data=True):
         training_set = np.array(training_set)
         expected_set = np.array(expected_set)
+        print("TRAIN MULTI")
         ii = 0
         i = 0
         print(len(training_set))

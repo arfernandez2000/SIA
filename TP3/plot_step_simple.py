@@ -1,6 +1,6 @@
 import matplotlib.pyplot as plt
 import numpy as np
-from config_loader import trainDataEx1 as train, expectOutEx1 as goal, perceptron
+from config_loader import trainData as train, expectOut as goal, perceptron
 
 def set_ax(points,ax,plt):
     plt.xlabel('Eje X')

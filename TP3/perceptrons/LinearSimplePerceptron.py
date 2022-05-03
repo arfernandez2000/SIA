@@ -16,7 +16,6 @@ class LinearSimplePerceptron(Perceptron):
         error = 0
         for i in range(len(input)):
             excitedState = np.dot(input[i], w)
-            print(excitedState)
             e = ((output[i] - excitedState)**2)
             error += e
         return error/2
