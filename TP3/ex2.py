@@ -1,4 +1,5 @@
 import numpy as np
+from TP3.plot_errors import plot_list_error
 from perceptrons.NonLinearSimplePerceptron import *
 from utils import *
 from config_loader import *
@@ -32,21 +33,4 @@ print("training error", min_err)
 print("testing error", min_err_test)
 print()
 
-plot_list_erros(error_list)
-
-# def cross_validations(array, expected, K):
-#     splitsA = truncate(array, K)
-#     splitsE = truncate(expected, K)
-#     testId = random.randint(0, K-1)
-#     test = splitsA[testId]
-#     testExp = splitsE[testId]
-
-#     train = []
-#     trainExp = []
-#     for i in range(K):
-#         if i != testId:
-#             for num in splitsA[i]:
-#                 train.append(num)
-#             for num in splitsE[i]:
-#                 trainExp.append(num)
-#     return train, trainExp, test, testExp
+plot_list_error(error_list)
