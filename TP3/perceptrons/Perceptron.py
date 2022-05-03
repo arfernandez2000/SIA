@@ -32,7 +32,7 @@ class Perceptron(ABC):
         if err < self.errorMin:
             self.errorMin = err
             self.wMin = w
-            self.wMins = self.wMins + [w]
+            self.wMins.append(w)
         self.errors.append(err)
 
     def train(self, cota):
