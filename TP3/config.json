@@ -1,6 +1,6 @@
 {
-    "perceptron" : "multi-layer",
-    "operation" : "xor",
+    "perceptron" : "linear",
+    "operation" : "and",
     "multi-layer": {
         "excercise" : 1
     }

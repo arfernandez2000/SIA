@@ -13,11 +13,11 @@ class LinearSimplePerceptron(Perceptron):
     def activation(self,excitedState):
         return excitedState
 
-    def error(self,w):
+    def error(self,w,input,output):
         error = 0
-        for i in range(self.length):
-            excitedState = np.dot(self.training[i], w)
+        for i in range(len(w)):
+            excitedState = np.dot(input[i], w)
             print(excitedState)
-            e = ((self.expOut[i] - excitedState)**2)
+            e = ((output[i] - excitedState)**2)
             error += e
         return error/2

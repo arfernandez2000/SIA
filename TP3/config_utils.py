@@ -1,4 +1,5 @@
 import numpy
+import re
 
 def load_entries(filename, row):
     f = open(filename, 'r')

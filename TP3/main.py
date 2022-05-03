@@ -20,8 +20,8 @@ elif perceptron == "non-linear":
     plot_errors()
    
 elif perceptron == "linear":
-    linear_perceptron = LinearSimplePerceptron(test_trainDataEx2, test_expectOutEx2, 0.01)
-    linear_perceptron.train(1000)
+    linear_perceptron = LinearSimplePerceptron(trainDataEx2, expectOutEx2, 0.01)
+    linear_perceptron.train(10000)
     plot_errors()
 
 else:
