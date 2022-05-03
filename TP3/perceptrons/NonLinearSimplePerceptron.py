@@ -1,6 +1,8 @@
 import numpy as np
 import random
 from perceptrons.Perceptron import Perceptron
+from plot_errors import add_error
+
 
 class NonLinearSimplePerceptron():
 
@@ -8,7 +10,7 @@ class NonLinearSimplePerceptron():
         self.eta = eta
         self.eta = eta
         self.activation_function = activation_function
-        self.weights = np.array(np.random.rand(input_size + 1))
+        self.weights = np.random.rand(input_size + 1)
         self.der_activation_function = der_activation_function
         self.delta = delta
         self.iterations_qty = iterations_qty
@@ -72,11 +74,8 @@ class NonLinearSimplePerceptron():
             if err < min_error:
                 min_error = err
             errors.append(err)
-            print("ERROR", err)
+            add_error(err)
             training_accuracies.append(training_correct_cases / len(training_set))
-            print("Epoch: ", ii)
-            print("min error", min_error)
-            print("weights: ", self.weights)
 
             error = self.error(test_set, test_expected_test)
             test_accuracies.append(self.error(test_set, test_expected_test))
