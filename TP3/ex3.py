@@ -38,7 +38,7 @@ def ex3_1():
     print(min_error)
     print(min_error_test)
     print(errors)
-    plot_list_erros(errors)
+    plot_list_error(errors)
 
 def ex3_2():
     numbers = parseNumbers('./entries_3.txt')
@@ -204,6 +204,7 @@ def ex3_3():
     #plot(ii, [errors], ['errors'], 'Epoch', 'Errors', 'Mean Squared Error vs Epochs - multilayer')
     print("training min error", min_error)
     print("testing min error", min_error_test)
+    print("Accuracies training", training_accuracies, "\nTest accuracies", test_accuracies)
 
     for i in range(len(train_data)):
         output = perceptron.predict(np.array(train_data[i]))
