@@ -1,7 +1,6 @@
 import numpy as np
 
 from perceptrons.Perceptron import Perceptron
-from plot_step_simple import add_w, plot
 
 class StepSimplePerceptron(Perceptron):
 

@@ -1,8 +1,6 @@
 from abc import ABC, abstractmethod
 import numpy as np
 import random
-from plot_step_simple import add_w
-from plot_errors import add_error
 
 class Perceptron(ABC):
 
@@ -12,6 +10,7 @@ class Perceptron(ABC):
         self.training = training
         self.errorMin = None
         self.wMin = None
+        self.prevWMin = []
         self.length = len(training)
         self.errors = []
         self.wMins = []
@@ -33,7 +32,7 @@ class Perceptron(ABC):
         if err < self.errorMin:
             self.errorMin = err
             self.wMin = w
-            self.wMins.append(w)
+            self.wMins = self.wMins + [w]
         self.errors.append(err)
 
     def train(self, cota):
