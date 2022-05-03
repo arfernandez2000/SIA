@@ -4,7 +4,7 @@ from config_loader import trainDataEx1 as train, expectOutEx1 as goal, perceptro
 
 if perceptron == 'step':
     plt.style.use('default')
-    ws = []
+    #ws = []
     x = np.linspace(-2,2,5)
     points = list(map(lambda p: p[:-1], train))
     fig, ax = plt.subplots()
@@ -25,16 +25,22 @@ def add_w(w):
     print(w, x)
     w = (w[1] * x + w[2]) / -w[0]
     print('add w: ', w)
-    ws.append(w)
+    #ws.append(w)
     ax.plot(x,w)
     plt.show(block=False)
     plt.pause(0.5)
     #plt.close()
     ax.cla()
+    return w
 
-def plot():
+def plot(ws):
+    for i in range(0,len(ws)):
+        new_w = add_w(ws[i])
+        ws[i] = new_w
     print('ploot')
-    set_ax()
+    #set_ax()
     print(x,ws[-1])
     ax.plot(x,ws[-1])
+    plt.xlabel('Eje X')
+    plt.ylabel('Eje Y')
     plt.show()
