@@ -1,6 +1,6 @@
 from cgi import test
 from locale import normalize
-import numpy
+import numpy as np
 import json
 from config_utils import load_entries, load_goals, parse_data
 
@@ -15,11 +15,11 @@ expectOut =[]
 perceptron = data['perceptron']
 if perceptron == 'step':
     operation = data['operation']
-    trainData = numpy.array([[-1,1,1], [1,-1,1], [-1,-1,1] , [1,1,1]])
+    trainData = np.array([[-1,1], [1,-1], [-1,-1] , [1,1]])
     if operation == 'and':
-        expectOut = numpy.array([-1,-1,-1,1])
+        expectOut = np.array([-1,-1,-1,1])
     else:
-        expectOut = numpy.array([1,1,-1,-1])
+        expectOut = np.array([1,1,-1,-1])
 elif perceptron == 'linear':
     linear_input = data['linear_input']['test']
     if linear_input:
@@ -36,6 +36,7 @@ elif perceptron == 'non-linear':
 elif perceptron == 'multi-layer':
     expoint = data['ex3']['excercise']
     
+trainData = list(map(lambda x: np.append(x,1), trainData))
 
 
 
