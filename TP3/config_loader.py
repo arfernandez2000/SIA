@@ -20,6 +20,7 @@ if perceptron == 'step':
         expectOut = np.array([-1,-1,-1,1])
     else:
         expectOut = np.array([1,1,-1,-1])
+    trainData = list(map(lambda x: np.append(x,1), trainData)) #umbral anadido
 elif perceptron == 'linear':
     linear_input = data['linear_input']['test']
     if linear_input:
@@ -29,15 +30,10 @@ elif perceptron == 'linear':
         trainData = load_entries('./entries_2.txt', 1)
         expectOut = load_goals('./expected_output_2.txt')
     expoint = data['ex2']['excercise']
+    trainData = list(map(lambda x: np.append(x,1), trainData)) #umbral anadido
 elif perceptron == 'non-linear':
     trainData = parse_data('./entries_2.txt')
     expectOut = parse_data('./expected_output_2.txt')
     expoint = data['ex2']['excercise']
 elif perceptron == 'multi-layer':
     expoint = data['ex3']['excercise']
-    
-trainData = list(map(lambda x: np.append(x,1), trainData))
-
-
-
-

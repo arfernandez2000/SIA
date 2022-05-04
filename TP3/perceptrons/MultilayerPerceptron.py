@@ -4,9 +4,8 @@ class NeuronLayer:
     def __init__(self, neurons_qty, inputs=None, activation="tanh"):
         self.neurons_qty = neurons_qty
         self.inputs = inputs
-        (f, df) = self.get_functions(activation)
-        self.f = f
-        self.df = df
+        self.f = tanh_act
+        self.df = der_tanh_act
         self.weights = None
         self.h = None
         self.v = None
@@ -18,17 +17,11 @@ class NeuronLayer:
             print("inputs + 1 = ", self.inputs+1)
         else:
             print("inputs + 1 = ", inputs+1)
-        print("neurons qty = ", self.neurons_qty)
         self.weights = 2 * np.random.random((self.neurons_qty, self.inputs+1)) - 1
-        print(self.weights)
-
-    def get_functions(self, activation_function):
-        f = tanh_act
-        df = der_tanh_act
-        return f, df
 
     def forward(self, a_input):
         a_input_biased = np.insert(a_input, 0, 1)
+        #print('biased: ', a_input_biased)
         output = np.matmul(self.weights, np.transpose(a_input_biased)) 
         output = np.transpose(output)
         self.h = output
@@ -39,7 +32,6 @@ class NeuronLayer:
     def back_propagate(self, dif, v, eta):
         v = np.insert(v, 0, 1)
         delta = np.multiply(self.df(self.h), dif)
-        aux = v.reshape((-1,1))
         d_w = eta*v.reshape((-1,1))*delta
         self.weights = self.weights + np.transpose(d_w)
         return delta
@@ -123,9 +115,7 @@ class MultiLayerPerceptron:
             while j < len(training_set):
                 x = training_set[shuffled_list[j]]
                 y = expected_set[shuffled_list[j]]
-
                 predicted_value = self.predict(x)
-
                 error = self.back_propagate(predicted_value, x, y)
                 aux_training = 0
                 if subitem == 3:
@@ -138,7 +128,7 @@ class MultiLayerPerceptron:
                             aux_training += 1
                     if aux_training == len(error):
                         training_correct_cases += 1
-
+                        
                 j += 1
             training_accuracies.append(training_correct_cases/len(training_set))
             Error = self.calculate_mean_square_error(training_set, expected_set)

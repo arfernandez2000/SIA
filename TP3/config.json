@@ -1,7 +1,13 @@
 {
     "perceptron" : "multi-layer",
     "operation" : "and",
-    "multi-layer": {
-        "excercise" : 1
+    "ex3": {
+        "excercise" : 2
+    },
+    "ex2" : {
+        "excercise" : 2
+    },
+    "linear_input" : {
+        "test" : true
     }
 }

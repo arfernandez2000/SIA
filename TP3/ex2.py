@@ -21,7 +21,7 @@ def ex2_1():
     plot_list_error(errors)
 
 def ex2_2():
-    perceptron_nolineal2 = NonLinearSimplePerceptron(len(trainData), tanh_act, der_tanh_act, eta=0.01)
+    perceptron_nolineal2 = NonLinearSimplePerceptron(np.array(trainData).shape[1], tanh_act, der_tanh_act, eta=0.01)
     min_err, epochs, error_list, training_accuracies, min_err_test, test_accuracies = perceptron_nolineal2.train(trainData, expectOut, [], [], 0.001)
 
     print()

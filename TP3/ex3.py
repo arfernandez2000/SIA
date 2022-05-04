@@ -24,6 +24,7 @@ def ex3_1():
         [-1, -1],
         [1, 1]
     ])
+    #train_data = np.array(list(map(lambda x: np.append(x,1), train_data)))
     xor_expected_data = np.array([[1], [1], [-1], [-1]])
 
     perceptron = MultiLayerPerceptron([
@@ -100,6 +101,9 @@ def ex3_2():
         #plot(ii, [errors], ['errors'], 'Epoch', 'Errors', 'Mean Squared Error vs Epochs - multilayer')
         print("min error", min_error)
         print("min error test", min_error_test)
+        print('training acc: ', len(training_accuracies))
+        print('test accuracies: ', len(test_accuracies))
+        print('epochs: ', ii)
 
         A = [0, 1, 2]
 
