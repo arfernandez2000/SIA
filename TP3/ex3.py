@@ -1,3 +1,4 @@
+import imp
 import math
 import numpy as np
 from plot_errors import plot_list_error
@@ -7,6 +8,8 @@ from config_utils import parseNumbers
 from perceptrons.MultilayerPerceptron import *
 import random
 from plot_errors import plot as plot_errors, plot_list_error
+from plot_accuracies import plot_acc
+from plot_predictions import plot_predictions
 
 def ex3():
     np.random.seed(1)
@@ -104,14 +107,16 @@ def ex3_2():
         print('training acc: ', len(training_accuracies))
         print('test accuracies: ', len(test_accuracies))
         print('epochs: ', ii)
+        plot_acc(ii,training=training_accuracies, test=test_accuracies) #Da cualquier cosa
 
         A = [0, 1, 2]
 
         for j in range(len(to_train)):
             output = perceptron.predict(np.array(train_data[j]))
+            #predictions.append(output)
             print(to_train[j], 'is ~', to_word(output[-1]))
 
-        print()
+        print() 
         print("TESTING")
         print("test", test_data)
         print("expected test", expected_test)

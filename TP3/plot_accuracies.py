@@ -1,3 +1,4 @@
+from cProfile import label
 import matplotlib.pyplot as plt
 import numpy as np
 
@@ -9,8 +10,9 @@ def plot_acc(epochs, training, test):
     plt.ylabel('Accuracie')
     plt.xlabel('Epochs')
     length = len(epochs)
-    ax.set(xlim=(0,length), xticks=np.arange(0,length, length/100),
-            ylim=(0,y_max + 100), yticks=np.arange(0,y_max + 100, y_max/100))
-    ax.plot(epochs,training)
-    ax.plot(epochs,test)
-    plt.show()
+    ax.set(xlim=(0,length), xticks=np.arange(0,length, length/10),
+            ylim=(0,y_max + 100), yticks=np.arange(0,y_max + 100, y_max/10))
+    ax.plot(epochs,training, label='Training')
+    ax.plot(epochs,test, label='Test')
+    plt.legend()
+    plt.show(block=False)
