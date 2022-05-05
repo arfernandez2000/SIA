@@ -143,8 +143,9 @@ def ex3_3():
         to_test.append(i)
         test_data.append(numbers[i])
     
-    # train_data.append(numbers[:5])
-    # test_data.append(numbers[5:])
+    print('VS: ', test_data == train_data)
+    train_data.append(numbers[:5])
+    test_data.append(numbers[5:])
 
     for n in to_train:
         if n == 0:
