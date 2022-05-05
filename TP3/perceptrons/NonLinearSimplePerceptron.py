@@ -51,23 +51,27 @@ class NonLinearSimplePerceptron():
         expected_set = np.array(expected_set)
         ii = 0
         shuffled_list = [a for a in range(0, len(training_set))]
-        random.shuffle(shuffled_list)
+        
         p = len(training_set)
         err = 1
         min_error = 2 * p
         error = 0
         test_accuracies = []
-        while ii < self.iterations_qty and err > error_epsilon:
+        delta_w_ant = 0
+        while ii < self.iterations_qty:
             j = 0
             training_correct_cases = 0
+            random.shuffle(shuffled_list)
             while j < len(shuffled_list):
                 biased_input = np.insert(training_set[shuffled_list[j]], 0, 1)
                 predicted_value = self.predict_with(biased_input)
                 error = expected_set[shuffled_list[j]] - predicted_value
                 if error < self.delta:
                     training_correct_cases += 1
-                self.weights = self.weights + (self.eta * error * self.der_activation_function(
-                    self.weights.T.dot(biased_input)) * biased_input.T)
+                delta_w = (self.eta * error * self.der_activation_function(
+                    self.weights.T.dot(biased_input)) * biased_input.T) + 0.8 * delta_w_ant
+                self.weights = self.weights + delta_w
+                delta_w_ant = delta_w
                 j += 1
 
             err = self.error(training_set, expected_set)

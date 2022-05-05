@@ -34,10 +34,8 @@ class Perceptron(ABC):
             self.wMin = w
             aux = [0] * (len(self.wMins) + 1)
             for i in range(len(self.wMins)):
-                print(self.wMins)
                 aux[i] = self.wMins[i]
             aux[-1] = w
-            print(aux)
             self.wMins = aux.copy()
         self.errors.append(err)
 
@@ -46,7 +44,7 @@ class Perceptron(ABC):
         length = len(self.training)
         dim = len(self.training[0])
         w = np.append(np.zeros(dim-1),1)
-        self.errorMin = length * 2
+        self.errorMin = np.inf
         error = 1
 
         while error > 0.001 and i < cota:
