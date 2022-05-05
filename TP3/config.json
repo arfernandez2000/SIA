@@ -1,5 +1,5 @@
 {
-    "perceptron" : "step",
+    "perceptron" : "multi-layer",
     "operation" : "and",
     "ex3": {
         "excercise" : 2

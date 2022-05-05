@@ -13,4 +13,4 @@ def plot_predictions(predictions):
             ylim=(0,y_max), yticks=np.arange(0,y_max, 10))
     ax.plot(x,predictions)
     #plt.legend()
-    plt.show(block=False)
+    plt.show()
