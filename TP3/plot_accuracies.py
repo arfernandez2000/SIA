@@ -11,7 +11,7 @@ def plot_acc(epochs, training, test):
     plt.xlabel('Epochs')
     length = len(epochs)
     ax.set(xlim=(0,length), xticks=np.arange(0,length, length/10),
-            ylim=(0,y_max + 1), yticks=np.arange(0,y_max + 1, y_max/10))
+            ylim=(0,y_max + 0.1), yticks=np.arange(0,y_max + 0.1, y_max/10))
     ax.plot(epochs,training, label='Training')
     ax.plot(epochs,test, label='Test')
     plt.legend()

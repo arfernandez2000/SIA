@@ -4,11 +4,24 @@ class NeuronLayer:
     def __init__(self, neurons_qty, inputs=None, activation="tanh"):
         self.neurons_qty = neurons_qty
         self.inputs = inputs
-        self.f = tanh_act
-        self.df = der_tanh_act
+        self.f, self.df = self.get_activations(activation)
         self.weights = None
         self.h = None
         self.v = None
+
+    def get_activations(self, activation_function):
+        if activation_function == "tanh":
+            f = tanh_act
+            df = der_tanh_act
+        elif activation_function == "sigmoid":
+            f = logist
+            df = der_logist
+        elif activation_function == "linear":
+            f = lineal_act
+            df = der_lineal_act
+        else:
+            raise LookupError("Function not defined")
+        return f, df
 
     def init_weights(self, inputs=None):
         self.inputs = inputs if inputs is not None else self.inputs

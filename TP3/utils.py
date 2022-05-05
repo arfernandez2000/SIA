@@ -3,8 +3,13 @@ import math
 import numpy as np
 import random
 
+def lineal_act(x):
+    return x
+
+def der_lineal_act(x):
+    return 1
+
 def tanh_act(x):
-    print("TAN:" ,np.tanh(1 * x))
     return np.tanh(1 * x)
 
 def der_tanh_act(x):
