@@ -7,14 +7,9 @@ def plot_acc(epochs, training, test, title=''):
     plt.style.use('default')
     fig, ax = plt.subplots()
     y_max = np.amax(np.array([np.amax(training),np.amax(test)]))
-<<<<<<< HEAD
     plt.ylabel('Accuracy')
     plt.xlabel('Iteraciones')
-=======
-    plt.ylabel('Accuracie')
-    plt.xlabel('Epochs')
     plt.title(title)
->>>>>>> 9e0403cba73b688f62bdf351b16bb741bf35a029
     length = len(epochs)
     ax.set(xlim=(0,length), xticks=np.arange(0,length, length/10),
             ylim=(0,y_max + 0.1), yticks=np.arange(0,y_max + 0.1, y_max/10))
