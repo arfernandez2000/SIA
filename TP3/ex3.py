@@ -55,6 +55,7 @@ def ex3_2():
 
     splitsA = truncate(numbers, k)
     splitsE = truncate(expected, k)
+
     train_data = []
     expected_data = []
 
@@ -139,13 +140,10 @@ def ex3_3():
 
     for i in range(10):
         to_train.append(i)
-        train_data.append(numbers[to_train[i]])
+        train_data.append(numbers[i])
         to_test.append(i)
         test_data.append(numbers[i])
     
-    print('VS: ', test_data == train_data)
-    train_data.append(numbers[:5])
-    test_data.append(numbers[5:])
 
     for n in to_train:
         if n == 0:
@@ -209,7 +207,6 @@ def ex3_3():
             exit("error else ej 3")
 
     test_data = noise(test_data)
-
     min_error, errors, ii, training_accuracies, test_accuracies, min_error_test  = perceptron.train(train_data, expected_data, test_data, expected_test, 3)
 
     #plot(ii, [training_accuracies, test_accuracies], ['train acc', 'test acc'], 'Epoch', 'Accuracies', 'Accuracies vs Epochs - multilayer')

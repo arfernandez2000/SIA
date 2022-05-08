@@ -101,14 +101,18 @@ class MultiLayerPerceptron:
 
 
     def train(self, training_set, expected_set,test_set, expected_test_set, subitem, error_epsilon=0, iterations_qty=10000, print_data=True):
+        print("Training: ", training_set)
         training_set = np.array(training_set)
         expected_set = np.array(expected_set)
         print("TRAIN MULTI")
         ii = 0
         i = 0
         print(len(training_set))
+        print(len(expected_set))
         shuffled_list = [a for a in range(0, len(training_set))]
-        random.shuffle(shuffled_list)
+
+        print(training_set)
+        
         p = len(training_set)
         l = len(test_set)
         Error = 1
@@ -125,7 +129,8 @@ class MultiLayerPerceptron:
             j = 0
             training_correct_cases = 0
             test_correct_cases = 0
-            while j < len(training_set):
+            random.shuffle(shuffled_list)
+            while j < len(shuffled_list):
                 x = training_set[shuffled_list[j]]
                 y = expected_set[shuffled_list[j]]
                 predicted_value = self.predict(x)
