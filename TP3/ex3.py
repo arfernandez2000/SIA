@@ -109,8 +109,9 @@ def ex3_2():
         print("min error test", min_error_test)
         print('training acc: ', len(training_accuracies))
         print('test accuracies: ', len(test_accuracies))
-        plot_acc(ii,training=training_accuracies, test=test_accuracies) #Da cualquier cosa
-        plot_list_error(errors)
+        title = 'k: ' + str(i) + ' test set: ' + str(to_test)
+        plot_acc(ii,training=training_accuracies, test=test_accuracies, title=title)
+        plot_list_error(errors, title=title)
 
         for j in range(len(to_train)):
             output = perceptron.predict(np.array(train_data[j]))
