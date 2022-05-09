@@ -34,7 +34,6 @@ class NeuronLayer:
 
     def forward(self, a_input):
         a_input_biased = np.insert(a_input, 0, 1)
-        #print('biased: ', a_input_biased)
         output = np.matmul(self.weights, np.transpose(a_input_biased)) 
         output = np.transpose(output)
         self.h = output

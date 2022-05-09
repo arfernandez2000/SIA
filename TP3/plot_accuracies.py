@@ -2,7 +2,6 @@ from cProfile import label
 import matplotlib.pyplot as plt
 import numpy as np
 
-#No testeado
 def plot_acc(epochs, training, test, title=''):
     plt.style.use('default')
     fig, ax = plt.subplots()

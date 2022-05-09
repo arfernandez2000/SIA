@@ -16,7 +16,6 @@ def set_ax(points,ax,plt):
             ylim=(-2,2), yticks=np.arange(-2,2))
 def plot(ws):
     plt.style.use('default')
-    #ws = []
     x = np.linspace(-2,2,5)
     points = list(map(lambda p: p[:-1], train))
     fig, ax = plt.subplots()
@@ -28,7 +27,6 @@ def plot(ws):
         ax.plot(x,w)
         plt.show(block=False)
         plt.pause(0.5)
-        #plt.close()
         ax.cla()
         ws[i] = w
     set_ax(points,ax,plt)

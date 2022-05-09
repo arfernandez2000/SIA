@@ -3,7 +3,6 @@ from datetime import datetime
 import math
 import numpy
 from scipy.optimize import minimize
-#import tensorflow as tf
 from plot import *
 
 values = [[(4.4793, -4.0765, -4.0765), 0], [(-4.1793, -4.9218, 1.7664), 1], [(-3.9429, -0.7689, 4.883), 1]]
@@ -72,25 +71,5 @@ class Ej1:
         
         self.print_res(res2['x'])
         plot(self.layers,datetime.now() - time2, "Gradiente Conjugado")
-
-        #x3 = numpy.zeros(11)
-        #x3 = tf.Variable(x3)
-        #print(x3.numpy())
-        #time3 = datetime.now()
-        #tf.keras.optimizers.Adam(
-         #   learning_rate=0.001,
-          #  beta_1=0.9,
-           # beta_2=0.999,
-            #epsilon=1e-07,
-            #amsgrad=False,
-            #name='Adam',
-        #)
-        #opt = tf.keras.optimizers.Adam()
-        #loss = lambda: (x3 ** 2)/2.0       # d(loss)/d(var1) == var1
-        #print(opt.minimize(loss, x3))
-        #w3 = opt.get_weights()
-        #print(w3)
-    #print_res(w3, datetime.now() - time3, "Adam")
-
 ej1 = Ej1()
 ej1.main()
