@@ -32,11 +32,19 @@ def truncate(seq, num):
 
 def cross_validations(array, expected, K):
     splitsA = truncate(array, K)
+    print('SPLITS A', splitsA)
+    print('len splits a, ', len(splitsA))
     splitsE = truncate(expected, K)
+    print('SPLITS E', splitsE)
+    print('len splits e, ', len(splitsE))
     testId = random.randint(0, K-1)
+    print('TEST ID: ', testId)
     test = splitsA[testId]
+    print('TEST: ', test)
     testExp = splitsE[testId]
-
+    print('TEST EXP: ', testExp)
+    print('len test: ', len(test))
+    print('len test exp: ', len(testExp))
     train = []
     trainExp = []
     for i in range(K):

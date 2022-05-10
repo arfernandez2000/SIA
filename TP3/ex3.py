@@ -114,6 +114,7 @@ def ex3_2():
 
         for j in range(len(to_train)):
             output = perceptron.predict(np.array(train_data[j]))
+            print('OUTPUT: ', output)
             #predictions.append(output)
             print(to_train[j], 'is ~', to_word(output[-1]))
 
@@ -125,6 +126,7 @@ def ex3_2():
 
         for j in range(len(test_data)):
             output = perceptron.predict(np.array(test_data[j]))
+            print('OUTPUT ', output)
             print(to_test[j], 'is ~', to_word(output[-1]))
 
 
@@ -145,8 +147,8 @@ def ex3_3():
         test_data.append(numbers[i])
     
     print('VS: ', test_data == train_data)
-    train_data.append(numbers[:5])
-    test_data.append(numbers[5:])
+    # train_data.append(numbers[:5])
+    # test_data.append(numbers[5:])
 
     for n in to_train:
         if n == 0:
@@ -210,7 +212,7 @@ def ex3_3():
             exit("error else ej 3")
 
     test_data = noise(test_data)
-
+    print('train data: ', train_data)
     min_error, errors, ii, training_accuracies, test_accuracies, min_error_test  = perceptron.train(train_data, expected_data, test_data, expected_test, 3)
 
     #plot(ii, [training_accuracies, test_accuracies], ['train acc', 'test acc'], 'Epoch', 'Accuracies', 'Accuracies vs Epochs - multilayer')
