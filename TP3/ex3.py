@@ -27,7 +27,7 @@ def ex3_1():
         [-1, -1],
         [1, 1]
     ])
-    #train_data = np.array(list(map(lambda x: np.append(x,1), train_data)))
+
     xor_expected_data = np.array([[1], [1], [-1], [-1]])
 
     perceptron = MultiLayerPerceptron([
@@ -38,8 +38,6 @@ def ex3_1():
 
     min_error, errors, ii, training_accuracies, test_accuracies, min_error_test = perceptron.train(train_data, xor_expected_data, train_data, xor_expected_data, 1, iterations_qty=10000)
 
-    #plot(ii, [errors], ['errors'], 'Epoch', 'Errors', 'Mean Squared Error vs Epochs - multilayer')
-
     print('Error minimo: ', min_error)
     print('Error minimo test: ', min_error_test)
     plot_list_error(errors)
@@ -49,12 +47,12 @@ def ex3_2():
     numbers = parseNumbers('./entries_3.txt')
     expected = [1, -1, 1, -1, 1, -1, 1, -1, 1, -1]
 
-    #Start Cross validations::
     k = 3
     first_layer_size = math.floor(((k-1) * len(numbers)) / k)
 
     splitsA = truncate(numbers, k)
     splitsE = truncate(expected, k)
+
     train_data = []
     expected_data = []
 
@@ -87,11 +85,6 @@ def ex3_2():
         train_data = np.array(train_data)
         expected_data = np.array(expected_data)
 
-        # print("to train:", to_train)
-        # print("train data:", train_data)
-        # print("expected data:", expected_data)
-        # print()
-
         test_data = np.array(test_data)
         expected_test = np.array(expected_test)
 
@@ -102,8 +95,6 @@ def ex3_2():
         ])
 
         min_error, errors, ii, training_accuracies, test_accuracies, min_error_test = perceptron.train(train_data, expected_data, test_data, expected_test, 2)
-        #plot(ii, [training_accuracies, test_accuracies], ['train acc', 'test acc'], 'Epoch', 'Accuracies','Accuracies vs Epochs - multilayer')
-        #plot(ii, [errors], ['errors'], 'Epoch', 'Errors', 'Mean Squared Error vs Epochs - multilayer')
         print("min error", min_error)
         print("min error test", min_error_test)
         print('training acc: ', len(training_accuracies))
@@ -114,8 +105,6 @@ def ex3_2():
 
         for j in range(len(to_train)):
             output = perceptron.predict(np.array(train_data[j]))
-            print('OUTPUT: ', output)
-            #predictions.append(output)
             print(to_train[j], 'is ~', to_word(output[-1]))
 
         print() 
@@ -142,13 +131,10 @@ def ex3_3():
 
     for i in range(10):
         to_train.append(i)
-        train_data.append(numbers[to_train[i]])
+        train_data.append(numbers[i])
         to_test.append(i)
         test_data.append(numbers[i])
     
-    print('VS: ', test_data == train_data)
-    # train_data.append(numbers[:5])
-    # test_data.append(numbers[5:])
 
     for n in to_train:
         if n == 0:
@@ -212,14 +198,10 @@ def ex3_3():
             exit("error else ej 3")
 
     test_data = noise(test_data)
-    print('train data: ', train_data)
     min_error, errors, ii, training_accuracies, test_accuracies, min_error_test  = perceptron.train(train_data, expected_data, test_data, expected_test, 3)
 
-    #plot(ii, [training_accuracies, test_accuracies], ['train acc', 'test acc'], 'Epoch', 'Accuracies', 'Accuracies vs Epochs - multilayer')
-    #plot(ii, [errors], ['errors'], 'Epoch', 'Errors', 'Mean Squared Error vs Epochs - multilayer')
     print("training min error", min_error)
     print("testing min error", min_error_test)
-    #print("Accuracies training", training_accuracies, "\nTest accuracies", test_accuracies)
     
     plot_acc(ii,training=training_accuracies,test=test_accuracies)
     plot_list_error(errors)
@@ -249,11 +231,11 @@ def to_num(array):
 
 def to_word(num):
     if num > 0:
-        return "par " + str(num*100) + " %"
+        return "par"
     elif num < 0:
-        return "impar " + str(num*-100) + " %"
+        return "impar"
     else:
-        return "wtf this shouldn't be printed"
+        return ""
 
 
 def noise(array):

@@ -75,7 +75,6 @@ def parseNumbers(path):
                 auxMatrix = []
             else:
                 line += 1
-        else:  # es un " "
             pass
         i += 1
     return numbers

@@ -2,13 +2,12 @@ from cProfile import label
 import matplotlib.pyplot as plt
 import numpy as np
 
-#No testeado
 def plot_acc(epochs, training, test, title=''):
     plt.style.use('default')
     fig, ax = plt.subplots()
     y_max = np.amax(np.array([np.amax(training),np.amax(test)]))
-    plt.ylabel('Accuracie')
-    plt.xlabel('Epochs')
+    plt.ylabel('Accuracy')
+    plt.xlabel('Iteraciones')
     plt.title(title)
     length = len(epochs)
     ax.set(xlim=(0,length), xticks=np.arange(0,length, length/10),
