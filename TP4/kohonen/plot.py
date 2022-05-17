@@ -1,5 +1,3 @@
-# def plot_map(x,y,xlabel,ylabel,k):
-from cProfile import label
 import numpy as np
 import seaborn as sns
 import matplotlib.pylab as plt
