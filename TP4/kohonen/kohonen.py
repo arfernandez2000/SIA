@@ -50,4 +50,5 @@ def kohonen(init_radius = np.sqrt(2), init_learn_rate = 0.5, max_epochs = 100):
         print(data.shape,weights[j].shape)
         weights[j] = weights[j] + learn_rate * (data[j]-weights[j])
     t += 1
+    
 kohonen()
