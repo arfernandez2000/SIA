@@ -14,14 +14,13 @@ def set_init_weights():
     w.append(wi)
   return np.array(w)
 
-def kohonen(init_radius = 1, init_learn_rate = 0.5, max_epochs = 100):
+def kohonen(init_radius = 1, init_learn_rate = 0.5, max_epochs = 1000):
   #Paso Inicial
   weights = set_init_weights()
   radius = init_radius
   learn_rate = init_learn_rate
   t = 1
   cut = False
-  t = 99
   #Paso t
   while t < max_epochs and not cut:
     #Selecciono un registro de entrada Xp
