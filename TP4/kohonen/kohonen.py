@@ -1,14 +1,14 @@
 import numpy as np
 from get_data import data, raw_data
-#Paso Inicial
-k = 5
+#Paso Inicial: Inicializo valores
+k = 5 # Revisar
 p = len(raw_data)
-n = len(raw_data.columns)
+n = data.shape[1]
 
 def set_init_weights():
   w = []
-  for _ in range(1,n):
-    wi = np.random.rand(p)
+  for _ in range(1,p):
+    wi = np.random.rand(n)
     w.append(wi)
   return np.array(w)
 
@@ -21,13 +21,14 @@ def kohonen(init_radius = 1, init_learn_rate = 0.5, max_epochs = 100):
   cut = False
   #Paso t
   while t < max_epochs and not cut:
-    #Selecciono un registro de entrada Xp
-    print(data)
+    #Paso 1: Selecciono un registro de entrada Xp
     x_index = np.random.choice(range(data.shape[0]))
     x = data[x_index]
-    print('weights: ', weights, 'x: ', x)
-    aux = x - weights
+    #Paso 2: Encontrar la neurona ganadora
+    aux = []
+    for w in weights:
+      aux.append(x - w)
     w_k = np.argmin(aux)
-    print(w_k)
+    #Paso 3: Actualizar los pesos de las neuronas vecinas
     t += 1
 kohonen()
