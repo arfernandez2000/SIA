@@ -26,6 +26,8 @@ def kohonen(init_radius = 1, init_learn_rate = 0.5, max_epochs = 1000):
     #Selecciono un registro de entrada Xp
     x_index = np.random.choice(data.index)
     x = data.values[x_index]
-    #w_k = 
+    aux = weights - x
+    w_k = np.argmin(aux)
+    print(w_k)
     t += 1
 kohonen()
