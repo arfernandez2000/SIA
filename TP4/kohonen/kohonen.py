@@ -1,11 +1,14 @@
 import numpy as np
 from get_data import data, raw_data
+from plot import plot_map
+
 #Paso Inicial: Inicializo valores
 k = 5 # Revisar
 p = len(raw_data)
+labels = raw_data.columns[1:]
 countries = raw_data.values[:,0]
 n = data.shape[1]
-print(data.shape)
+
 def set_init_weights():
   w = []
   for _ in range(0,p):
@@ -25,7 +28,6 @@ def update_neighborhood_weight(radius, w_k):
 def kohonen(init_radius = np.sqrt(2), init_learn_rate = 0.5, max_epochs = 100):
   #Paso Inicial
   weights = set_init_weights()
-  print(weights.shape)
   radius = init_radius
   learn_rate = init_learn_rate
   t = 1
@@ -35,7 +37,6 @@ def kohonen(init_radius = np.sqrt(2), init_learn_rate = 0.5, max_epochs = 100):
     #Paso 1: Selecciono un registro de entrada Xp
     x_index = np.random.choice(range(data.shape[0]))
     x = data[x_index]
-    print(x.shape,data.shape,weights.shape)
     #Paso 2: Encontrar la neurona ganadora
     # Xp se refiere a todo el conjunto o a un registro elegido de Xp?
     aux = []
@@ -47,10 +48,9 @@ def kohonen(init_radius = np.sqrt(2), init_learn_rate = 0.5, max_epochs = 100):
     n_k = update_neighborhood_weight(radius,w_k)
     for j in range(len(weights)):
       if (j in n_k):
-        print(data.shape,weights[j].shape)
         weights[j] = weights[j] + learn_rate * (data[j]-weights[j])
     t += 1
-  weights_total = list(map(lambda w: np.sum(w), weights))
-  print(weights)
+  
+  plot_map(weights,ylabels=countries,xlabels=labels)  
   
 kohonen()
