@@ -41,6 +41,7 @@ def ex2_2():
     plot_list_error(training_accuracies)
 
 def ex2_3():
+    print('2.3')
     i = 0
     max_value = np.max(expectOut)
     min_value = np.min(expectOut)
@@ -56,7 +57,7 @@ def ex2_3():
     test_set = np.array(test_set)
     test_expected = np.array(test_expected)
     after_len = len(training_set)
-    
+    #print(len(trainData), len(training_set), len(test_set))
 
     perceptron_nolineal2 = NonLinearSimplePerceptron(training_set.shape[1], logist, der_logist, eta=0.01)
     min_err, epochs, error_list, training_accuracies, min_err_test, test_accuracies = perceptron_nolineal2.train(training_set, training_expected, test_set, test_expected, 0.001)

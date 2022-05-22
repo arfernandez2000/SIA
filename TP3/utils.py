@@ -22,29 +22,23 @@ def der_logist(x):
     return 2 * 1 * logist(x) * (1 - logist(x))
 
 def truncate(seq, num):
+    print('len seq: ', len(seq))
     avg = len(seq) / float(num)
+    print('avg: ', avg)
     out = []
     last = 0.0
     while last < len(seq):
+        #print(seq[int(last):int(last + avg)])
         out.append(seq[int(last):int(last + avg)])
         last += avg
     return out
 
 def cross_validations(array, expected, K):
     splitsA = truncate(array, K)
-    print('SPLITS A', splitsA)
-    print('len splits a, ', len(splitsA))
     splitsE = truncate(expected, K)
-    print('SPLITS E', splitsE)
-    print('len splits e, ', len(splitsE))
     testId = random.randint(0, K-1)
-    print('TEST ID: ', testId)
     test = splitsA[testId]
-    print('TEST: ', test)
     testExp = splitsE[testId]
-    print('TEST EXP: ', testExp)
-    print('len test: ', len(test))
-    print('len test exp: ', len(testExp))
     train = []
     trainExp = []
     for i in range(K):
