@@ -22,15 +22,3 @@ print(f'Primer Componente: \n {first_component}')
 print(f'Varianza: \n {pca.explained_variance_ratio_}' + "\n")
 print(f'Varianza acumulada: \n {pca.explained_variance_ratio_.cumsum()}')
 print(f'Autovectores: \n {pca.components_}')
-
-print('First componente: ', first_component.values)
-print('First componente: ', first_component.columns)
-
-import numpy as np
-import matplotlib.pyplot as plt
-
-bars = first_component.values[0]
-labels = list(map(lambda t: t[0], first_component.columns))
-plt.figure(figsize=(10, 5)) 
-plt.bar(labels,bars, width=0.5, align='edge')
-plt.show()
