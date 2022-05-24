@@ -1,7 +1,7 @@
 import numpy as np
 from get_data import data, raw_data
 from Neuron import Neuron
-from plot import plot_map
+from plot import plot_map, plot_u_matrix
 from utils import * 
 
 def kohonen(k = 3,init_eta = 0.1,init_radius = 2):
@@ -43,4 +43,5 @@ def kohonen(k = 3,init_eta = 0.1,init_radius = 2):
     t += 1
 
   plot_map(k,grid,countries)
+  plot_u_matrix(k,grid)
 kohonen()
