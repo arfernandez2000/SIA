@@ -37,11 +37,14 @@ def plot_map(k,grid,countries):
             step = 1 / (len(neuron.elements) - 0.2) if len(neuron.elements) > 0 else 0
             i = 0.4 if len(neuron.elements) == 1 else i
             for e in neuron.elements:
-                text = ax.text(j + 0.2,i+0.01, e,
-                                ha="center", va="center", color="r")
+                text = ax.text(j + 0.2,i-0.01, e,
+                                ha="center", va="center", color="#000")
+                if i > 0.8:
+                    j += 0.4
+                    i = 0.2
                 i += step
-    sns.heatmap(values, annot=True, center=0, ax=ax, cmap='summer')
-    plt.show(block=False)
+    sns.heatmap(values, annot=True, center=0, ax=ax, cmap='summer',linewidths=.5)
+
 
 
 def get_neighbors(i,j):
