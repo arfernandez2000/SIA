@@ -1,35 +1,28 @@
 import numpy as np
 from get_data import data, raw_data
+from Neuron import Neuron
 from plot import plot_map
+from utils import * 
 
-#Paso Inicial: Inicializo valores
-k = 5 # Revisar
-p = len(raw_data)
-labels = raw_data.columns[1:]
-countries = raw_data.values[:,0]
-n = data.shape[1]
+def kohonen(k = 3,init_eta = 0.1,init_radius = 2):
+  #Paso Inicial: Inicializo valores
+  p = len(raw_data)
+  labels = raw_data.columns[1:]
+  countries = raw_data.values[:,0]
+  n = data.shape[1]
 
-def set_init_weights():
-  w = []
-  for _ in range(0,p):
-    wi = np.random.rand(n)
-    w.append(wi)
-  return np.array(w)
+  weights = set_init_weights(k)
+  grid = np.empty((k,k), Neuron)
+  index = 0
+  for i in range(k):
+      for j in range(k):
+          grid[i][j] = Neuron(weights[index],0,(i,j))
+          index += 1
 
-def update_neighborhood_weight(radius, w_k):
-  #neu - neuk ?
-  umbral = np.sum(data[w_k])
-  res = []
-  for i in range(len(data)):
-    if np.abs(np.sum(data[i]) - umbral) < radius:
-      res.append(i)
-  return np.array(res)
-
-def kohonen(init_radius = np.sqrt(2), init_learn_rate = 0.5, max_epochs = 100):
-  #Paso Inicial
-  weights = set_init_weights()
+  eta = init_eta
   radius = init_radius
-  learn_rate = init_learn_rate
+  max_epochs = 100
+
   t = 1
   cut = False
   #Paso t
@@ -38,19 +31,16 @@ def kohonen(init_radius = np.sqrt(2), init_learn_rate = 0.5, max_epochs = 100):
     x_index = np.random.choice(range(data.shape[0]))
     x = data[x_index]
     #Paso 2: Encontrar la neurona ganadora
-    # Xp se refiere a todo el conjunto o a un registro elegido de Xp?
-    aux = []
-    for w in weights:
-      aux.append(np.sum(np.abs(data - w))) # PREGUNTAR si data o x
-    aux = np.array(aux)
-    w_k = np.argmin(aux)
+    w_k = get_winner_neuron(grid,x)
     #Paso 3: Actualizar los pesos de las neuronas vecinas
-    n_k = update_neighborhood_weight(radius,w_k)
-    for j in range(len(weights)):
-      if (j in n_k):
-        weights[j] = weights[j] + learn_rate * (data[j]-weights[j])
+    n_k = update_neighborhood_weight(weights, radius, w_k)
+    
+    for i in range(k):
+      for j in range(k):
+          if (j in n_k):
+            weights[j] = weights[j] + eta * (x-weights[j])
+            grid[i][j].weights = weights[j]
     t += 1
-  
-  plot_map(weights,ylabels=countries,xlabels=labels)  
-  
+
+  plot_map(k,grid,countries)
 kohonen()
