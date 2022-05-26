@@ -30,34 +30,37 @@ def plot_map(k,grid,countries):
     for col in grid:
         for j in range(len(col)):
             print('Neurona (',i,',',j,') tiene a: ', grid[i][j].elements)
+            label = ''
+            for e in grid[i][j].elements:
+                label = label + str(e) + '\n'
+            ax.text(j + 0.1,i  + 0.75, label, color='w')
         i += 1
                 
-    sns.heatmap(values, annot=True, center=3, ax=ax, cmap='summer',linewidths=.5)
+    sns.heatmap(values, annot=True, ax=ax, cmap='viridis')
     plt.show()
 
 def get_neighbors(i,j):
   return [(i,j+1), (i+1,j), (i+1,j+1), (i,j-1), (i-1,j), (i-1,j-1), (i-1, j+1), (i+1, j-1)]
 
-
 def plot_u_matrix(k,grid):
     u_values = np.zeros((k,k),float)
-
+    plt.figure(figsize=(20,10))
+    
     for i in range(k):
         for j in range(k):
             w = grid[i,j].weights
             neighbors = get_neighbors(i,j)
-            true_neighbors = 0
             distances = []
             for n in neighbors:
                 x, y = n[0], n[1]
                 if x >= 0 and y >= 0 and x < k and y < k:
-                    neighbor_neuron_w = grid[x,y].weights
-                    dist = np.linalg.norm(w-neighbor_neuron_w)
+                    neighbor_neuron_w = np.array(grid[x,y].weights)
+                    dist = np.linalg.norm(w - neighbor_neuron_w)
                     distances.append(dist)
-                    true_neighbors += 1
-            u_values[i][j] = (sum(distances)/true_neighbors)
-            
-    fig, ax = plt.subplots(figsize=(20,10))
+                    
+            u_values[i][j] = np.mean(distances)
+
     plt.title('MATRIZ U')
-    sns.heatmap(u_values,cmap='summer',linewidths=.5, ax=ax)
+    sns.heatmap(u_values, annot=True, cmap='viridis')
+
     plt.show()
