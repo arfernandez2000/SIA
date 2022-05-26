@@ -15,13 +15,19 @@ def activation(weights, j):
 def oja(epochs = 5000, eta = 0.0001):
     print("DATA", data)
     N = len(data)
-    weights = np.random.uniform(-1, 1, len(data[0]))
-
+    weight = np.random.uniform(-1, 1, len(data[0]))
+    w = []
+    w.append(weight)
     for i in range(0, epochs):
         for j in range(0, N):
-            s = activation(weights, j)
-            weights = update_weigth(eta, s, weights, j)
-    print("WEIGHTS: ", weights)
+            s = activation(weight, j)
+            weight = update_weigth(eta, s, weight, j)
+            w.append(weight)
+    print("Autovector: ", w[-1])
+
+    f_c_o = np.matmul(data, w[-1])
+
+    print("Primera componente: ", f_c_o)
 
 
 oja()
