@@ -48,13 +48,13 @@ def plot_u_matrix(k,grid):
     
     for i in range(k):
         for j in range(k):
-            w = grid[i,j].weights
+            w = np.linalg.norm(grid[i,j].weights)
             neighbors = get_neighbors(i,j)
             distances = []
             for n in neighbors:
                 x, y = n[0], n[1]
                 if x >= 0 and y >= 0 and x < k and y < k:
-                    neighbor_neuron_w = np.array(grid[x,y].weights)
+                    neighbor_neuron_w = np.linalg.norm(np.array(grid[x,y].weights))
                     dist = np.linalg.norm(w - neighbor_neuron_w)
                     distances.append(dist)
                     

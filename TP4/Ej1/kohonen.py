@@ -5,8 +5,8 @@ from Neuron import Neuron
 from plot import plot_map, plot_u_matrix
 from utils import * 
 
-def update_eta(old_eta):
-  return old_eta * 1
+def update_eta(t):
+  return 1 / t
 
 def update_radius(old_radius, t):
   return old_radius
@@ -48,7 +48,7 @@ def kohonen(k = 3, init_eta = 0.01, init_radius = 2):
         weights[j] = weights[j] + eta * (x-weights[j])
         #grid[i][j].weights = weights[j]
     t += 1
-    eta = update_eta(eta)
+    eta = update_eta(t)
     radius = update_radius(radius, t)
 
   grid = create_grid(k,weights)
