@@ -4,6 +4,12 @@ from Neuron import Neuron
 from plot import plot_map, plot_u_matrix
 from utils import * 
 
+def update_eta(old_eta):
+  return old_eta * 0.9
+
+def update_radius(old_radius):
+  return old_radius * 0.9
+
 def kohonen(k = 3,init_eta = 0.1,init_radius = 2):
   #Paso Inicial: Inicializo valores
   p = len(raw_data)
@@ -41,6 +47,8 @@ def kohonen(k = 3,init_eta = 0.1,init_radius = 2):
             weights[j] = weights[j] + eta * (x-weights[j])
             grid[i][j].weights = weights[j]
     t += 1
+    eta = update_eta()
+    radius = update_radius()
 
   plot_map(k,grid,countries)
   plot_u_matrix(k,grid)
