@@ -1,4 +1,5 @@
 import numpy as np
+import sys
 from get_data import data, raw_data
 from Neuron import Neuron
 from plot import plot_map, plot_u_matrix
@@ -10,24 +11,15 @@ def update_eta(old_eta):
 def update_radius(old_radius):
   return old_radius * 1
 
-def kohonen(k = 3,init_eta = 0.3,init_radius = 2):
+def kohonen(k = 3, init_eta = 0.01, init_radius = 2):
   #Paso Inicial: Inicializo valores
   p = len(raw_data)
   labels = raw_data.columns[1:]
   countries = raw_data.values[:,0]
-  n = data.shape[1]
-
   weights = set_init_weights(k)
-  #grid = np.empty((k,k), Neuron)
-  # index = 0
-  # for i in range(k):
-  #     for j in range(k):
-  #         grid[i][j] = Neuron(weights[index],0,(i,j))
-  #         index += 1
-
   eta = init_eta
   radius = init_radius
-  max_epochs = 100
+  max_epochs = 500 * 28
 
   t = 1
   cut = False
@@ -50,7 +42,6 @@ def kohonen(k = 3,init_eta = 0.3,init_radius = 2):
     eta = update_eta(eta)
     radius = update_radius(radius)
 
-  print(weights)
   grid = np.empty((k,k), Neuron)
   index = 0
   for i in range(k):
@@ -59,5 +50,9 @@ def kohonen(k = 3,init_eta = 0.3,init_radius = 2):
           index += 1
   
   plot_map(k,grid,countries)
-  #plot_u_matrix(k,grid)
-kohonen()
+  plot_u_matrix(k,grid)
+
+k = int(sys.argv[1]) if len(sys.argv) >= 2 else 3
+eta = float(sys.argv[2]) if len(sys.argv) >= 3 else 0.1
+radius = int(sys.argv[3]) if len(sys.argv) >= 4 else 1
+kohonen(k=k,init_eta=eta,init_radius=radius)

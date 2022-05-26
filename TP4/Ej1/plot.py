@@ -22,30 +22,19 @@ def plot_map(k,grid,countries):
         grid[min_position[0], min_position[1]].add_element(countries[index])
         values[min_position[0], min_position[1]] += 1
         index += 1
-        
-    i = 0
-    for col in grid:
-        for j in range(len(col)):
-            print('Neurona (',i,',',j,') tiene a: ', grid[i][j].elements)
-        i += 1
 
     fig, ax = plt.subplots(figsize=(20,10))
 
+    plt.title('AGRUPACION DE PAISES')
     for col in grid:
         for neuron in col:
             i, j = neuron.position[0], neuron.position[1]
-            step = 1 / (len(neuron.elements) - 0.2) if len(neuron.elements) > 0 else 0
-            i = 0.4 if len(neuron.elements) == 1 else i
-            for e in neuron.elements:
-                text = ax.text(j + 0.2,i-0.01, e,
-                                ha="center", va="center", color="#000")
-                if i > 0.8:
-                    j += 0.4
-                    i = 0.2
-                i += step
-    sns.heatmap(values, annot=True, center=0, ax=ax, cmap='summer',linewidths=.5)
-
-
+            step_j = 1 / (20 / k)
+            step_i = 1 / (10 / k)
+            # for e in neuron.elements:
+                
+    sns.heatmap(values, annot=True, center=3, ax=ax, cmap='summer',linewidths=.5)
+    plt.show()
 
 def get_neighbors(i,j):
   return [(i,j+1), (i+1,j), (i+1,j+1), (i,j-1), (i-1,j), (i-1,j-1), (i-1, j+1), (i+1, j-1)]
@@ -60,15 +49,19 @@ def plot_u_matrix(k,grid):
             neighbors = get_neighbors(i,j)
             true_neighbors = 0
             distances = []
+            print('NEIGHBORS \n')
             for n in neighbors:
                 x, y = n[0], n[1]
                 if x >= 0 and y >= 0 and x < k and y < k:
                     neighbor_neuron_w = grid[x,y].weights
+                    print(neighbor_neuron_w, w, ': \n')
                     dist = np.linalg.norm(w-neighbor_neuron_w)
+                    print(dist, '\n \n')
                     distances.append(dist)
                     true_neighbors += 1
+            print('SUMA: ', sum(distances))
             u_values[i][j] = (sum(distances)/true_neighbors)
-        
-    fig, ax = plt.subplots(figsize=(20,10))
-    sns.heatmap(u_values,cmap='summer',linewidths=.5, ax=ax )
+    
+    plt.title('MATRIZ U')
+    sns.heatmap(u_values,cmap='summer',linewidths=.5, ax=None)
     plt.show()
