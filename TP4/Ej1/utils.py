@@ -17,11 +17,17 @@ def update_neighborhood_weight(weights, radius, w_k):
       res.append(i)
   return np.array(res)
 
-def get_winner_neuron(grid,x):
-  aux = []
-  for row in grid:
-    for neu in row:
-        aux.append(np.linalg.norm(x-neu.weights))
+# def get_winner_neuron(grid,x):
+#   aux = []
+#   for row in grid:
+#     for neu in row:
+#         aux.append(np.linalg.norm(x-neu.weights))
+#   aux = np.array(aux)
+#   w_k = np.argmin(aux)
+#   return w_k
+
+def get_winner_neuron(x,weights):
+  aux = list(map(lambda wi: np.linalg.norm(x-wi), weights))
   aux = np.array(aux)
   w_k = np.argmin(aux)
   return w_k
