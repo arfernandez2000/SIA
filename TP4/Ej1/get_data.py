@@ -7,3 +7,4 @@ features = ['Area', 'GDP', 'Inflation', 'Life.expect', 'Military', 'Pop.growth',
 
 x = raw_data.loc[:, features].values
 data = StandardScaler().fit_transform(x)
+print(data)
