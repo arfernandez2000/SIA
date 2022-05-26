@@ -26,12 +26,11 @@ def plot_map(k,grid,countries):
     fig, ax = plt.subplots(figsize=(20,10))
 
     plt.title('AGRUPACION DE PAISES')
+    i = 0
     for col in grid:
-        for neuron in col:
-            i, j = neuron.position[0], neuron.position[1]
-            step_j = 1 / (20 / k)
-            step_i = 1 / (10 / k)
-            # for e in neuron.elements:
+        for j in range(len(col)):
+            print('Neurona (',i,',',j,') tiene a: ', grid[i][j].elements)
+        i += 1
                 
     sns.heatmap(values, annot=True, center=3, ax=ax, cmap='summer',linewidths=.5)
     plt.show()
@@ -49,19 +48,16 @@ def plot_u_matrix(k,grid):
             neighbors = get_neighbors(i,j)
             true_neighbors = 0
             distances = []
-            print('NEIGHBORS \n')
             for n in neighbors:
                 x, y = n[0], n[1]
                 if x >= 0 and y >= 0 and x < k and y < k:
                     neighbor_neuron_w = grid[x,y].weights
-                    print(neighbor_neuron_w, w, ': \n')
                     dist = np.linalg.norm(w-neighbor_neuron_w)
-                    print(dist, '\n \n')
                     distances.append(dist)
                     true_neighbors += 1
-            print('SUMA: ', sum(distances))
             u_values[i][j] = (sum(distances)/true_neighbors)
-    
+            
+    fig, ax = plt.subplots(figsize=(20,10))
     plt.title('MATRIZ U')
-    sns.heatmap(u_values,cmap='summer',linewidths=.5, ax=None)
+    sns.heatmap(u_values,cmap='summer',linewidths=.5, ax=ax)
     plt.show()
