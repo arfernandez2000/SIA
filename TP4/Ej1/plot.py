@@ -25,7 +25,6 @@ def plot_map(k,grid,countries):
 
     fig, ax = plt.subplots(figsize=(20,10))
 
-    plt.title('AGRUPACION DE PAISES')
     i = 0
     for col in grid:
         for j in range(len(col)):
@@ -37,6 +36,7 @@ def plot_map(k,grid,countries):
         i += 1
                 
     sns.heatmap(values, annot=True, ax=ax, cmap='viridis')
+    plt.savefig('map.png')
     plt.show()
 
 def get_neighbors(i,j):
@@ -62,7 +62,7 @@ def plot_u_matrix(k,grid):
                     
             u_values[i][j] = np.mean(distances)
 
-    plt.title('MATRIZ U')
     sns.heatmap(u_values, annot=True, cmap='viridis')
 
+    plt.savefig('matriz_u.png')
     plt.show()
