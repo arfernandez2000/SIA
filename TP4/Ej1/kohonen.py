@@ -12,7 +12,7 @@ def update_eta(t):
 
 def update_radius(old_radius, t, adaptive):
   if adaptive:  
-    return 1 + (old_radius / t)
+    return np.round(1 + (old_radius / t))
   else:
     return old_radius
 
@@ -30,7 +30,7 @@ def kohonen(k = 3, init_radius = 2, adaptive_radius = False):
   countries = raw_data.values[:,0]
   weights = set_init_weights(k)
   radius = init_radius
-  max_epochs = 1000 * k * k
+  max_epochs = 10000 * k * k
 
   t = 1
   eta = update_eta(t)
@@ -45,7 +45,7 @@ def kohonen(k = 3, init_radius = 2, adaptive_radius = False):
     w_k = get_winner_neuron(weights,x)
     
     #Paso 3: Actualizar los pesos de las neuronas vecinas
-    n_k = update_neighborhood_weight(weights, radius, w_k)
+    n_k = update_neighborhood_weight(weights, radius, w_k, k)
     
     for j in range(k*k):
       if (j in n_k):
