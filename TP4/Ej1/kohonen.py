@@ -11,6 +11,7 @@ def update_eta(t):
   return 1 / t
 
 def update_radius(old_radius, t, adaptive):
+  print(np.round(1 + (old_radius / t)))
   if adaptive:  
     return np.round(1 + (old_radius / t))
   else:
@@ -61,6 +62,9 @@ def kohonen(k = 3, init_radius = 2, adaptive_radius = False):
   plot_u_matrix(k,grid)
 
 k = int(sys.argv[1]) if len(sys.argv) >= 2 else 3
-radius = float(sys.argv[2]) if len(sys.argv) >= 3 else 1
+radius = int(sys.argv[2]) if len(sys.argv) >= 3 else 1
+print('RADIUS: ', radius)
+
 adaptive_radius = True if len(sys.argv) >= 4 else False
+print('ADAPTIVE: ', adaptive_radius)
 kohonen(k=k,init_radius=radius, adaptive_radius=adaptive_radius)
