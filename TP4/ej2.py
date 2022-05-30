@@ -85,11 +85,23 @@ def printLetter(letter):
                 str = str + ' '
         print(str)
 
+def noise(array):
+    for i in range(len( array)):
+        rand = random.uniform(0, 1)
+        if rand <= 0.02:
+            if array[i] == -1:
+                array[i] = 1
+            elif array[i] == 1:
+                array[i] = -1
+            else:
+                exit("error adding noise")
+    return array
+
 def hopfield():
     letters = chooseLetters()
     weights = getWeights(letters)
     aux = randLetterPattern(letters)
-    original = np.copy(aux)
+    original = noise(aux)
     value = randWithNoNoise(aux)
     prev = value
     actual = np.zeros(len(prev))
