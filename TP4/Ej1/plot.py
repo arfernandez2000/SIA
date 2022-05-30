@@ -23,7 +23,7 @@ def plot_map(k,grid,countries):
         values[min_position[0], min_position[1]] += 1
         index += 1
 
-    fig, ax = plt.subplots(figsize=(20,10))
+    fig, ax = plt.subplots(figsize=(15,10))
 
     i = 0
     for col in grid:
@@ -37,14 +37,14 @@ def plot_map(k,grid,countries):
                 
     sns.heatmap(values, annot=True, ax=ax, cmap='viridis')
     plt.savefig('map.png')
-    plt.show()
+    plt.show(block=False)
 
 def get_neighbors(i,j):
   return [(i,j+1), (i+1,j), (i+1,j+1), (i,j-1), (i-1,j), (i-1,j-1), (i-1, j+1), (i+1, j-1)]
 
 def plot_u_matrix(k,grid):
     u_values = np.zeros((k,k),float)
-    plt.figure(figsize=(20,10))
+    plt.figure(figsize=(15,10))
     
     for i in range(k):
         for j in range(k):

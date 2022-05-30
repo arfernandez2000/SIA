@@ -1,7 +1,6 @@
 import numpy as np
 import sys
 
-from tomlkit import boolean
 from get_data import data, raw_data
 from Neuron import Neuron
 from plot import plot_map, plot_u_matrix
@@ -11,7 +10,6 @@ def update_eta(t):
   return 1 / t
 
 def update_radius(old_radius, init_radius, t, max_t, adaptive):
-  # (1-r0)/T * t + r0
   if adaptive:  
     return (1 - init_radius) / max_t * t + init_radius
   else:
@@ -31,7 +29,7 @@ def kohonen(k = 3, init_radius = 2, adaptive_radius = False):
   countries = raw_data.values[:,0]
   weights = set_init_weights(k)
   radius = init_radius
-  max_epochs = 10000 * k * k
+  max_epochs = 500 * k * k
 
   t = 1
   eta = update_eta(t)
