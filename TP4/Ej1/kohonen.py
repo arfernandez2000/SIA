@@ -10,10 +10,10 @@ from utils import *
 def update_eta(t):
   return 1 / t
 
-def update_radius(old_radius, t, adaptive):
-  print(np.round(1 + (old_radius / t)))
+def update_radius(old_radius, init_radius, t, max_t, adaptive):
+  # (1-r0)/T * t + r0
   if adaptive:  
-    return np.round(1 + (old_radius / t))
+    return (1 - init_radius) / max_t * t + init_radius
   else:
     return old_radius
 
@@ -54,7 +54,7 @@ def kohonen(k = 3, init_radius = 2, adaptive_radius = False):
     
     t += 1
     eta = update_eta(t)
-    radius = update_radius(radius, t, adaptive_radius)
+    radius = update_radius(radius, init_radius, t, max_epochs, adaptive_radius)
     
   grid = create_grid(k,weights)
   
