@@ -30,4 +30,4 @@ En TP4/Ej2:
 - seaborn
 - numpy
 - pandas
-- skelearn
+- sklearn
