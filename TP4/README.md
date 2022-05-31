@@ -29,3 +29,5 @@ En TP4/Ej2:
 - matplotlib
 - seaborn
 - numpy
+- pandas
+- skelearn
