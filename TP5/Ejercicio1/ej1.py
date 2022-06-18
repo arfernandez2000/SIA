@@ -83,7 +83,6 @@ x = to_binary(x_input)
 
 autoencoder = MultiLayerPerceptron(layers, eta=0.0001)
 
-# Como "desactivar" test?
 min_error, errors, ii, training_accuracies, test_accuracies, min_error_test = autoencoder.train(x, x, train_data, xor_expected_data, 1, iterations_qty=30000)
 
 print('MIN ERROR: ', min_error)
@@ -97,15 +96,15 @@ for i in range(len(x)):
     to_predict = x[i, :]
     encoded = encoder.predict(to_predict)
     decoded = decoder.predict(encoded)
-    #print(f"{detransform(to_predict)} -> {encoded} -> {detransform(decoded)}" )
+    print(f"{(to_predict)} -> {encoded} -> {to_decimal(decoded)}" )
     print(f"{to_predict} -> {decoded}")
-    # printFont(to_predict)#.astype(np.int64))
+    print_font(to_predict)#.astype(np.int64))
     print()
     print()
-    # printFont(decoded)#.astype(np.int64))
+    print_font(decoded)#.astype(np.int64))
     aux_1.append(encoded[0])
     aux_2.append(encoded[1])
-    #print("(",decoded[0],",",decoded[1],")")
+    print("(",decoded[0],",",decoded[1],")")
 
 print(aux_1)
 print(aux_2)
@@ -118,7 +117,7 @@ for i in values:
         print(i, " ", j, ": ")
         new_letter = [i, j]
         decoded = decoder.predict(new_letter)
-        # printFont(decoded)
+        print_font(decoded)
 
 plt.xlim([-1.1, 1.1])
 plt.ylim([-1.1, 1.1])

@@ -119,3 +119,16 @@ font_3 = np.array([
    [0x08, 0x15, 0x02, 0x00, 0x00, 0x00, 0x00],   # 0x7e, ~
    [0x1f, 0x1f, 0x1f, 0x1f, 0x1f, 0x1f, 0x1f]   # 0x7f, DEL
    ])
+
+def print_font(font):
+    char = 0
+    line = ""
+    for i in font:
+        if i > 0:
+            line += "█"
+        else:
+            line += " "
+        char += 1
+        if char % 5 == 0:
+            line += "\n"
+    print(line)
