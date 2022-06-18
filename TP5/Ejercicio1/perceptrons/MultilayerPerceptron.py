@@ -100,7 +100,7 @@ class MultiLayerPerceptron:
         return delta
 
 
-    def train(self, training_set, expected_set,test_set, expected_test_set, subitem, error_epsilon=0, iterations_qty=10000, print_data=True):
+    def train(self, training_set, expected_set, subitem, error_epsilon=0, iterations_qty=10000, print_data=True):
         print("Training: ", training_set)
         training_set = np.array(training_set)
         expected_set = np.array(expected_set)
@@ -114,10 +114,8 @@ class MultiLayerPerceptron:
         print(training_set)
         
         p = len(training_set)
-        l = len(test_set)
         Error = 1
         min_error = 2 * p
-        min_error_test = 2*l
         errors = []
         training_accuracies = []
         epochs = []
@@ -154,30 +152,10 @@ class MultiLayerPerceptron:
                 min_error = Error
             errors.append(Error)
 
-            aux_test = 0
-            for i in range(len(test_set)):
-                if subitem == 3:
-                    res = self.predict(np.array(test_set[i]))
-                    max_index = np.where(res == np.amax(res))
-                    if max_index[0] == i:
-                        test_correct_cases += 1
-                else:
-                    if expected_test_set[i] == 1:
-                        error = expected_test_set[i] - self.predict(test_set[i])
-                    else:
-                        error = expected_test_set[i] + self.predict(test_set[i])
-                    if error < self.delta:
-                        test_correct_cases += 1
-
-            test_accuracies.append(test_correct_cases/len(test_set))
-            mean_square_error = self.calculate_mean_square_error(test_set, expected_test_set)
-            if mean_square_error < min_error_test:
-                min_error_test = mean_square_error
-
             epochs.append(ii)
             ii += 1
 
-        return min_error, errors, epochs, training_accuracies, test_accuracies, min_error_test
+        return min_error, errors, epochs, training_accuracies, test_accuracies
 
     def test(self, test_set, expected_test):
         return self.calculate_mean_square_error(test_set, expected_test)
