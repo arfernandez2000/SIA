@@ -33,9 +33,9 @@ def kohonen(k = 3, init_radius = 2, adaptive_radius = False):
 
   t = 1
   eta = update_eta(t)
-  cut = False
+  
   #Paso t
-  while t < max_epochs and not cut:
+  while t < max_epochs:
     #Paso 1: Selecciono un registro de entrada Xp
     x_index = np.random.choice(range(data.shape[0]))
     x = data[x_index]

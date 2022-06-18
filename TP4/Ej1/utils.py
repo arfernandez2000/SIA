@@ -22,6 +22,7 @@ def update_neighborhood_weight(weights, radius, w_k, k):
         pos = np.array([i,j])
       index += 1
   res = []
+  
   index = 0
   for i in range(k):
     for j in range(k):
