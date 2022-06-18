@@ -24,6 +24,7 @@
 
 import matplotlib.pyplot as plt
 import numpy as np
+from TP5.Ejercicio1.fonts import print_font
 from utils.fonts import *
 from utils.activations import *
 from perceptrons.MultilayerPerceptron import *
