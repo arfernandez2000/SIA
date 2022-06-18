@@ -83,7 +83,8 @@ x = to_binary(x_input)
 
 autoencoder = MultiLayerPerceptron(layers, eta=0.0001)
 
-min_error, errors, ii, training_accuracies, test_accuracies, min_error_test = autoencoder.train(x, x, train_data, xor_expected_data, 1, iterations_qty=30000)
+min_error, errors, ii, training_accuracies, test_accuracies, min_error_test = autoencoder.train(
+    x, x, 1, iterations_qty=30000)
 
 print('MIN ERROR: ', min_error)
 
