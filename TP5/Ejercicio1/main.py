@@ -1,3 +1,4 @@
+from cProfile import label
 import csv
 import time
 import os
@@ -30,15 +31,43 @@ def trainMultilayerOptimizer(config, inputs, optimizer):
     network = Network(config, inputs.shape[1])
     error = network.trainMinimizer(inputs, optimizer)
 
+def trainDenoiser(config, inputs):
+    # repeatedInput = 3
+    # # Which inputs to use to generate noise
+    # indexesSample = [7, 14, 16, 17, 21, 24, 25, 26, 29, 30]
+    # # inputsCount = len(inputs)
+    # # indexes = [ x for x in range(0, inputsCount) ]
+    # # indexesSample = random.sample(indexes, config.noiseCount if config.noiseCount < inputsCount else inputsCount)
+    
+    # inputCharacters = []
+    # expected = []
+    # for index in indexesSample:
+    #     inputCharacters.append(inputs[index])
+    #     for _ in range(0, repeatedInput):
+    #         expected.append(inputs[index])
+
+    # Expected outcome 
+    expected = np.copy(np.array(inputs))
+    # Create noise with expected input
+    noiseInput = np.array([createNoise(origInput,0.02) for origInput in expected])
+    
+    # Create instance of the network
+    network = Network(config, inputs.shape[1])
+    # Train with noise
+    network.train(noiseInput, expected, labels)
+
+    print('#### TRAINING SET RESULTS ####')
+
+    predictAndPrintResults(network, noiseInput, expected)
+    print('---')
+    predictNewNoise(config, network, inputs)
+    
 def predictNewNoise(config, network, expected):
     print('#### NEW SET RESULTS ####')
 
-    newNoiseInputs = np.array([createNoise(origInput, config.noiseProbability) for origInput in expected])
-
-    inputs = concatenateArrays(newNoiseInputs, expected)
-    outputs = concatenateArrays(expected, expected)
-
-    predictAndPrintResults(network, inputs, outputs)
+    noiseInput = np.array([createNoise(origInput,0.03) for origInput in expected])
+    
+    predictAndPrintResults(network, noiseInput, expected)
 
 
 def main():
@@ -48,6 +77,9 @@ def main():
     if config.mode == ModeOptions.NORMAL.value:
         inputs = parser.parseInput(config.input)
         trainMultilayer(config, inputs)
+    elif config.mode == ModeOptions.DENOISER.value:
+        inputs = parser.parseInput(config.input)
+        trainDenoiser(config, inputs)
     else:
         inputs = parser.parseInput(config.input)
         trainMultilayerOptimizer(config, inputs, config.optimizer)

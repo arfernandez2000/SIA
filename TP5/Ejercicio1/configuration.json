@@ -1,40 +1,45 @@
 {
-    "files": {
-        "input": "font.txt"
+  "files": {
+    "input": "font.txt"
+  },
+  "mode": "denoiser",
+  "optimizer": "TNC",
+  "noise": {
+    "count": 10,
+    "probability": 0
+  },
+  "iterations": 2000,
+  "learningRate": 0.001,
+  "beta": 1,
+  "error": 0.001,
+  "momentum": true,
+  "alpha": 0.8,
+  "generatorPoints": [
+    [0.5, 0.6],
+    [0.2, 0.75],
+    [0.1, 0.9],
+    [0.9, -0.5]
+  ],
+  "layers": [
+    {
+      "activation": "nonlinear",
+      "perceptrons": 35
     },
-    "mode": "normal",
-    "optimizer": "TNC",
-    "noise": {
-        "count": 10,
-        "probability": 0
+    {
+      "activation": "nonlinear",
+      "perceptrons": 15
     },
-    "iterations": 100,
-    "learningRate": 0.005,
-    "beta": 1,
-    "error": 0.001,
-    "momentum": true,
-    "alpha": 0.8,
-    "generatorPoints": [[0.5, 0.6], [0.2, 0.75], [0.1, 0.9], [0.9, -0.5]],
-    "layers": [
-        {
-            "activation": "nonlinear",
-            "perceptrons": 35
-        },
-        {
-            "activation": "nonlinear",
-            "perceptrons": 25
-        },
-        {
-            "activation": "nonlinear",
-            "perceptrons": 2
-        },    
-        {
-            "activation": "nonlinear",
-            "perceptrons": 25
-        },
-        {
-            "activation": "nonlinear",
-            "perceptrons": 35
-        }
-    ]
+    {
+      "activation": "nonlinear",
+      "perceptrons": 2
+    },
+    {
+      "activation": "nonlinear",
+      "perceptrons": 15
+    },
+    {
+      "activation": "nonlinear",
+      "perceptrons": 35
+    }
+  ]
 }
