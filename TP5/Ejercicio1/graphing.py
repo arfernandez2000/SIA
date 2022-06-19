@@ -1,18 +1,27 @@
+from turtle import color
 import matplotlib.pyplot as plt
 import numpy as np
 
-def plotLatentSpace(latentPoints, labels):
+def plotLatentSpace(latentPoints, labels, generated = None):
+    print('POINTS LEN: ', np.array(latentPoints).shape)
     x = [point[0] for point in latentPoints]
     y = [point[1] for point in latentPoints]
     plt.figure(figsize=(6, 6))
     plt.scatter(x, y, cmap='viridis')
 
     if labels != None:
-        print(len(labels))
         for i in range(len(x)):
-            print(i)
-            print(len(x))
             plt.text(x=x[i] + 0.005, y=y[i] + 0.005, s=labels[i])
+    
+    if generated:
+        for g in generated:
+            aux = g[0]
+            plt.plot(aux[0], aux[1], 'o', color='red')
+            rect = [-1,1]
+            ax = [aux[1],aux[1]]
+            plt.plot(rect,ax,linestyle='--', color='black', linewidth = 0.2)
+            ax = [aux[0],aux[0]]
+            plt.plot(ax,rect,linestyle='--', color='black', linewidth = 0.2)
     plt.show()
     
 def plotError(errorPoints):

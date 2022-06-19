@@ -10,19 +10,20 @@ import parser
 from network import Network
 from constants import ModeOptions
 from utils import createNoise, predictAndPrintResults, concatenateArrays
+from graphing import plotLatentSpace
 
 CONFIG_INPUT = "configuration.json"
 labels = ['@', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '[', '\\', ']', '^', '_']
 
 def trainMultilayer(config, inputs):
     network = Network(config, inputs.shape[1])
-    network.train(inputs, inputs, labels)
+    latent, latentLabels = network.train(inputs, inputs, labels)
     if len(config.generatorPoints) > 0:
         results = network.generate(config.generatorPoints)
         results = [[r[0], np.array([1 if e > 0.5 else 0 for e in r[1]]).reshape((7, 5))] for r in results]
         for result in results:
             print(f'Generated using {result[0]}:\n {result[1]}')
-    
+        plotLatentSpace(latent,latentLabels,generated = results)
     return network
 
 def trainMultilayerOptimizer(config, inputs, optimizer):

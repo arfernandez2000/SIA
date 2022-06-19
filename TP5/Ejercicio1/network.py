@@ -65,7 +65,7 @@ class Network:
             for col in range(0, self.config.layers[row][1]):
                 self.network[row][col].weights_set(weightMatrix[row][col])
         
-    def forward_propagation(self, input, storeLatent = True, offsetStart = 0, offsetValues = [0,0]):
+    def forward_propagation(self, input, err=False, storeLatent = True, offsetStart = 0, offsetValues = [0,0]):
         activationValues = []
         summationValues = []
         for index, layer in enumerate(self.network):
@@ -79,9 +79,8 @@ class Network:
                 data = input if index == 0 else activationValues[index - 1]
                 summationValues.append(
                     np.array([perceptron.sum(data) for perceptron in layer]))
-                activations = [layer[i].activate(
-                    summationValues[index][i]) for i in range(len(summationValues[index]))]
-                if storeLatent and layer.shape[0] == 2:
+                activations = [layer[i].activate(summationValues[index][i]) for i in range(len(summationValues[index]))]
+                if not err and storeLatent and layer.shape[0] == 2:
                     self.latentCode.append(activations)
                 if index < self.networkSize - 1:
                     activations = [1] + activations
@@ -96,10 +95,8 @@ class Network:
         for index in range(self.networkSize - 2, -1, -1):
             data = []
             for subindex, perceptron in enumerate(self.network[index]):
-                outboundWeights = np.array(
-                    [p.weights[subindex + 1] for p in self.network[index + 1]])
-                data.append(perceptron.backpropagate(
-                    summations[index][subindex], outboundWeights, backpropagationValues[index + 1]))
+                outboundWeights = np.array([p.weights[subindex + 1] for p in self.network[index + 1]])
+                data.append(perceptron.backpropagate(summations[index][subindex], outboundWeights, backpropagationValues[index + 1]))
             backpropagationValues[index] = np.array(data)
         return backpropagationValues
 
@@ -115,7 +112,7 @@ class Network:
     def error_calculation(self, input, expected):
         error = 0
         for i in range(len(input)):
-            _, activ = self.forward_propagation(input[i])
+            _, activ = self.forward_propagation(input[i], err=True)
             error = error + self.input_error(expected[i][1:], activ[-1])
         return error
 
@@ -150,18 +147,16 @@ class Network:
                 latentLabels = []
                 for itemIndex in indexes:
                     latentLabels.append(labels[itemIndex])
-                    summationValues, activationValues = self.forward_propagation(
-                        input[itemIndex])
-                    backpropagationValues = self.back_propagation(
-                        input[itemIndex], summationValues, activationValues)
-                    self.weights(
-                        input[itemIndex], backpropagationValues, activationValues)
+                    summationValues, activationValues = self.forward_propagation(input[itemIndex])
+                    backpropagationValues = self.back_propagation(input[itemIndex], summationValues, activationValues)
+                    self.weights(input[itemIndex], backpropagationValues, activationValues)
                 error = self.error_calculation(input, expected)/trainingSize
                 errors.append(error)
                 iterations += 1
             print(f'Final loss is {errors[-1]}')
             plotError(errors)
             plotLatentSpace(self.latentCode, latentLabels)
+            return self.latentCode, latentLabels
         except KeyboardInterrupt:
             print("Finishing up...")
 
