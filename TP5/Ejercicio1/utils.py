@@ -86,17 +86,26 @@ def adam(
     i += 1
     return OptimizeResult(x=x, fun=fun(x), jac=g, nit=i, nfev=i, success=True)
 
+def printLetter(letter):
+    for i in range(0, len(letter)):
+        line = ""
+        for j in range(0, len(letter[0])):
+            if letter[i][j] == 1:
+                line += "█"
+            else:
+                line += " "
+        print(line)
 
 def predictAndPrintResults(network, inputs, expected):
     for i in range(0, len(inputs)):
         print('Original Input:')
-        print(expected[i][1:].reshape((7, 5)))
+        printLetter(expected[i][1:].reshape((7, 5)).astype(int))
         print('Noise Input')
-        print(inputs[i][1:].reshape((7, 5)))
+        printLetter(np.array(inputs[i][1:].reshape((7, 5))).astype(int))
         # Predict with the trained network
         result = network.predict(inputs[i])
         print('Result:')
-        print(np.array([0 if e < 0.5 else 1 for e in result]).reshape((7, 5)))
+        printLetter(np.array([0 if e < 0.5 else 1 for e in result]).reshape((7, 5)))
 
 def printCharacter(matrix):
     # Parse input images
