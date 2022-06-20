@@ -11,7 +11,7 @@ import parser
 from network import Network
 from constants import ModeOptions
 from utils import createNoise, predictAndPrintResults, concatenateArrays
-from graphing import plotLatentSpace, plotLetter
+from graphing import plotLatentSpace
 
 CONFIG_INPUT = "configuration.json"
 labels = ['@', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '[', '\\', ']', '^', '_']
@@ -49,24 +49,23 @@ def trainDenoiser(config, inputs):
     # Expected outcome 
     expected = np.copy(np.array(inputs))
     # Create noise with expected input
-    prob = 2/35
-    noise_train = np.array([createNoise(origInput,prob) for origInput in expected])
-    noise_test = np.array([createNoise(origInput,prob) for origInput in expected])
+    noiseInput = np.array([createNoise(origInput,2/35) for origInput in expected])
+    
     # Create instance of the network
     network = Network(config, inputs.shape[1])
     # Train with noise
-    network.train(noise_train, expected, labels)
+    network.train(noiseInput, expected, labels)
 
-    # print('#### TRAINING SET RESULTS ####')
-    predictAndPrintResults(network, noise_train, expected)
-    predictAndPrintResults(network, noise_test, expected)
-    # print('---')
-    # predictNewNoise(config, network, inputs)
+    print('#### TRAINING SET RESULTS ####')
+
+    predictAndPrintResults(network, noiseInput, expected, plot = False)
+    print('---')
+    predictNewNoise(config, network, inputs)
     
 def predictNewNoise(config, network, expected):
     print('#### NEW SET RESULTS ####')
 
-    noiseInput = np.array([createNoise(origInput,0.03) for origInput in expected])
+    noiseInput = np.array([createNoise(origInput,2/35) for origInput in expected])
     
     predictAndPrintResults(network, noiseInput, expected)
 

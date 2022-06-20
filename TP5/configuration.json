@@ -2,14 +2,14 @@
   "files": {
     "input": "font.txt"
   },
-  "mode": "normal",
+  "mode": "denoiser",
   "optimizer": "TNC",
   "noise": {
     "count": 10,
     "probability": 0
   },
-  "iterations": 2500,
-  "learningRate": 0.0001,
+  "iterations": 2000,
+  "learningRate": 0.001,
   "beta": 1,
   "error": 0.001,
   "momentum": true,
@@ -27,11 +27,7 @@
     },
     {
       "activation": "nonlinear",
-      "perceptrons": 20
-    },
-    {
-      "activation": "nonlinear",
-      "perceptrons": 10
+      "perceptrons": 15
     },
     {
       "activation": "nonlinear",
@@ -39,11 +35,7 @@
     },
     {
       "activation": "nonlinear",
-      "perceptrons": 10
-    },
-    {
-      "activation": "nonlinear",
-      "perceptrons": 20
+      "perceptrons": 15
     },
     {
       "activation": "nonlinear",

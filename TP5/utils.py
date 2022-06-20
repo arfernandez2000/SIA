@@ -97,7 +97,7 @@ def printLetter(letter):
                 line += " "
         print(line)
 
-def predictAndPrintResults(network, inputs, expected):
+def predictAndPrintResults(network, inputs, expected, plot = True):
     for i in range(0, len(inputs)):
         print('Original Input:')
         printLetter(expected[i][1:].reshape((7, 5)).astype(int))
@@ -105,13 +105,14 @@ def predictAndPrintResults(network, inputs, expected):
         printLetter(np.array(inputs[i][1:].reshape((7, 5))).astype(int))
         # Predict with the trained network
         result = network.predict(inputs[i])
-        plotLetter(
-            expected[i][1:].reshape((7, 5)), 
-            inputs[i][1:].reshape((7, 5)),
-            np.array([0 if e < 0.5 else 1 for e in result]).reshape((7, 5))
-        )
         print('Result:')
         printLetter(np.array([0 if e < 0.5 else 1 for e in result]).reshape((7, 5)))
+        if plot: 
+            plotLetter(
+                expected[i][1:].reshape((7, 5)),
+                np.array(inputs[i][1:].reshape((7, 5))),
+                np.array([0 if e < 0.5 else 1 for e in result]).reshape((7, 5))
+            )
 
 def printCharacter(matrix):
     # Parse input images

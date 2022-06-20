@@ -11,7 +11,6 @@ def plotLatentSpace(latentPoints, labels, generated = None):
 
     if labels != None:
         for i in range(len(x)):
-            # plt.plot([x,y])
             plt.text(x=x[i] + 0.005, y=y[i] + 0.005, s=labels[i])
     
     if generated:
@@ -32,15 +31,15 @@ def plotError(errorPoints):
     plt.ylabel("Error")
     plt.show()
     
-def plotLetter(input,noised,predicted):  
+def plotLetter(input,noised,predicted):
     plt.imshow(input, cmap='hot', interpolation='nearest')
     plt.title('INPUT')
     plt.show()
-    
+
     plt.imshow(noised, cmap='hot', interpolation='nearest')
     plt.title('NOISED')
     plt.show()
-    
+
     plt.imshow(predicted, cmap='hot', interpolation='nearest')
     plt.title('PREDICTED')
     plt.show()
