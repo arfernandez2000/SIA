@@ -4,6 +4,7 @@ import numpy as np
 from scipy.optimize import OptimizeResult
 import matplotlib.pyplot as plt
 import os
+from graphing import plotLetter
 
 OUTPUT_DIR = 'output/'
 
@@ -89,12 +90,17 @@ def adam(
 
 def predictAndPrintResults(network, inputs, expected):
     for i in range(0, len(inputs)):
-        print('Original Input:')
-        print(expected[i][1:].reshape((7, 5)))
-        print('Noise Input')
-        print(inputs[i][1:].reshape((7, 5)))
+        # print('Original Input:')
+        # print(expected[i][1:].reshape((7, 5)))
+        # print('Noise Input')
+        # print(inputs[i][1:].reshape((7, 5)))
         # Predict with the trained network
         result = network.predict(inputs[i])
+        plotLetter(
+            expected[i][1:].reshape((7, 5)), 
+            inputs[i][1:].reshape((7, 5)),
+            np.array([0 if e < 0.5 else 1 for e in result]).reshape((7, 5))
+        )
         print('Result:')
         print(np.array([0 if e < 0.5 else 1 for e in result]).reshape((7, 5)))
 
