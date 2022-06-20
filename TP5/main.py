@@ -32,19 +32,19 @@ def trainMultilayerOptimizer(config, inputs, optimizer):
     error = network.trainMinimizer(inputs, optimizer)
 
 def trainDenoiser(config, inputs):
-    # repeatedInput = 3
+    repeatedInput = 3
     # # Which inputs to use to generate noise
-    # indexesSample = [7, 14, 16, 17, 21, 24, 25, 26, 29, 30]
+    indexesSample = [7, 14, 16, 17, 21, 24, 25, 26, 29, 30]
     # # inputsCount = len(inputs)
     # # indexes = [ x for x in range(0, inputsCount) ]
     # # indexesSample = random.sample(indexes, config.noiseCount if config.noiseCount < inputsCount else inputsCount)
     
-    # inputCharacters = []
-    # expected = []
-    # for index in indexesSample:
-    #     inputCharacters.append(inputs[index])
-    #     for _ in range(0, repeatedInput):
-    #         expected.append(inputs[index])
+    inputCharacters = []
+    expected = []
+    for index in indexesSample:
+        inputCharacters.append(inputs[index])
+        for _ in range(0, repeatedInput):
+             expected.append(inputs[index])
 
     # Expected outcome 
     expected = np.copy(np.array(inputs))
