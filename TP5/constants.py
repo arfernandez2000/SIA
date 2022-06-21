@@ -16,6 +16,7 @@ class ModeOptions(enum.Enum):
    NORMAL = "normal"
    OPTIMIZER = "optimizer"
    DENOISER = "denoiser"
+   GENERATIVE = "generative"
    def __str__(self):
       return str(self.value)
 

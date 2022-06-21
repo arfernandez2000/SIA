@@ -69,7 +69,33 @@ def predictNewNoise(config, network, expected):
     
     predictAndPrintResults(network, noiseInput, expected)
 
-
+def trainGenerative(config):
+    # Parse input images
+    inputs = parser.parseInput(config.input)
+    labels = ['@', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '[', '\\', ']', '^', '_']
+    # Create instance of the network
+    network = Network(config, inputs[0].shape[0])
+    # Train the network
+    network.train(inputs, inputs, labels)
+    n = 25
+    dimensions = (7, 5)
+    grid_x = np.linspace(0.05, 0.95, n)
+    grid_y = np.linspace(0.05, 0.95, n)
+    figure = np.zeros((dimensions[0] * n, dimensions[1] * n))
+    for i, yi in enumerate(grid_x):
+        for j, xi in enumerate(grid_y):
+            # Include bias in sample
+            z_sample = np.array([1, xi, yi])
+            print('z sample: ', z_sample)
+            x_decoded = network.generateFromPoint(z_sample)
+            x_decoded = np.array([0 if e > 0.5 else 1 for e in x_decoded])
+            digit = x_decoded.reshape(dimensions[0], dimensions[1])
+            figure[i * dimensions[0]: (i + 1) * dimensions[0],
+                j * dimensions[1]: (j + 1) * dimensions[1]] = digit
+    plt.figure(figsize=(7, 7))
+    plt.imshow(figure, cmap='Greys_r')
+    plt.show()
+    
 def main():
     config = parser.parseConfiguration(CONFIG_INPUT)    
 
@@ -80,6 +106,9 @@ def main():
     elif config.mode == ModeOptions.DENOISER.value:
         inputs = parser.parseInput(config.input)
         trainDenoiser(config, inputs)
+    elif config.mode == ModeOptions.GENERATIVE.value:
+        inputs = parser.parseInput(config.input)
+        trainGenerative(config)
     else:
         inputs = parser.parseInput(config.input)
         trainMultilayerOptimizer(config, inputs, config.optimizer)

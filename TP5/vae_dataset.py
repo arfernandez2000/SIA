@@ -16,7 +16,7 @@ from keras.layers import Input, Dense, Lambda, Reshape
 from keras.models import Model
 from keras import backend as K
 from keras import metrics
-from keras.datasets import fashion_mnist as mnist
+from keras.datasets import mnist as mnist
 
 from tensorflow.python.framework.ops import disable_eager_execution
 disable_eager_execution()

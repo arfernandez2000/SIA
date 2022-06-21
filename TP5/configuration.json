@@ -2,7 +2,7 @@
   "files": {
     "input": "font.txt"
   },
-  "mode": "denoiser",
+  "mode": "minimizer",
   "optimizer": "TNC",
   "noise": {
     "count": 10,
